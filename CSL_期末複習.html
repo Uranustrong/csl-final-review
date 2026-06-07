@@ -13,7 +13,7 @@
   --code-bg:#1e242d;--quote-bg:#1a2026;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:60px}
 body{
   margin:0;background:var(--bg);color:var(--text);
   font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Segoe UI",sans-serif;
@@ -3419,6 +3419,16 @@ $$\delta_{\min} = d_{\text{軸,min}} - d_{\text{孔,max}} = 9.98 - 9.97 = \mathb
     document.querySelectorAll('details.deepdive').forEach(function(d){ d.open = ddOpen; });
     this.textContent = ddOpen ? '收合補充說明' : '展開補充說明';
   });
+
+  // 5. Keep anchor-scroll offset in sync with the sticky nav's real height
+  //    (the nav wraps to 2 rows on narrow screens, so measure instead of hard-coding)
+  var nav = document.querySelector('nav.toc');
+  function syncScrollPadding(){
+    if(!nav) return;
+    document.documentElement.style.scrollPaddingTop = (nav.offsetHeight + 12) + 'px';
+  }
+  syncScrollPadding();
+  window.addEventListener('resize', syncScrollPadding);
 })();
 </script>
 
