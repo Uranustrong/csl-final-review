@@ -1,0 +1,10 @@
+# Large copyrighted lecture originals — do NOT commit
+pdf/
+pptx/
+
+# Local tooling / editor cruft
+.DS_Store
+.claude/
+.superpowers/
+.pages/
+.txt/

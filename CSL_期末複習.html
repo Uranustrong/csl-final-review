@@ -1,0 +1,3426 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CSL 期末複習筆記</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<style>
+:root{
+  --bg:#0d1117;--surface:#161b22;--elev:#21262d;--border:#30363d;
+  --text:#e6edf3;--muted:#8b949e;--strong:#f0f6fc;
+  --accent:#58a6ff;--accent2:#d29922;--success:#3fb950;--warn:#db6d28;--danger:#f85149;
+  --code-bg:#1e242d;--quote-bg:#1a2026;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Segoe UI",sans-serif;
+  font-size:16px;line-height:1.75;
+}
+.container{max-width:980px;margin:0 auto;padding:0 24px 80px}
+header.hero{
+  padding:48px 24px 32px;border-bottom:1px solid var(--border);
+  background:linear-gradient(180deg,#0f1620 0%,var(--bg) 100%);
+}
+header.hero .inner{max-width:980px;margin:0 auto}
+header.hero h1{
+  margin:0 0 8px;font-size:34px;color:var(--strong);font-weight:700;
+  letter-spacing:-.01em;
+}
+header.hero .sub{color:var(--muted);font-size:15px;margin-bottom:18px}
+header.hero .meta{color:var(--muted);font-size:13px}
+nav.toc{
+  position:sticky;top:0;z-index:50;background:rgba(13,17,23,.92);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--border);
+}
+nav.toc .inner{
+  max-width:980px;margin:0 auto;padding:10px 24px;
+  display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-size:13px;
+}
+nav.toc a{
+  color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px;
+  transition:background .15s,color .15s;
+}
+nav.toc a:hover{background:var(--elev);color:var(--text)}
+nav.toc .controls{margin-left:auto;display:flex;gap:6px}
+nav.toc button{
+  background:var(--elev);color:var(--text);border:1px solid var(--border);
+  padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer;
+  font-family:inherit;
+}
+nav.toc button:hover{background:#2e353e;border-color:#4d555f}
+
+h2{color:var(--strong);font-size:24px;margin:28px 0 14px;font-weight:700;letter-spacing:-.005em}
+h3{color:var(--strong);font-size:18px;margin:24px 0 10px;font-weight:600}
+h4{color:var(--text);font-size:16px;margin:18px 0 8px;font-weight:600}
+p{margin:10px 0}
+strong{color:var(--strong);font-weight:600}
+em{color:var(--text);font-style:italic}
+hr{border:0;border-top:1px solid var(--border);margin:32px 0}
+
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+code{
+  background:var(--code-bg);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.92em;color:#ffd6a8;
+}
+pre{
+  background:var(--code-bg);border:1px solid var(--border);border-radius:8px;
+  padding:14px 16px;overflow:auto;font-size:13px;line-height:1.6;
+}
+pre code{background:transparent;padding:0;color:#c9d1d9}
+
+ul,ol{padding-left:1.5em;margin:10px 0}
+li{margin:4px 0}
+
+table{
+  width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;
+  background:var(--surface);border:1px solid var(--border);border-radius:8px;
+  overflow:hidden;
+}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+th{background:var(--elev);color:var(--strong);font-weight:600}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,.02)}
+
+blockquote{
+  margin:14px 0;padding:12px 16px;border-left:4px solid var(--accent);
+  background:var(--quote-bg);border-radius:0 8px 8px 0;color:var(--text);
+}
+blockquote p{margin:4px 0}
+blockquote.remember{border-left-color:var(--success);background:#16221a}
+blockquote.warning{border-left-color:var(--danger);background:#231619}
+blockquote.definition{border-left-color:var(--accent2);background:#221d12}
+blockquote.thinking{border-left-color:#a371f7;background:#1b1726}
+
+/* Chapter wrappers */
+details.chapter{
+  margin:20px 0;background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;
+}
+details.chapter > summary{
+  cursor:pointer;padding:18px 24px;font-size:19px;font-weight:600;
+  color:var(--strong);list-style:none;display:flex;align-items:center;gap:12px;
+  background:var(--elev);user-select:none;
+}
+details.chapter > summary::-webkit-details-marker{display:none}
+details.chapter > summary::before{
+  content:"▸";color:var(--muted);font-size:16px;
+  transition:transform .15s;display:inline-block;
+}
+details.chapter[open] > summary::before{transform:rotate(90deg)}
+details.chapter > summary:hover{background:#262d36}
+details.chapter .chapter-body{padding:8px 28px 28px;border-top:1px solid var(--border)}
+
+.chapter-num{
+  background:var(--bg);color:var(--accent);padding:2px 10px;border-radius:12px;
+  font-size:13px;font-weight:600;border:1px solid var(--border);
+}
+.chapter-tag{
+  background:var(--bg);color:var(--muted);padding:2px 8px;border-radius:10px;
+  font-size:11px;border:1px solid var(--border);margin-left:auto;
+}
+
+/* Deep-dive supplementary sections */
+details.deepdive{
+  margin:12px 0;background:var(--surface);border:1px solid var(--border);
+  border-radius:8px;
+}
+details.deepdive > summary{
+  cursor:pointer;padding:8px 16px;font-size:15px;font-weight:600;
+  color:var(--accent);list-style:none;display:flex;align-items:center;gap:10px;
+  background:var(--elev);border-radius:8px;user-select:none;
+}
+details.deepdive[open] > summary{border-radius:8px 8px 0 0;border-bottom:1px solid var(--border)}
+details.deepdive > summary::-webkit-details-marker{display:none}
+details.deepdive > summary::before{
+  content:"▸";color:var(--muted);font-size:12px;
+  transition:transform .15s;display:inline-block;flex-shrink:0;
+}
+details.deepdive[open] > summary::before{transform:rotate(90deg)}
+details.deepdive > summary:hover{background:#262d36}
+details.deepdive > summary::after{
+  content:"深入補充";margin-left:auto;font-size:11px;font-weight:400;
+  color:var(--muted);background:var(--bg);padding:1px 7px;
+  border-radius:8px;border:1px solid var(--border);
+}
+.deepdive-body{padding:10px 20px 16px}
+
+/* Self-test answer details */
+.chapter-body details:not(.chapter):not(.deepdive){
+  margin:6px 0 12px 0;background:var(--elev);border:1px solid var(--border);
+  border-radius:6px;padding:0;
+}
+.chapter-body details:not(.chapter):not(.deepdive) > summary{
+  cursor:pointer;padding:8px 12px;font-size:13px;font-weight:500;color:var(--accent);
+  list-style:none;background:transparent;user-select:none;
+}
+.chapter-body details:not(.chapter):not(.deepdive) > summary::-webkit-details-marker{display:none}
+.chapter-body details:not(.chapter):not(.deepdive) > summary::before{
+  content:"看答案 ▸ ";color:var(--muted);font-weight:400;
+}
+.chapter-body details:not(.chapter):not(.deepdive)[open] > summary::before{content:"答案 ▾ "}
+.chapter-body details:not(.chapter):not(.deepdive)[open] > summary{
+  border-bottom:1px solid var(--border);background:#1a2026;
+}
+.chapter-body details:not(.chapter):not(.deepdive) > *:not(summary){padding:10px 14px}
+
+/* Self-test question paragraph (the one before details) */
+.chapter-body p:has(+ details:not(.chapter)){margin-top:18px;font-weight:500}
+
+/* Cheat sheet */
+details.chapter.cheat{margin-top:48px}
+details.chapter.cheat table{font-size:13px}
+details.chapter.cheat td:first-child{font-weight:600;color:var(--strong);white-space:nowrap}
+
+.callout-row{display:flex;gap:18px;flex-wrap:wrap;margin:12px 0}
+.callout-row .callout{flex:1;min-width:280px}
+
+footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--border);color:var(--muted);font-size:13px;text-align:center}
+
+.katex{font-size:1.05em}
+.katex-display{margin:14px 0;overflow:auto hidden}
+
+/* loading state */
+.loading-md{color:var(--muted);font-style:italic;padding:20px}
+
+/* small screens */
+@media (max-width:640px){
+  header.hero h1{font-size:26px}
+  details.chapter > summary{padding:14px 16px;font-size:16px}
+  details.chapter .chapter-body{padding:8px 18px 22px}
+  .container{padding:0 16px 60px}
+  table{font-size:12px}
+  th,td{padding:6px 8px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="inner">
+    <h1>CSL 期末複習筆記</h1>
+    <div class="sub">NTU CSIE — Creative Studio Lab · Lung-Pan Cheng (鄭龍磻)</div>
+    <div class="meta">六講總筆記｜中文為主、英文術語並列｜KaTeX 公式｜每章末附自測題</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="inner">
+    <a href="#overview">總覽</a>
+    <a href="#ch1">1. Dynamics</a>
+    <a href="#ch2">2. Early HCI</a>
+    <a href="#ch3">3. Mechanisms</a>
+    <a href="#ch4">4. Trusses & Springs</a>
+    <a href="#ch5">5. Actuation</a>
+    <a href="#ch6">6. Lasercutter</a>
+    <a href="#cheat">Cheat Sheet</a>
+    <div class="controls">
+      <button id="btn-expand">全部展開</button>
+      <button id="btn-collapse">全部收合</button>
+      <button id="btn-show-ans">顯示所有答案</button>
+      <button id="btn-deepdive">展開補充說明</button>
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+
+<section id="overview">
+  <h2>📚 總覽</h2>
+  <p>六講內容性質差異很大，背的方式不同。下表是「考前一週優先順序」的建議：</p>
+  <table>
+    <thead>
+      <tr><th>#</th><th>講題</th><th>頁數</th><th>性質</th><th>一句話本質</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>Dynamics</td><td>89</td><td>控制理論 + 公式</td><td>Open vs. closed loop，從 On/Off → P → PI → PID，含 tuning SOP</td></tr>
+      <tr><td>2</td><td>Early HCI</td><td>74</td><td>歷史 / 人物 / 年代</td><td>從 Mac 倒推回 Memex 的「偷竊鏈」：Microsoft ← Apple ← Xerox ← Engelbart ← Bush</td></tr>
+      <tr><td>3</td><td>Mechanisms, Friction, Transmission</td><td>135</td><td>機械原理 + 公式</td><td>弱馬達怎麼開好車：F=μN、機械優勢、齒輪 / 軸承 / 連桿目錄</td></tr>
+      <tr><td>4</td><td>Trusses & Springs</td><td>156</td><td>製造定義為主</td><td>⚠ 不是傳統靜力學！是 3D 列印 / HCI 製造視角，重點是定義 box + 質性原則</td></tr>
+      <tr><td>5</td><td>Small & Large Actuation</td><td>96</td><td>質性比較</td><td>從液壓到 piezo / SMA / EAP / 超音波，結論：電動馬達還是王</td></tr>
+      <tr><td>6</td><td>Lasercutter Connections</td><td>227</td><td>製造圖鑑</td><td>把 2D 變 3D 的接合圖鑑 + 「finger joint 被過度使用」</td></tr>
+    </tbody>
+  </table>
+  <p><strong>跨講可能整合考的觀念：</strong></p>
+  <ul>
+    <li>3D 列印 vs. 雷射切的接合策略對比（hinge、spring、snap-fit）</li>
+    <li>機械優勢 + 摩擦 = 怎麼配齒輪比</li>
+    <li>PID 用在馬達控制（Dynamics + Mechanisms 串接）</li>
+    <li>大型 vs. 小型 actuation 為什麼最後還是電馬達 → 接到 transmission</li>
+    <li>Living hinge 同時出現在 Trusses 與 Lasercutter 章，背的角度要分清</li>
+  </ul>
+</section>
+
+<details class="chapter" id="ch1" open>
+  <summary><span class="chapter-num">Ch 1</span> Dynamics — 控制理論與 PID <span class="chapter-tag">89 頁</span></summary>
+  <div class="chapter-body" data-md="md-ch1"></div>
+</details>
+
+<details class="chapter" id="ch2">
+  <summary><span class="chapter-num">Ch 2</span> Early HCI — 歷史人物與系統 <span class="chapter-tag">74 頁</span></summary>
+  <div class="chapter-body" data-md="md-ch2"></div>
+</details>
+
+<details class="chapter" id="ch3">
+  <summary><span class="chapter-num">Ch 3</span> Mechanisms, Friction, Transmission <span class="chapter-tag">135 頁</span></summary>
+  <div class="chapter-body" data-md="md-ch3"></div>
+</details>
+
+<details class="chapter" id="ch4">
+  <summary><span class="chapter-num">Ch 4</span> Trusses & Springs — 3D 列印視角 <span class="chapter-tag">156 頁</span></summary>
+  <div class="chapter-body" data-md="md-ch4"></div>
+</details>
+
+<details class="chapter" id="ch5">
+  <summary><span class="chapter-num">Ch 5</span> Small & Large Actuation <span class="chapter-tag">96 頁</span></summary>
+  <div class="chapter-body" data-md="md-ch5"></div>
+</details>
+
+<details class="chapter" id="ch6">
+  <summary><span class="chapter-num">Ch 6</span> Lasercutter Connections <span class="chapter-tag">227 頁</span></summary>
+  <div class="chapter-body" data-md="md-ch6"></div>
+</details>
+
+<details class="chapter cheat" id="cheat">
+  <summary><span class="chapter-num">📋</span> Cheat Sheet <span class="chapter-tag">跨講對照</span></summary>
+  <div class="chapter-body">
+
+  <blockquote><p>💡 <strong>考試重點順序</strong>：⑤ 陷阱題 &gt; ③ 高頻定義 &gt; ④ 場景選擇 &gt; ① 公式（計算題本身很少考，但公式背後的物理直覺會考）。</p></blockquote>
+
+  <h3>① 必背公式（低頻計算；高頻物理直覺）</h3>
+  <table>
+    <thead><tr><th>章</th><th>公式</th><th>變數意義</th><th>用途</th></tr></thead>
+    <tbody>
+      <tr><td>Dynamics</td><td>$\text{output} = P + I + D$</td><td>$P=K_p\,\text{Err}$；$I=K_i\sum\text{Err}$；$D=K_d(\text{Err}-\text{Err}_{prev})$</td><td>完整 PID</td></tr>
+      <tr><td>Mechanisms</td><td>$F_f = \mu F_n$</td><td>$\mu$ 摩擦係數、$F_n$ 法向力</td><td>摩擦力（核心）</td></tr>
+      <tr><td>Mechanisms</td><td>$\text{MA} = F_B/F_A = a/b$</td><td>$a,b$ 力臂</td><td>機械優勢 / 槓桿</td></tr>
+      <tr><td>Mechanisms</td><td>$P = Fv = \tau\omega$</td><td>$\tau$ 扭矩、$\omega$ 角速度</td><td>功率守恆（齒輪換算）</td></tr>
+      <tr><td>Mechanisms</td><td>$W = F \cdot d$</td><td>$d$ 滑動距離</td><td>解釋輪子省力（軸要細）</td></tr>
+      <tr><td>Mechanisms</td><td>$F = \mu q_{m1}q_{m2}/(4\pi r^2)$</td><td>磁極吸力</td><td>距離平方衰減</td></tr>
+      <tr><td>Actuation</td><td>力放大 $= A_{out}/A_{in}$</td><td>活塞面積比</td><td>氣壓 / 液壓</td></tr>
+      <tr><td>Trusses</td><td>$k \propto t^3 / L^3$</td><td>$t$ 厚度、$L$ 長度</td><td>cantilever snap-fit 剛度</td></tr>
+    </tbody>
+  </table>
+
+  <h3>② Early HCI 年代速查</h3>
+  <table>
+    <thead><tr><th>年</th><th>人 / 事</th><th>機構</th></tr></thead>
+    <tbody>
+      <tr><td>1945</td><td>Bush「As We May Think」/ Memex（microfilm）</td><td>MIT / Atlantic Monthly</td></tr>
+      <tr><td>1945</td><td>Harvard Mark I（55 ft, 5 t, 乘法 3 秒）</td><td>Harvard</td></tr>
+      <tr><td>1947</td><td>Grace Hopper 發現 first bug（Mark II 蛾）</td><td>Harvard</td></tr>
+      <tr><td>1948</td><td>transistor</td><td>Bell Labs</td></tr>
+      <tr><td>1955</td><td>Engelbart Berkeley EE PhD（plasma）</td><td>Berkeley</td></tr>
+      <tr><td>1958</td><td>ARPA 成立</td><td>US Gov.</td></tr>
+      <tr><td>1962</td><td>Sutherland <strong>Sketchpad</strong> / Engelbart "Augmenting Human Intellect"</td><td>MIT / SRI</td></tr>
+      <tr><td>1968-10</td><td><strong>Telefunken Rollkugel</strong> RKS 100-86（真‧第一顆球鼠）</td><td>Telefunken (DE)</td></tr>
+      <tr><td>1968-12-09</td><td><strong>Mother of All Demos</strong> @ SF</td><td>SRI</td></tr>
+      <tr><td>1973</td><td><strong>Xerox Alto</strong> / <strong>SuperPaint</strong>（Dick Shoup）</td><td>Xerox PARC</td></tr>
+      <tr><td>1979</td><td>Jobs 訪 PARC</td><td>Apple</td></tr>
+      <tr><td>1981</td><td>Xerox Star（second system syndrome）</td><td>Xerox</td></tr>
+      <tr><td>1983</td><td>Shoup Emmy</td><td>—</td></tr>
+      <tr><td>1984</td><td><strong>Apple Macintosh</strong>（晚 Alto 11 年）</td><td>Apple</td></tr>
+      <tr><td>1997</td><td>Engelbart Turing Award；Shneiderman vs. Maes 辯論</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <h3>③ 高頻定義 box（填空題候選）</h3>
+  <table>
+    <thead><tr><th>術語</th><th>章</th><th>關鍵字</th></tr></thead>
+    <tbody>
+      <tr><td>statics</td><td>Trusses</td><td>bodies at rest, forces in equilibrium</td></tr>
+      <tr><td>finite element analysis</td><td>Trusses</td><td>subdivides large problem into finite elements</td></tr>
+      <tr><td>living hinge</td><td>Trusses / Lasercutter</td><td>thin flexible hinge, **same material**, MEMS / 拋棄式包裝</td></tr>
+      <tr><td>buckle</td><td>Trusses</td><td>bend and give way under pressure / strain</td></tr>
+      <tr><td>stiffness</td><td>Trusses</td><td>rigidity; resists deformation; determined by material</td></tr>
+      <tr><td>snap-fit</td><td>Trusses</td><td>flexible, interlocking, no loose parts</td></tr>
+      <tr><td>press-fit / interference fit</td><td>Lasercutter</td><td>**normal force + friction + cold welding**</td></tr>
+      <tr><td>kerf</td><td>Lasercutter</td><td>雷射移除的材料寬度</td></tr>
+      <tr><td>backlash</td><td>Mechanisms</td><td>嚙合件間的間隙（lost motion）</td></tr>
+      <tr><td>holonomicity</td><td>Mechanisms</td><td>可控 DoF = 總 DoF → holonomic</td></tr>
+      <tr><td>universal joint</td><td>Trusses</td><td>**2 DoF**, transmit rotary between angled shafts</td></tr>
+      <tr><td>ball joint</td><td>Trusses</td><td>**3 DoF**</td></tr>
+    </tbody>
+  </table>
+
+  <h3>④ 接合 / 機構選擇速查</h3>
+  <table>
+    <thead><tr><th>場景</th><th>選哪個</th><th>為什麼</th></tr></thead>
+    <tbody>
+      <tr><td>3D 列印需要彈簧</td><td>cantilever spring</td><td>FDM 不適合 coil；對照 SpringFit</td></tr>
+      <tr><td>雷射切要彎曲剛性面板</td><td>lattice / living hinge</td><td>一排細縫變柔；FLEX / Google Glass</td></tr>
+      <tr><td>雷射切要精準折角</td><td>defocus the laser</td><td>LaserOrigami / HPI</td></tr>
+      <tr><td>雷射切要做盒子</td><td>用 notch / stacking，不要無腦 finger joint</td><td>finger joint is terribly overused</td></tr>
+      <tr><td>挖土機巨大出力</td><td>液壓 hydraulic</td><td>油不可壓縮、不漏</td></tr>
+      <tr><td>輪胎吸震</td><td>氣壓 pneumatic</td><td>需要 springyness</td></tr>
+      <tr><td>HCI 微定位（相機影像穩定）</td><td>piezo + slip-stick</td><td>微米精度、快</td></tr>
+      <tr><td>恆溫水壺切斷加熱</td><td>雙金屬條</td><td>溫度自觸發</td></tr>
+      <tr><td>馬達車動不了</td><td>先檢查 jamming 再考慮升馬達</td><td>大馬達救不了卡死</td></tr>
+      <tr><td>消除穩態誤差</td><td>I 項</td><td>P 看現在、I 看過去、D 看未來</td></tr>
+      <tr><td>抑制 overshoot / 震盪</td><td>D 項</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <h3>⑤ 易踩雷的陷阱題</h3>
+  <ul>
+    <li><strong>timer 不是 sensor</strong> → 烤麵包機是 open loop</li>
+    <li><strong>Memex 不是電腦</strong> → microfilm + dry photography</li>
+    <li><strong>滑鼠不是 Xerox 發明的</strong>，也不是 Engelbart 第一（Telefunken 早 2 個月）</li>
+    <li><strong>Bush 在 1945 看不到電腦</strong>，因為 Mark I 還是 55 ft 5 噸的怪物</li>
+    <li><strong>Trusses & Springs 講不考傳統靜力學</strong>（沒 F=kx、沒 2j=m+r、沒 method of joints）</li>
+    <li><strong>Pneumatics 是 transmission 不是 source</strong>（壓縮機背後還是電 / 燃機）</li>
+    <li><strong>Dovetail 雷切做不出來</strong>（需要 undercut 側向進刀）</li>
+    <li><strong>laptop stand 的 notch 為什麼成立</strong>：力只有 -Z 方向</li>
+    <li><strong>universal joint = 2 DoF, ball joint = 3 DoF</strong>（很愛考）</li>
+    <li><strong>snap-fit 剛度 ∝ t³ / L³</strong>（立方）— 厚度減半剛度變 1/8</li>
+    <li><strong>FTIR 觸控</strong>：切邊光滑光進、雕刻處光出。順序記反就錯</li>
+  </ul>
+  </div>
+</details>
+
+<footer>
+  CSL 期末複習 · 2026 春｜筆記由 Slides PDF 自動萃取整理｜公式以 KaTeX 排版
+</footer>
+
+</main>
+
+<!-- ============== Markdown content (rendered on load) ============== -->
+
+<script type="text/markdown" id="md-ch1">
+## 學習目標
+
+- 能清楚分辨 statics、kinematics、dynamics 三個力學分支，並說明為什麼有 dynamics 才需要「控制器 (controller)」
+- 能畫出開迴路 (open loop) 與閉迴路 (closed loop) 的方塊圖，並判斷一個日常家電屬於哪一種
+- 能解釋 On/Off (bang-bang)、P、PI、PID 四種控制器各自解決什麼問題，以及各自帶來什麼副作用
+- 能寫出 PID 的**連續式與離散式**公式，並從連續推導到離散
+- 能用數學證明「為什麼 P 一定有穩態誤差」、「為什麼 I 一定能消除穩態誤差」、「為什麼 D 能提供阻尼」
+- 能依照交互式調參 SOP 在實機上把一個 PID 控制器調到收斂
+- 能舉出 PID 控制在 3D 印表機加熱頭、平衡機器人、autonomous bot 等實作上的具體應用
+
+## 為什麼需要 dynamics？三個直觀類比
+
+要理解 controller 為什麼存在，先想想下面三個你都做過的動作：
+
+**🚿 類比 1：洗澡水溫**
+你打開蓮蓬頭，水管裡的水**過了 3 秒才開始變熱**。如果你只看「龍頭轉了幾度」就決定溫度（這就是 open loop），等熱水真的來時你已經燙傷了。聰明的人會**邊轉邊用手感**（這就是 closed loop），看到太燙就把熱水關小一點。
+
+**🚗 類比 2：開車到 7-11 門口停**
+看到 7-11 在 50 公尺外。如果你決定「踩 3 秒油門就到」（open loop），結果可能停在 30 公尺或 100 公尺。真實情況你必然是 **邊看距離邊調節**油門與剎車（closed loop），距離大踩深、距離小放開、剩 5 公尺改踩剎車。**這個「邊看邊調」就是 PID 的精神。**
+
+**⚾ 類比 3：接住掉下來的球**
+你必須持續觀察球的**位置 (P)**、**過去軌跡 (I)** 和**速度 (D)**。光看位置不夠（看到時可能已經來不及），還要看它接近你的速度有多快，才能預測伸手要伸到哪裡。
+
+> 💡 **記住**：dynamics 的世界裡，「力 → 加速度 → 速度 → 位置」之間有時間延遲，初始條件 + 模型不足以決定未來。**必須持續感測 + 動態調整**才能達標。
+
+## 核心概念
+
+### 1. statics vs. kinematics vs. dynamics 的分野
+
+力學在這門課裡分為三個遞進層次：
+
+| 層次 | 研究對象 | 例子 |
+|---|---|---|
+| **statics** | 靜止物體與平衡力 | trusses、springs |
+| **kinematics** | 只看運動本身，不問造成運動的力 | engines、mechanisms |
+| **dynamics** | 力與力造成的運動間的關係 | controllers、haptics |
+
+老師的關鍵反問是：搬動一個東西，一定要考慮力嗎？答案是「如果你擁有 quasi infinite power，可以忽略 inertia、gravity、flexibility，那就不用」。比如示範影片裡那支會擺盪的手臂，要解決 oscillation 有兩種途徑：
+
+1. **brute force**：用一支很粗、不會彎的剛性手臂 + 一顆超強力馬達，把慣性問題硬幹掉
+2. **dynamics 思維**：加一個「考慮系統動態特性的 controller」，用聰明的方式減震
+
+第二條路就是本章的主題。
+
+### 2. 控制器與開迴路 (Open Loop)
+
+**controller** 的定義：a device that monitors and changes the operating conditions of a given dynamical system。歷史上 controller 都是 **analog** 的——機械式、液壓式 (hydraulic)、氣動式 (pneumatic) 或電子式（例如馬桶水箱浮球、烤麵包機計時器、煮水壺雙金屬片、電烙鐵）；現在大多換成 **digital**，以微處理器或電腦的形式存在（例如 Siemens LOGO、Arduino Nano）。
+
+最簡單的便宜烙鐵 (cheap soldering iron) 完全沒有 controller——插電就用。為什麼可以？因為：
+
+1. 室溫接近常數
+2. 一次要熔的焊錫量很少
+3. 加熱元件功率固定
+
+所有相關變數事先已知，**所以不需要 sensor**。這就是 **open loop control** 的本質：
+
+> 💡 **記住**：open loop control = **沒有 sensor 介入**，只靠系統的「model」與「initial state」就決定輸出。
+
+烤麵包機 (toaster) 是經典案例：controller 只是一個 timer。注意 PDF 特別澄清：
+
+> 💡 **記住**：**timer 不是 sensor**！加 timer 就像加電表，並沒有閉合 feedback loop，仍屬於 predetermined control。sensor 的定義是「偵測環境事件或變化、並把資訊送回控制端」的裝置。
+
+### 3. 閉迴路 (Closed Loop) 與控制階層
+
+當系統有外部干擾、初始狀態不固定、或需要高精度時，open loop 就不夠了。**closed loop** 加入 **negative feedback** 動態調整輸出：
+
+$$\text{error} = \text{desired output} - \text{measured value}$$
+
+整個自動控制 (automatic control) 的分類樹是：
+
+```
+automatic control
+├── open loop
+└── closed loop
+    ├── On/Off (bang-bang)
+    ├── P  (proportional)
+    ├── PI (+ integral)
+    └── PID (+ derivative)
+```
+
+這個樹從上往下，控制器越來越複雜、能解決的問題也越多。
+
+### 4. On/Off (Bang-Bang) 控制
+
+最簡單的閉迴路：
+
+```
+if (measured < low_threshold)  turn ON
+if (measured > high_threshold) turn OFF
+```
+
+注意它**不是只看一個 setpoint**，而是看「上下兩條 threshold」。中間那段就叫 **hysteresis** 或 **dead band**。
+
+**🔧 數字例**：冰箱設定 4°C，hysteresis ±1°C
+- 溫度升到 5°C → 壓縮機開啟
+- 溫度降到 3°C → 壓縮機停止
+- 永遠在 3 ~ 5°C 之間擺盪
+
+為什麼需要 hysteresis？如果只用單一 threshold (4°C)，sensor 在 3.99 ~ 4.01°C 雜訊跳動時，壓縮機會每秒開關幾次，**幾天就燒掉**。dead band 把切換頻率降到每分鐘一次以下。
+
+常見 bang-bang 應用：冰箱、中價位電烙鐵、水塔水位、家用恆溫器。
+
+### 5. 比例控制 P
+
+**🧒 類比：媽媽叫小孩過來**
+
+媽媽在 10 公尺外叫小孩。小孩有兩個直覺：
+- **離得越遠 → 跑越快**
+- **越靠近 → 走越慢**
+
+這就是 P control：**輸出與誤差成正比**。
+
+$$u(t) = K_p \cdot e(t)$$
+
+其中 $u$ 是控制輸出（油門、加熱功率、PWM），$e = \text{setpoint} - \text{measured}$ 是誤差，$K_p$ 是比例增益。
+
+歷史上最經典的實作是蒸汽機上的 **centrifugal governor**（離心調速器）：飛球轉得越快、撐得越開、就把進汽閥拉得越小，自動把轉速壓回工作點。
+
+**🔧 worked example：加熱爐穩態誤差**
+
+設想一個加熱爐：目標溫度 $T_{set} = 100°C$，室溫 $T_{env} = 25°C$。爐子有散熱，散熱功率與溫差成正比：$P_{loss} = h(T - T_{env})$，假設 $h = 1$ W/°C。
+
+純 P 控制：$u = K_p (T_{set} - T)$。
+
+**穩態分析（必背推導）**：穩態時 $dT/dt = 0$，所以加熱功率 = 散熱功率：
+
+$$K_p (T_{set} - T) = h(T - T_{env})$$
+
+解 $T$：
+
+$$T = \frac{K_p \cdot T_{set} + h \cdot T_{env}}{K_p + h}$$
+
+穩態誤差：
+
+$$e_{ss} = T_{set} - T = \frac{h(T_{set} - T_{env})}{K_p + h}$$
+
+代數字 $K_p = 10$：
+
+$$e_{ss} = \frac{1 \times (100 - 25)}{10 + 1} = \frac{75}{11} \approx 6.8°C$$
+
+也就是說，溫度會穩定在 **93.2°C**，永遠到不了 100°C。
+
+要降低這個誤差怎麼辦？
+
+| 對策 | 結果 |
+|---|---|
+| $K_p = 100$ | $e_{ss} = 75/101 ≈ 0.74°C$，仍非零 |
+| $K_p \to \infty$ | $e_{ss} \to 0$，但實際會 overshoot、震盪 |
+| 加 I 項 | $e_{ss} = 0$ 嚴格成立（見下節） |
+
+> 💡 **記住（重要結論）**：**單純 P 控制必然有 steady-state error**。原因：穩態時要輸出非零功率抵消干擾（散熱、重力、摩擦），但 $u = K_p \cdot e$ 要非零就**必須** $e \ne 0$。誤差不可能歸零。
+
+#### 🎯 投影片三大 $K_p$ 狀態（必考！）
+
+Dynamics 投影片在 P 控制章節末尾、進入 PI 之前，連續三張圖展示**只調 $K_p$、不加 I 不加 D** 時，系統會出現的三種典型反應。請記住投影片用的標籤（不是課本標準的 underdamped / critically damped）：
+
+| 投影片標籤 | 階躍響應形狀 | 投影片註記 | 物理直覺 |
+|---|---|---|---|
+| **small Kp value**<br/>（低 $K_p$ / "low stable"） | 平滑爬升，停在目標**下方**，從此不動 | "constant error"、"can not reach desired value" | 太溫和：力道不夠抵抗 external force／散熱／重力，永遠差一截 |
+| **higher Kp value**<br/>（中 $K_p$ / "overshoot"） | 衝過頭一次 → 回落 → 仍停在目標下方 | "constant error"、"can not reach desired value" | 加大力道，響應快、但仍有 $e_{ss}$（單純 P 的宿命） |
+| **critical high Kp value**<br/>（臨界 $K_p$ / "critical"） | 持續等幅震盪，**不收斂也不發散** | "constant **oscillations**" | 系統到了臨界穩定 (marginal stability)，就是 Ziegler–Nichols 法的 **ultimate gain $K_u$** |
+
+**三條階躍響應曲線（同一受控對象、不同 $K_p$）**：
+
+<svg viewBox="0 0 720 420" xmlns="http://www.w3.org/2000/svg" style="background:#161b22; border:1px solid #30363d; border-radius:8px; max-width:100%; height:auto; display:block; margin:1em 0;">
+  <text x="10" y="78" fill="#7ee787" font-family="ui-monospace,monospace" font-size="13" font-weight="bold">small Kp</text>
+  <line x1="80" y1="130" x2="680" y2="130" stroke="#6e7681" stroke-width="1"/>
+  <line x1="80" y1="20" x2="80" y2="130" stroke="#6e7681" stroke-width="1"/>
+  <line x1="80" y1="65" x2="680" y2="65" stroke="#f85149" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="625" y="58" fill="#f85149" font-family="ui-monospace,monospace" font-size="11">setpoint</text>
+  <polyline points="80,130 116,117 152,107 188,100 224,96 260,93 296,91 368,89 440,88 512,88 656,88" fill="none" stroke="#7ee787" stroke-width="2.5"/>
+  <text x="450" y="108" fill="#adbac7" font-size="11" font-style="italic">收斂但停在目標下方（穩態誤差大）</text>
+  <text x="10" y="208" fill="#79c0ff" font-family="ui-monospace,monospace" font-size="13" font-weight="bold">higher Kp</text>
+  <line x1="80" y1="260" x2="680" y2="260" stroke="#6e7681" stroke-width="1"/>
+  <line x1="80" y1="150" x2="80" y2="260" stroke="#6e7681" stroke-width="1"/>
+  <line x1="80" y1="195" x2="680" y2="195" stroke="#f85149" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="625" y="188" fill="#f85149" font-family="ui-monospace,monospace" font-size="11">setpoint</text>
+  <polyline points="80,260 102,247 123,231 152,209 174,196 195,187 217,187 246,195 274,207 296,211 325,209 354,205 382,202 411,203 440,205 512,205 656,205" fill="none" stroke="#79c0ff" stroke-width="2.5"/>
+  <text x="200" y="180" fill="#adbac7" font-size="11" font-style="italic">overshoot 一次</text>
+  <text x="450" y="227" fill="#adbac7" font-size="11" font-style="italic">回落、仍停在目標下方</text>
+  <text x="10" y="338" fill="#ff7b72" font-family="ui-monospace,monospace" font-size="13" font-weight="bold">critical Kp</text>
+  <line x1="80" y1="390" x2="680" y2="390" stroke="#6e7681" stroke-width="1"/>
+  <line x1="80" y1="280" x2="80" y2="390" stroke="#6e7681" stroke-width="1"/>
+  <line x1="80" y1="325" x2="680" y2="325" stroke="#f85149" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="625" y="318" fill="#f85149" font-family="ui-monospace,monospace" font-size="11">setpoint</text>
+  <polyline points="80,390 102,384 130,364 152,341 174,319 195,299 213,289 231,299 260,322 289,348 310,361 332,364 354,354 375,335 404,312 426,296 444,289 462,296 490,318 519,345 541,358 562,364 584,354 606,335 634,312 656,299" fill="none" stroke="#ff7b72" stroke-width="2.5"/>
+  <text x="410" y="278" fill="#adbac7" font-size="11" font-style="italic">等幅震盪，永不收斂</text>
+  <text x="360" y="412" fill="#c9d1d9" font-family="ui-monospace,monospace" font-size="12" text-anchor="middle">time →</text>
+</svg>
+
+> ⚠ **重要術語陷阱**：投影片的 "**critical** high Kp" **不是**控制工程教科書的 "**critically damped**"（最快無 overshoot）！
+> - 教科書 "critically damped" = $\zeta = 1$，最快收斂、零震盪
+> - 投影片 "critical high Kp" = **震盪臨界**，相當於 Ziegler–Nichols 的 $K_u$
+> 兩個 "critical" 意思完全相反。考試／面試請依**投影片定義**作答。
+
+**三個狀態為何都有 steady-state error（除了臨界）？**
+
+回想前面推導：$e_{ss} = h(T_{set} - T_{env}) / (K_p + h)$。
+- 低 $K_p$：分母小 → $e_{ss}$ 大 → 圖上明顯停在目標下方
+- 中 $K_p$：分母大些 → $e_{ss}$ 縮小 → 但仍非零，圖上仍可見停在目標下方
+- 臨界 $K_p$：系統根本沒「停下來」(穩態本身不存在) → 談 $e_{ss}$ 沒意義，只剩震盪
+
+#### 📐 完整數學推導：為什麼 $K_p$ 越大越會震盪
+
+把受控對象建模成「質量 + 阻尼」二階系統（適用於馬達、機械臂、車輛這類動力系統）：
+
+$$m\ddot{x} + b\dot{x} = u$$
+
+$m$ 是慣性（質量、轉動慣量），$b$ 是物理阻尼（摩擦、空氣阻力），$u$ 是控制輸入。加上純 P 控制 $u = K_p(r - x)$：
+
+$$m\ddot{x} + b\dot{x} + K_p x = K_p r$$
+
+用誤差座標 $e = r - x$（$r$ 為常數 setpoint，所以 $\ddot{e} = -\ddot{x}$、$\dot{e} = -\dot{x}$），得到一個漂亮的齊次二階線性 ODE：
+
+$$\boxed{\,m\ddot{e} + b\dot{e} + K_p\, e = 0\,}$$
+
+特徵方程 $ms^2 + bs + K_p = 0$，根為：
+
+$$s = \frac{-b \pm \sqrt{b^2 - 4mK_p}}{2m}$$
+
+定義自然頻率與阻尼比：
+
+$$\omega_n = \sqrt{\frac{K_p}{m}}, \qquad \zeta = \frac{b}{2\sqrt{m K_p}}$$
+
+則 $s = -\zeta\omega_n \pm \omega_n\sqrt{\zeta^2 - 1}$。
+
+**🔑 關鍵：$\zeta$ 怎麼隨 $K_p$ 變化？**
+
+固定 $b, m$，把 $K_p$ 從小調到大：
+
+$$K_p \uparrow \ \Rightarrow\ \omega_n = \sqrt{K_p/m} \uparrow \ \Rightarrow\ \zeta = \frac{b}{2\sqrt{m K_p}} \downarrow$$
+
+**$K_p$ 越大、阻尼比越小**！這是投影片三個狀態的數學根源。判別式 $\Delta = b^2 - 4mK_p$ 直接對應：
+
+| 投影片標籤 | 判別式 | $\zeta$ | 特徵根 | 誤差解析解 |
+|---|---|---|---|---|
+| **small Kp** | $b^2 > 4mK_p$ | $\zeta > 1$ | 兩實負根 $-\sigma_1, -\sigma_2$ | $e(t) = A_1 e^{-\sigma_1 t} + A_2 e^{-\sigma_2 t}$<br/>純指數衰減、**無震盪** |
+| **higher Kp** | $b^2 < 4mK_p$ | $0 < \zeta < 1$ | 共軛複根 $-\zeta\omega_n \pm j\omega_d$ | $e(t) = A\, e^{-\zeta\omega_n t}\cos(\omega_d t + \phi)$<br/>**衰減震盪**（overshoot 再收斂） |
+| **critical Kp** | （見下方修正） | $\zeta \to 0$ | 純虛根 $\pm j\omega_n$ | $e(t) = A\cos(\omega_n t + \phi)$<br/>**等幅震盪不收斂** |
+
+其中阻尼震盪頻率 $\omega_d = \omega_n\sqrt{1 - \zeta^2}$。
+
+**🔢 數字例**：取 $m = 1, b = 2$，看 $K_p$ 怎麼推動阻尼比：
+
+| $K_p$ | $\omega_n$ | $\zeta = 1/\sqrt{K_p}$ | 狀態 |
+|---|---|---|---|
+| 0.25 | 0.5 | 2.00 | overdamped（small Kp） |
+| 1 | 1.0 | 1.00 | critically damped（教科書定義，**不是**投影片那個！） |
+| 4 | 2.0 | 0.50 | underdamped（higher Kp） |
+| 25 | 5.0 | 0.20 | 嚴重 underdamped |
+| 100 | 10.0 | 0.10 | 幾乎不衰減 |
+| $\to \infty$ | $\to \infty$ | $\to 0$ | 等幅震盪（投影片 critical） |
+
+**⚠ 重要修正：純連續模型不會單靠加大 $K_p$ 就震盪**
+
+注意上面數字例：純連續、$b > 0$ 的線性系統，無論 $K_p$ 多大都仍有 $\zeta > 0$，只會「震盪越來越久」但**理論上仍會收斂**。真實系統的 critical 震盪在**有限 $K_p$** 就出現，元兇是：
+
+1. **取樣延遲 (sample delay)**：數位控制器每 $\Delta t$ 才更新一次，引入平均相位延遲 $\phi \approx -\omega\Delta t/2$。
+2. **致動器延遲 (actuator lag)**：馬達、加熱器有有限頻寬，本身是個低通濾波。
+3. **被控對象延遲 (transport delay)**：熱系統、流體系統的「傳遞延遲」。
+
+合起來看，迴路在某個頻率 $\omega_u$ 會繞到 $-180°$ 相移。**Nyquist 穩定判據**：當 $K_u \cdot |G(j\omega_u)| = 1$ 時系統剛好臨界穩定，產生頻率 $\omega_u$、週期 $T_u = 2\pi/\omega_u$ 的等幅震盪。這個 $K_u$ 與 $T_u$ 就是 Ziegler–Nichols 法量測的兩個值。
+
+> 💡 **物理直覺**：critical 震盪 = 「你拉一下、它晃過去 → 你還沒看到它晃過去就又拉了一次 → 越拉越同步、震盪就停不下來」。**延遲是元兇，$K_p$ 只是放大器**。
+
+#### 🆚 critical 震盪 vs bang-bang 震盪：看起來像、本質完全不同
+
+學生最容易混淆的就是這兩種震盪：投影片開頭講的 **bang-bang (On/Off) 自己會震盪**（冷氣 26°C 開、25.5°C 關，溫度永遠在這 0.5°C 之間鋸齒來回），而 critical Kp 的 P 控制**也會震盪**。兩者表面像，本質完全不同：
+
+| 對照項 | bang-bang 震盪 | critical Kp 震盪 |
+|---|---|---|
+| 控制律 | **非連續**：$u = u_{\max}$ if $e>0$ else $u_{\min}$ | **線性**：$u = K_p \cdot e$ |
+| 數學分類 | 非線性**極限環 (limit cycle)** | 線性**中心 (center)**，特徵根落虛軸 |
+| 為何震盪 | 控制器**只有兩個檔位**，永遠在「衝過頭再反衝」 | 迴路相位延遲讓高頻被放大、剛好繞一整圈 |
+| 波形 | 三角／鋸齒波（線性段 + 突跳） | 正弦波（線性系統的固有響應） |
+| 振幅來源 | hysteresis 寬度 + 系統時間常數 | 理論上初始條件決定（實務由飽和限制） |
+| 怎麼消除 | **改用 P 控制**就能解決 | **降低 $K_p$** 退回 underdamped 區 |
+| 平均輸出 | 平均對的、但瞬時**永遠錯**（不是太大就是太小） | 平均與瞬時都接近對的，只是不衰減 |
+| 跟 $K_p$ 的關係 | **完全無關**（bang-bang 沒有 $K_p$） | **直接相關**（過 $K_u$ 就出現） |
+
+**🔬 數學本質的差異**
+
+**bang-bang 是非線性系統**：控制律 $u(e) = u_{\max}\cdot\text{sign}(e)$ 在 $e=0$ 跳變。這種系統會出現 **limit cycle**——一條閉合的相空間軌跡，**不管初始條件在哪，系統最終都會被吸到這條軌跡上**。limit cycle 是控制律本身造成的，跟任何「增益」無關。即使你把 $u_{\max}$ 調小，震盪只會變慢，**不會消失**。
+
+**critical Kp 是線性系統的邊界現象**：特徵根剛好落虛軸（$\zeta = 0$），相空間出現「**中心點 (center)**」——一族同心橢圓軌跡，**每條軌跡大小由初始條件決定**。稍微降低 $K_p$ → 特徵根實部變負 → 軌跡變內螺線（衰減震盪，回到 higher Kp 區）；稍微提高 $K_p$ → 實部變正 → 軌跡變外螺線（發散）。所以 critical 是「穩定 vs 不穩定」的**刀鋒邊界**。
+
+> 🔑 **一句話差別**：bang-bang 的震盪是**控制律自己造成的**（無解，只能減幅）；critical Kp 的震盪是**參數選錯造成的**（小調 $K_p$ 就解決）。
+
+這也是為什麼從 bang-bang 升級到 P 是真正的進步：bang-bang 永遠震盪，P 控制只在 $K_p > K_u$ 才震盪，退回到 $K_p < K_u$ 就乖乖收斂、只剩 steady-state error 這一個（可以加 I 解決的）問題。
+
+**投影片緊接著的 PID 調參 SOP 怎麼用這三個狀態？**
+
+老師給的手調流程其實**主動利用** "critical high Kp"：
+
+1. 把 $K_i$、$K_d$ 設為 0
+2. **慢慢加大 $K_p$ 直到系統開始震盪** ← 找到投影片那張 "critical" 圖
+3. 記下此時 $K_p = K_u$（ultimate gain）、震盪週期 $T_u$
+4. 退回到 $K_p \approx 0.6 K_u$（離開臨界、回到 underdamped 區）
+5. 加 $K_d$ 抑制 overshoot
+6. 加 $K_i$ 消除剩下的 steady-state error
+
+也就是說：投影片那三張 Kp 圖**不只是「壞情況示範」，而是 PID tuning 的實作起點**。
+
+### 6. 積分項 PI
+
+**😤 類比：「累積的怒氣」**
+
+你已經跟室友說了 5 次「冷氣調 26°C 太熱」，他都沒改。**第 6 次你火氣會比第 1 次大很多** — 因為怒氣（積分項）累積了。終於你的怒氣大到他不得不調整。
+
+I 項就是這個「累積怒氣」：只要誤差還在，積分就會持續長大，直到輸出足夠把誤差推到 0。
+
+**連續式**：
+
+$$u(t) = K_p \cdot e(t) + K_i \int_0^t e(\tau)\, d\tau$$
+
+**離散式（程式碼直接對應）**：
+
+```python
+errorAccumulator += err * dt
+I = Ki * errorAccumulator
+output = Kp * err + I
+```
+
+**🧮 為什麼 I 能保證 $e_{ss} = 0$？（數學論證）**
+
+假設系統達到穩態，所有變數都不再變化。看積分項：$I = K_i \int e \, d\tau$。
+
+**穩態要求 $I$ 是常數**（不能繼續變化），所以積分內被加總的量必須為 0：
+
+$$\frac{dI}{dt} = K_i \cdot e = 0 \quad \Rightarrow \quad e = 0$$
+
+只要 $e \ne 0$，I 項就會持續變化、系統就還在動。所以**穩態 ⇔ $e = 0$**。這是 I 項最關鍵的數學保證。
+
+**🔧 worked example：3D 印表機加熱頭 windup**
+
+加熱頭從室溫 25°C 加熱到 200°C，誤差初始 175°C，假設 $K_p = 0.2$、$K_i = 0.05$。
+
+加熱器最大功率 40 W（飽和上限）。**起跳階段**：
+
+- $t = 0$：$e = 175$，$P_{out} = 0.2 \times 175 = 35$ W，加上 I 項輸出 → 飽和到 40 W
+- 接下來 10 秒：誤差一直很大（因為熱慣性），積分快速累積
+
+10 秒後積分值估算（取 $e$ 平均 100°C）：
+
+$$\int_0^{10} e \, d\tau \approx 100 \times 10 = 1000 \, °\text{C·s}$$
+
+$$I = 0.05 \times 1000 = 50 \text{ W}$$
+
+注意：加熱器**最多輸出 40 W**！但 I 已經到 50。這就叫 **integral windup（積分飽和）**。
+
+問題在哪：等溫度終於到達 200°C 時，誤差變 0，但累積的 50 W I 項還沒「消化」掉，會繼續加熱直到 **積分縮回去** — 期間可能衝到 230°C。**過衝量是 windup 直接的結果**。
+
+> 💡 **記住**：windup = 在 actuator 飽和期間 I 項繼續累積、超出實際輸出能力的「虛假命令」，會在系統接近目標時造成嚴重 overshoot。
+
+**Anti-windup 兩種做法**：
+
+1. **Integral clamping（積分限幅）**：強制 $|I| \le I_{max}$，例如 $I_{max} = 40$（等於加熱器最大功率）
+2. **Conditional integration（條件積分）**：偵測到 actuator 飽和時，**暫停**積分累積；解飽和後才繼續
+
+PI 也要注意 **取樣率 (sample rate)**：取樣太密 → $\int e\,dt$ 增長過快、放大不穩定；取樣太疏 → 來不及反應。一般取樣週期 $\Delta t$ 取系統時間常數的 1/10 ~ 1/50。
+
+### 7. 微分項 PID
+
+**🧱 類比：「快撞牆時看到牆」**
+
+開車逼近紅燈，距離還很遠時不必煞車；當你**逼近的速度太快**時，要開始減速。D 項看的就是「我以多快的速度在靠近目標？」
+
+**完整 PID 公式（連續式）**：
+
+$$u(t) = K_p\, e(t) + K_i \int_0^t e(\tau)\, d\tau + K_d \frac{de(t)}{dt}$$
+
+**離散式**：
+
+$$D_n = K_d \cdot \frac{e_n - e_{n-1}}{\Delta t}$$
+
+時間意義：
+
+> 💡 **記住**：**P 看「現在」、I 看「過去」、D 看「未來」**。
+> P = 當下誤差有多大；I = 過去累積有多少未消的誤差；D = 誤差正以什麼速度變化（預示未來）。
+
+**🧮 為什麼 D 能提供阻尼？二階系統推導**
+
+考慮一個典型的伺服系統：質量 $m$ 的物體要移動到位置 $x_{set}$，環境有摩擦 $b$：
+
+$$m\ddot{x} = u - b\dot{x}$$
+
+設誤差 $e = x_{set} - x$，所以 $\dot{e} = -\dot{x}$、$\ddot{e} = -\ddot{x}$。
+
+用 PD 控制 $u = K_p\, e + K_d\, \dot{e}$ 代入：
+
+$$m\ddot{x} = K_p(x_{set} - x) + K_d(-\dot{x}) - b\dot{x}$$
+
+整理成 $x$ 的方程：
+
+$$m\ddot{x} + (b + K_d)\dot{x} + K_p\, x = K_p\, x_{set}$$
+
+對照經典二階阻尼方程 $m\ddot{x} + c\dot{x} + kx = k\,x_{set}$，立刻看出：
+
+$$c_{\text{有效}} = b + K_d, \quad k_{\text{有效}} = K_p$$
+
+**結論**：**$K_d$ 在數學上扮演的就是「人造摩擦」的角色**，它增加系統的有效阻尼。
+
+定義無因次阻尼比：
+
+$$\zeta = \frac{c_{\text{有效}}}{2\sqrt{m \cdot k_{\text{有效}}}} = \frac{b + K_d}{2\sqrt{m K_p}}$$
+
+**系統響應的四種形態**（必背）：
+
+| $\zeta$ | 名稱 | 響應形狀 |
+|---|---|---|
+| $\zeta > 1$ | 過阻尼 (overdamped) | 慢但不超過；指數收斂 |
+| $\zeta = 1$ | 臨界阻尼 (critically damped) | 最快收斂且不超過 |
+| $0 < \zeta < 1$ | 欠阻尼 (underdamped) | 有 overshoot、衰減震盪 |
+| $\zeta = 0$ | 無阻尼 | 等幅震盪 |
+| $\zeta < 0$ | 不穩定 | 發散 |
+
+```
+位置
+ │
+ │           ........ ────────── 過阻尼（慢、不超）
+ │      .....
+ │   ..../───────────────────── 臨界阻尼（最快不超）
+ │  ./
+ │ / \  /\
+ │/   \/  \ ──────────────────── 欠阻尼（震盪收斂）
+ │
+ └──────────────────────── 時間
+```
+
+**想要臨界阻尼（最快不超）的 $K_d$**：解 $\zeta = 1$：
+
+$$K_d = 2\sqrt{m K_p} - b$$
+
+**⚠ D 項的代價：放大雜訊**
+
+設量測值有雜訊 $\eta_n$：$e_n^{\text{量}} = e_n^{\text{真}} + \eta_n$
+
+$$D = K_d \cdot \frac{(e_n^{\text{真}} - e_{n-1}^{\text{真}}) + (\eta_n - \eta_{n-1})}{\Delta t}$$
+
+雜訊差 $\eta_n - \eta_{n-1}$ 通常和雜訊本身同量級，被 $\Delta t$ 分母**放大**（$\Delta t$ 越小放大越多）。實作上 D 項常常要配 **low-pass filter（低通濾波器）**：
+
+```python
+D_raw = (err - last_err) / dt
+D = alpha * D_raw + (1 - alpha) * D_prev  # 一階低通
+D_prev = D
+```
+
+> 💡 **記住**：D 項是「未來預測」也是「雜訊放大器」。雜訊大的系統反而常常用 **PI 不用 D**。
+
+## 從連續到離散：實作 PID
+
+連續式：
+
+$$u(t) = K_p\, e(t) + K_i \int_0^t e\, d\tau + K_d \frac{de}{dt}$$
+
+電腦每 $\Delta t$ 取樣一次。把積分用**矩形法則**、微分用**後向差分**離散化：
+
+$$\int_0^{t_n} e \, d\tau \approx \sum_{k=0}^{n} e_k \cdot \Delta t$$
+
+$$\frac{de}{dt}\bigg|_{t_n} \approx \frac{e_n - e_{n-1}}{\Delta t}$$
+
+合起來，**離散 PID 偽碼**（直接可貼進 Arduino）：
+
+```c
+// 全域變數
+float integral = 0;
+float last_err = 0;
+float Kp, Ki, Kd, dt;
+
+// 每 dt 秒呼叫一次
+float pid_step(float setpoint, float measured) {
+  float err = setpoint - measured;
+  integral += err * dt;
+  if (integral > I_MAX) integral = I_MAX;          // anti-windup
+  if (integral < -I_MAX) integral = -I_MAX;
+  float derivative = (err - last_err) / dt;
+  float output = Kp * err + Ki * integral + Kd * derivative;
+  last_err = err;
+  return output;
+}
+```
+
+**$\Delta t$ 選擇原則**：
+- 太大（$\Delta t > 1/10$ 系統時間常數）：丟失系統動態
+- 太小（$\Delta t < 0.001$ 秒）：浪費 CPU、D 項放大雜訊
+- 經驗值：**取系統時間常數的 1/20 ~ 1/50**
+
+## PID 調參 SOP（含數字例）
+
+老師在投影片上給的 boxed procedure：
+
+1. **全部 gain 設為 0**（$K_p = K_i = K_d = 0$）
+2. **慢慢調大 $K_p$**，直到系統開始震盪 — 例如從 0.1 試到 2.0，發現 1.5 開始等幅震盪
+3. **調大 $K_d$**，直到震盪消失 — $K_d$ 大約是 $0.05 \sim 0.2$ 級的數字
+4. **重複 2、3**，直到再加 $K_d$ 也壓不住震盪 — 此時找到了 P/D 的甜蜜點，例如 $K_p = 1.0$、$K_d = 0.15$
+5. **若還有 steady-state error**，慢慢加 $K_i$ 直到輸出抵達 setpoint（例如 $K_i = 0.01$）。注意加 I 會再次引入震盪，可能要**回頭把 $K_p$ 降一點、把 $K_d$ 升一點**
+6. **iterate**，直到滿意
+
+對於更複雜的系統（巢狀控制迴路，例如煉油廠那種），就不能用手動了，要做 transfer function 分析，配合 Laplace transform 或 Z transform，畫 Nyquist diagram 找出穩定區間。
+
+### 🧠 為什麼順序是 P → D → I？
+
+調 PID 是盲試過程——你看的不是公式，是系統真實反應。每個 gain 加進去都會同時影響多個指標（響應速度、overshoot、穩態誤差、震盪頻率），所以 SOP 設計目標是：**讓每一步只改變一件事**，這樣才能看出該 gain 在做什麼。
+
+**(1) 先 P：建立「基準響應」**
+
+$K_p = K_i = K_d = 0$ 時系統根本不動。先把 $K_p$ 加上去，系統終於朝 setpoint 移動，你才有東西可觀察。$K_p$ 一手撐起所有後續分析的基準：響應速度、是否震盪、震盪週期 $T_u$、穩態誤差大小。**沒有 P 就沒有可調的對象**。
+
+**(2) 再 D：用穩定性換更高的 P**
+
+P 加大會撞到震盪牆（$K_u$）。想要更快響應就只能加 D。D 的關鍵特性是「**只**增加阻尼、**不**改變穩態行為」：
+
+- $D = K_d\,\dot{e}$，穩態時 $\dot{e} = 0$ → **D 對穩態誤差完全沒貢獻**
+- 頻率域上 D 提供 $+90°$ 相位超前 → **增加相位餘裕 (phase margin)** → 系統更穩
+
+所以 D 是「**純穩定化器**」：加進去之後穩態誤差完全不變，只是震盪被抑制。這讓你可以放心**把 $K_p$ 再推高**（更快響應、更小 $e_{ss}$），震盪由 D 接住。P/D 互相搭配迭代到「再加 D 也壓不住震盪」——這就是 P/D 的甜蜜點。
+
+**(3) 最後 I：清掉殘留誤差**
+
+I 是雙面刃：
+
+| 面向 | I 的效果 |
+|---|---|
+| 數學 | ✅ 保證 $e_{ss} = 0$（前面證明過：穩態時 $dI/dt = K_i e = 0 \Rightarrow e = 0$） |
+| 頻率域 | ❌ 引入 $-90°$ 相位**延遲** → **減少**相位餘裕 → 系統變得更不穩 |
+| 時域 | ❌ windup 風險，飽和時繼續累積會造成嚴重 overshoot |
+
+I 加進去就會把你辛苦建立的穩定性吃掉一些。所以策略是：**先把穩定性「存款」最大化（P/D 調到極限），再小心把這個存款花在 I 上**，買回零穩態誤差。順序顛倒就破產。
+
+**頻率域一張圖看懂三者的相位貢獻**：
+
+| 項 | 相位貢獻 | 對相位餘裕 | 對穩態誤差 |
+|---|---|---|---|
+| P | $0°$ | 增益越大、餘裕越小 | 改善（但無法歸零） |
+| D | $+90°$ 超前 | **增加** | 無影響 |
+| I | $-90°$ 延遲 | **減少** | 歸零 |
+
+**為什麼別的順序都不行？**
+
+| 順序 | 失敗理由 |
+|---|---|
+| **I 先** | I 沒 P 沒意義——光靠累積誤差緩慢爬升，動態看不出來，連 $K_u$ 都量不到 |
+| **D 先** | D 看 $\dot{e}$。沒 P 推動系統時 $\dot{e} \approx 0$，加 D 沒輸出。系統不動，D 等於白加 |
+| **P → I → D** | P 已經夠大會震盪，再加 I 等於「油門上加汽油」——windup + 相位延遲讓震盪更糟。這時候 D 要同時抵抗 P 引發的震盪 + I 引發的相位延遲，**兩種效應疊在一起無法分離觀察** |
+| **正確 P → D → I** | 每步只改一件事，可觀察、可逆，能迭代收斂 |
+
+**🔑 一句話心法**
+
+- **P 讓系統「動起來」**（建立響應）
+- **D 讓系統「穩下來」**（換取 phase margin）
+- **I 讓系統「準起來」**（花掉 phase margin 換 $e_{ss}=0$）
+
+順序就是「**先要有運動，再要有穩定，最後追求精準**」——這三件事有依賴關係：沒有運動談不上穩定，沒有穩定談不上精準。
+
+> 💡 **隱含原則：可觀察性 (observability)**。每一步加一個 gain，效果應該**清晰且唯一**地呈現在系統反應上（更快 / 更穩 / 更準），這樣你才能憑肉眼判斷下一步要做什麼。P→D→I 是唯一同時滿足「每一步可觀察」與「每一步穩定」的順序。
+
+## 三個完整 worked examples
+
+### EX1：3D 印表機加熱頭（PI 主導）
+
+**目標**：把噴頭從 25°C 加熱到 200°C 並維持。
+
+**系統特性**：熱慣性大、雜訊小、需要穩態零誤差。
+**選擇**：**PI**（不用 D，因為熱系統慢，D 沒貢獻且容易被雜訊干擾）。
+
+```python
+Kp = 0.25   # 對 175°C 的誤差，初始輸出 = 43.75 W → 飽和到 40 W
+Ki = 0.05
+Kd = 0
+I_MAX = 40  # 等於最大功率（防 windup）
+```
+
+**典型響應**：30 秒內爬到 198°C；I 累積到「剛好抵消散熱所需的偏置」後穩定在 200°C 嚴格無誤差。
+
+### EX2：自走 2 輪平衡機器人（PD 主導）
+
+**目標**：保持車身垂直（pitch angle = 0），任何傾斜都自動回正。
+
+**系統特性**：類倒立擺、雜訊大（IMU）、可承受小穩態傾斜（沒人會在意 0.3° 偏差）。
+**選擇**：**PD**（不用 I！）。原因：I 在這種快速系統會引入相位延遲、容易震盪；穩態小誤差可接受。
+
+```python
+Kp = 50    # 傾斜 1°，立即輸出 50 單位 PWM
+Kd = 8     # 傾斜的「速度」每 °/s，再加 8 單位 PWM
+Ki = 0
+```
+
+D 項在這裡至關重要：車身**正在快速向前倒**時（即使角度還小），D 項先給輪子一個「衝刺」抵消未來的傾倒。
+
+#### 📁 助教實作對照：`lab04_Stabilizer.ino`
+
+助教給的 Stabilizer 範例就是這個概念的 Arduino 實作（MPU6050 量 pitch、單顆 DC 馬達拉鋼絲讓桿子保持垂直）。把講義概念跟程式碼對齊看：
+
+**(1) PID 全域變數（行 45–53）**：對應 $u = P + I + D = K_p e + K_i \int e + K_d \dot{e}$
+
+```cpp
+float error;
+float prev_error;
+float kp = 0;       // ← 三個 gain 預設全 0，符合「Ziegler–Nichols 第 1 步」
+float ki = 0;
+float kd = 0;
+int dt = 10;        // ← 取樣週期 10 ms = 100 Hz，符合「Δt 取系統時間常數 1/10~1/50」
+float setPoint = 0; // ← 想保持的 pitch 角度，0° 表示垂直
+float P, I, D, PID;
+float prevTime;
+```
+
+**(2) 誤差計算（行 173）**：DMP 直接吐出 quaternion + Euler angles，我們只取 `ypr[1]`（pitch，rad → deg）：
+
+```cpp
+error = (ypr[1] * 180 / M_PI) - setPoint;
+```
+
+這就是講義裡的 $e = r - y$（這裡 $r = \text{setPoint} = 0$，$y$ 是當前 pitch）。
+
+**(3) 離散 PID 三行（行 174–177）**：精準對應我們前面推導的離散公式：
+
+```cpp
+P = kp * error;                              // 比例
+I += ki * error;                             // 積分（注意是 += 不是 =！）
+// I = (abs(error) < someThreshold) ? I + ki * error : 0;  ← 助教註解的 anti-windup 變形
+D = kd * ((error - prev_error) / dt);        // 微分（後向差分）
+```
+
+對應公式：
+
+- $P_n = K_p \cdot e_n$
+- $I_n = I_{n-1} + K_i \cdot e_n$ ← 注意助教用 `I += ki * error`，**沒乘 $\Delta t$**（$\Delta t$ 被吸進 $K_i$ 裡，是常見簡化）
+- $D_n = K_d \cdot (e_n - e_{n-1}) / \Delta t$
+
+**(4) 飽和限幅 + NaN 防護（行 180–181）**：這就是教過的 **anti-windup 之一：output clamping**
+
+```cpp
+PID = constrain(P + I + D, -255, 255);  // PWM 最多 ±255，先夾住
+if (isnan(PID)) PID = 0;                 // 防止初始化或除零時跑出 NaN
+```
+
+**⚠ 但要注意**：這個 `constrain` 只夾**總輸出**，而 `I` 變數本身**還在 `+=` 累積**。如果系統長時間打到 ±255 上限，`I` 還是會 windup 出去（行 176 那個註解才是真正的 anti-windup：誤差大時暫停積分，是 conditional integration）。考試或實作時可以把這當成 **"output clamping vs integral clamping" 的對比題材**。
+
+**(5) H-bridge 方向 + PWM 大小拆開（行 184–196）**：純 P/PD 輸出是有號數，但 PWM 是無號的 0–255，所以用 sign 決定 in1/in2 接腳極性、用 abs 取大小：
+
+```cpp
+speed = abs(PID);
+if (PID > 0) {              // 正向：in1=L, in2=H
+    digitalWrite(in1Pin, LOW);
+    digitalWrite(in2Pin, HIGH);
+} else {                    // 反向：in1=H, in2=L
+    digitalWrite(in1Pin, HIGH);
+    digitalWrite(in2Pin, LOW);
+}
+analogWrite(pwmPin, speed); // 0~255 PWM
+```
+
+**🧭 對照講義 SOP 你該怎麼調這份程式**：
+
+1. 三個 gain 都已預設為 0（行 47–49）。先 `kp = 0.5`、慢慢往上加（如 1, 2, 5, 10...），看 Serial Monitor 出現等幅震盪的 Kp 就是 $K_u$
+2. 記下震盪週期 $T_u$（每秒幾下震盪 → 算 $T_u$）
+3. 退回到 $K_p \approx 0.6 K_u$、加 $K_d \approx K_p T_u / 8$
+4. **本範例不加 $K_i$**（PD 控制；如真要加，先把行 176 的 anti-windup 啟用，避免 windup）
+
+**🔬 跟教科書 PID 差距清單**：
+- 沒有針對 IMU 雜訊做低通濾波（D 項對雜訊很敏感，實作上常會加 EMA 或 Kalman）
+- `I += ki * error` 沒乘 `dt`（簡化吸進 gain，但若改變 `dt` 要重新調 $K_i$）
+- 沒做正規的 conditional anti-windup（只做 output clamp）
+- `loop()` 不是嚴格 100 Hz：靠 `millis() > prevTime + dt` 觸發，實際週期可能 10–15 ms 抖動
+
+### EX3：autonomous bot 巡線（雙層 PID）
+
+**目標**：循著地面上同心圓直走進入靶心（→ 應用案例）。
+
+**系統特性**：複雜，「位置」與「速度」的動態時間常數差很多。
+
+**架構**：兩層串接 PID
+
+```
+[外層 position regulator]                   [內層 speed regulator]
+θ_target ─► PID ─► ω_desired ┐              ┌─► PID ─► PWM ─► 左輪
+                              ├ mix ─►       │
+d_target ─► PID ─► v_desired ┘              └─► PID ─► PWM ─► 右輪
+```
+
+- **外層**：吃目標角度、距離，輸出「該以什麼角速度 ω、線速度 v 行進」
+- **內層**：每個馬達各一顆 PID，把實測轉速逼近目標轉速、最終輸出 PWM
+
+外層的「ω, v」目標被混合成「左輪該轉多快、右輪該轉多快」（差動轉向）。每層各自解決一個簡單問題，整體穩定度與可調性大幅提升。**這也是 3D 印表機、無人機、汽車電子節氣門全部都用的「巢狀 PID」架構**。
+
+## 易混淆 / 易考點
+
+- **timer 不是 sensor**：烤麵包機用 timer 仍是 open loop，因為 timer 不偵測麵包顏色
+- **誰負責修什麼**：P 提供主要驅動力但留下 steady-state error；**I 消除 steady-state error**；**D 抑制 overshoot 與 oscillation**
+- **bang-bang 的 hysteresis 不是 bug 是 feature**：沒有 dead band 會把繼電器燒掉
+- **open vs closed loop 家電分類**（投票題型）：
+  - **open loop**：烤麵包機（timer）、便宜 FDM 印表機（噴頭走預設 G-code 不量測）、灑水器（除非加 rain detector）、便宜烙鐵（直接插電）
+  - **closed loop**：冰箱（bang-bang）、電熱水壺（雙金屬片 sensor）、馬桶水箱（浮球當液位 sensor）、暖氣恆溫閥（內部液體膨脹推彈簧關閥，本身就是機械式 closed loop）、中價烙鐵
+  - **微妙的**：FDM 印表機**通常是 open loop**，所以才會印出「鳥窩」失敗品
+- **P 太大的失敗模式**：稍大 → overshoot 後收斂留誤差；臨界大 → 等幅振盪；超臨界 → 發散
+- **I 的副作用**：windup 與取樣率錯誤都會造成 overshoot（不是 steady-state 問題，是 transient 問題）
+- **D 的代價**：放大量測雜訊；雜訊大的系統反而不用 D（如平衡機器人可以，但溫控通常 PI 即可）
+- **離散化要點**：$\Delta t$ 取得太小 → D 項放大雜訊；太大 → 丟失動態
+- **PID 不是萬靈丹**：碰到強非線性（如倒立擺大角度、機器手臂多自由度耦合）要改用 LQR、MPC 等更高階方法
+
+## 自我測驗
+
+> 💡 **考試風格**：考題以概念理解與課題延伸為主，鮮少直接考數字計算。標有 *（計算，低頻）* 的題目是低頻考點，其餘都是重點。
+
+**Q1.** 一個非常便宜的 USB 烙鐵，插電就熱、沒任何旋鈕，它算開迴路還是閉迴路？為什麼這樣設計可行？
+
+<details><summary>答案</summary>
+Open loop。可行原因有三：(1) 室溫近乎常數作為已知 initial state；(2) 焊錫量很小，熱負載變化不大；(3) 加熱元件功率固定。所有相關變數事先可知，不需要 sensor。
+</details>
+
+**Q2.** 冰箱、烤麵包機、馬桶水箱、暖氣恆溫閥，分別是哪一種控制？
+
+<details><summary>答案</summary>
+冰箱：closed loop, bang-bang。烤麵包機：open loop（controller 是 timer，timer 不是 sensor）。馬桶水箱：closed loop（浮球＝液位 sensor）。暖氣恆溫閥：closed loop（內部液體受熱膨脹推彈簧關閥，全機械式的 negative feedback）。
+</details>
+
+**Q3.** *（計算，低頻）* 加熱爐：$T_{set} = 80°C$、$T_{env} = 20°C$、散熱係數 $h = 2$ W/°C、純 P 控制 $K_p = 6$ W/°C。求穩態時實際溫度與穩態誤差。
+
+<details><summary>答案</summary>
+
+穩態方程：$K_p(T_{set} - T) = h(T - T_{env})$
+$6(80 - T) = 2(T - 20)$
+$480 - 6T = 2T - 40$
+$T = 520 / 8 = 65°C$
+
+穩態誤差 $e_{ss} = 80 - 65 = 15°C$。
+
+用公式驗證：$e_{ss} = \frac{h(T_{set} - T_{env})}{K_p + h} = \frac{2 \times 60}{6 + 2} = 15°C$ ✓
+</details>
+
+**Q4.** 用數學論證「為什麼 PI 控制可以保證 $e_{ss} = 0$」。
+
+<details><summary>答案</summary>
+
+PI 輸出 $u = K_p\, e + K_i \int e\, d\tau$。在穩態，所有變數都不再變化，特別是積分項 $I = K_i \int e\, d\tau$ 必須是**常數**（不能再變化）。但 $\frac{dI}{dt} = K_i \cdot e$，要求 $\frac{dI}{dt} = 0$ 等價於 $e = 0$。所以**穩態時誤差必須為 0**。
+</details>
+
+**Q5.** 解釋什麼是 integral windup？舉一個 3D 印表機加熱頭的場景說明，並列出兩種 anti-windup 方法。
+
+<details><summary>答案</summary>
+
+Windup = 在 actuator 飽和期間 I 項繼續累積、超出實際輸出能力的「虛假命令」。場景：加熱頭從 25°C 加熱到 200°C，誤差初始 175°C，加熱器最大 40 W；I 項在 10 秒內累積到 50 W（已超過實體上限），等溫度終於接近 200°C 時，多餘的 I 還沒消化完，會繼續加熱衝到 220°C 才開始降。
+
+兩種 anti-windup：(1) **integral clamping**：強制 $|I| \le I_{max}$；(2) **conditional integration**：偵測 actuator 飽和時暫停積分累積。
+</details>
+
+**Q6.** *（推導，低頻）* 用「二階阻尼系統」推導：在 $m\ddot{x} + b\dot{x} = u$ 的系統上加 PD 控制，得到的有效阻尼是多少？臨界阻尼條件是？
+
+<details><summary>答案</summary>
+
+代 $u = K_p(x_{set} - x) - K_d \dot{x}$ 到 $m\ddot{x} = u - b\dot{x}$（注意 $\dot{e} = -\dot{x}$）：
+
+$$m\ddot{x} + (b + K_d)\dot{x} + K_p x = K_p x_{set}$$
+
+對照 $m\ddot{x} + c\dot{x} + kx = kx_{set}$：有效阻尼 $c_{\text{有效}} = b + K_d$、$k_{\text{有效}} = K_p$。
+
+阻尼比 $\zeta = \frac{b + K_d}{2\sqrt{m K_p}}$。臨界阻尼 $\zeta = 1$：
+
+$$K_d = 2\sqrt{m K_p} - b$$
+</details>
+
+**Q7.** 寫出離散 PID 的偽碼（包含 anti-windup）。
+
+<details><summary>答案</summary>
+
+```python
+err = setpoint - measured
+integral += err * dt
+integral = clamp(integral, -I_MAX, I_MAX)  # anti-windup
+derivative = (err - last_err) / dt
+output = Kp*err + Ki*integral + Kd*derivative
+last_err = err
+```
+</details>
+
+**Q8.** D 項為什麼會放大量測雜訊？為什麼在 3D 印表機溫控通常不用 D？
+
+<details><summary>答案</summary>
+
+D 項計算 $(e_n - e_{n-1})/\Delta t$。如果量測有雜訊 $\eta$，則 $D \propto (\eta_n - \eta_{n-1})/\Delta t$，雜訊差被 $\Delta t$ 放大（$\Delta t$ 越小放大越多）。
+
+3D 印表機溫控**不用 D** 的原因：(1) 熱系統時間常數大、變化緩慢，D 項物理意義小；(2) 熱敏電阻量測有 ADC 雜訊，D 會把雜訊放大成 PWM 抖動；(3) PI 已足夠達標。所以實務上幾乎所有 3D 印表機固件（Marlin、Klipper）都用 PI 而非完整 PID。
+</details>
+
+**Q9.** 請寫出投影片上手調 PID 的 6 步驟流程。
+
+<details><summary>答案</summary>
+(1) 所有 gain 歸零；(2) 加大 Kp 直到開始震盪；(3) 加大 Kd 直到震盪消失；(4) 重複 2、3 直到加 Kd 也壓不住震盪；(5) 若需要消除穩態誤差，慢慢加 Ki 直到抵達 setpoint，可能要回頭微減 Kp、微增 Kd；(6) 反覆 iterate。
+</details>
+
+**Q10.** Autonomous bot 為什麼要用兩層 PID（position regulator + speed regulator）而不是一層？
+
+<details><summary>答案</summary>
+任務目標是「位置/角度」，但馬達直接吃的是 PWM（→ 力矩 → 速度）。一層 PID 要同時管「位置誤差到 PWM」會很難調，因為兩個迴路的動態特性與時間常數差距很大。拆成外層管 θ/d、內層管左右輪轉速後，外層輸出（期望角速度、線速度）變成內層的 setpoint，每層各自只解決一個簡單問題、各自獨立 tune，整體穩定度與可調性大幅提升。這也是工業上「巢狀控制迴路 (nested control loops)」的標準做法。
+</details>
+
+**Q11.** 平衡機器人 (self-balancing robot) 為什麼通常用 PD 而不是 PID？這個選擇的代價是什麼？
+
+<details><summary>答案</summary>
+
+平衡機器人是快速動態系統（時間常數短），IMU 訊號雜訊大、且**穩態小傾斜誤差（如 0.3°）對使用者無感**。所以：
+
+- 不用 I 的原因：I 會在快速系統引入相位延遲、容易引發震盪；穩態小誤差可接受
+- 必須有 D 的原因：D 提供阻尼，車身傾斜的「速度」直接被用來預測未來、提前加大反向輸出
+
+代價：理論上會留下小的穩態傾斜誤差（例如重心稍偏前時車會稍微往前漂），但實務上幾乎察覺不到。如果使用者真的在意，可以再加極小的 I（$K_i$ 比 $K_p$ 小兩個數量級）做精修。
+</details>
+
+**Q12.** 一個系統表現為「快速逼近 setpoint 然後 overshoot 30%、震盪 5 個週期才穩定」。對應的阻尼比 $\zeta$ 屬於哪個範圍（underdamped / critical / overdamped）？要讓它變成「最快收斂且不超」應該調哪個 gain 怎麼調？
+
+<details><summary>答案</summary>
+
+阻尼比 $0 < \zeta < 1$（**欠阻尼 underdamped**）。要變成「最快收斂且不超」= 臨界阻尼 $\zeta = 1$。
+
+調整方法：**增加 $K_d$**（因為 $\zeta = (b + K_d)/(2\sqrt{m K_p})$，增加分子）。也可以**減小 $K_p$**（減小分母），但這會犧牲響應速度。實務上先增加 $K_d$，若仍震盪再小幅降 $K_p$。
+</details>
+
+**Q13.** Dynamics 投影片連續三張圖展示「只調 Kp 不加 I/D」會出現的三種狀態。請寫出投影片上每張圖的標籤、階躍響應的形狀、以及是否有 steady-state error。投影片用的 "critical" 跟控制工程教科書的 "critically damped" 是同一回事嗎？
+
+<details><summary>答案</summary>
+
+| 投影片標籤 | 階躍響應 | $e_{ss}$ |
+|---|---|---|
+| **small Kp value** | 平滑爬升，停在目標下方 | 有，且很大 |
+| **higher Kp value** | overshoot 一次後回落，仍停在目標下方 | 有，但比 small Kp 小 |
+| **critical high Kp value** | 持續等幅震盪，不收斂 | 無穩態可言 |
+
+**"critical" 不是 "critically damped"！** 投影片的 critical 指的是**震盪臨界 / marginal stability**，相當於 Ziegler–Nichols 的 ultimate gain $K_u$。教科書 critically damped ($\zeta = 1$) 反而是「最快無 overshoot」、跟震盪完全相反。兩個 critical 意思相反，考試請依投影片定義作答。
+
+另外：前兩種狀態都有穩態誤差，是因為純 P 控制要在穩態輸出非零功率抵消干擾，而 $u = K_p e$ 要非零就必須 $e \ne 0$。要消除穩態誤差，只能加 I 項（不能只靠加大 $K_p$，那只會把系統推向 critical 震盪）。
+</details>
+
+**Q14.** 在 Ziegler–Nichols 手調流程裡，為什麼要**故意**把系統推到「critical high Kp」那種震盪狀態？找到這個點之後接下來怎麼用？
+
+<details><summary>答案</summary>
+
+「critical high Kp」就是 **ultimate gain $K_u$** 與**震盪週期 $T_u$** 的量測點。Ziegler–Nichols 經驗法以這兩個量為基礎，給出一組通用的 PID 起始 gain：
+
+- 純 P：$K_p = 0.5 K_u$
+- PI：$K_p = 0.45 K_u$、$K_i = 1.2 K_p / T_u$
+- PID：$K_p = 0.6 K_u$、$K_i = 2 K_p / T_u$、$K_d = K_p T_u / 8$
+
+意義：$K_u$ 標出了系統的**穩定邊界**，從這個邊界往回退一個固定比例（如 0.6），可以在不知道系統 model 的情況下，得到一個「夠快、又安全」的初始 gain。投影片的 6 步驟手調法 step 2「加大 Kp 直到開始震盪」做的就是這件事。
+</details>
+</script>
+
+<script type="text/markdown" id="md-ch2">
+## 學習目標
+
+- 能說出 1945–1984 年 HCI 史上六位關鍵人物（Bush、Sutherland、Engelbart、Kay、Shoup、Jobs/Gates）的主要貢獻與所屬機構
+- 能釐清滑鼠、GUI、hypertext、bitmap display 各自的「真正第一」是誰，而不是被流行說法誤導
+- 能用 Engelbart 的 augmentation 哲學解釋為什麼 HCI 不等於 AI 自動化
+- 能解釋 Vannevar Bush 的「social contract for science」如何促成戰後美國科研生態，並推導出 ARPA、PARC、Engelbart 的資金鏈
+- 看到 Memex、Alto、Star、Sketchpad、NLS、SuperPaint 的照片或描述能立刻配對到正確年代與貢獻
+
+## 核心觀念：augmentation, not automation
+
+Engelbart 的核心哲學是 **augmentation（增能），而不是 automation（自動化）**。他的名言可以這樣翻：「你花再多錢做 smart agents 和 smart tools 都沒用；如果你給 20 個沒受訓的人這些工具，再讓我訓練另外 20 個人去『駕馭工具』，**受過訓練的人永遠贏**。」這句話直接定義了 HCI 的立場：電腦不是替人做事，而是放大人的智力。
+
+> 💡 **記住**：Engelbart = **augment human intellect**，不是「讓電腦聰明」。HCI 的整個學科基礎就建立在這裡。
+
+從這個立場延伸出 **Bootstrapping**：用工具改造做工具的人，做工具的人再做出更好的工具。Engelbart 2000 年代成立的 **Bootstrap.org**（辦公室在 Logitech 大樓裡），目標是「improving society's collective IQ」，仍延續同一條主線。
+
+這個辯論到 1997 年還在繼續：**Ben Shneiderman（direct manipulation 派）vs. Pattie Maes（interface agents 派）** 在 IUI '97 與 CHI '97 公開辯論。Shneiderman 主張使用者要保有 control 與 predictability；Maes 主張要交給 software agents 代理。這場辯論的精神祖先就是 Engelbart 1968 的 augmentation 立場。
+
+## 時間軸總表
+
+| 年份 | 人物 | 系統 / 事件 | 機構 |
+|------|------|-------------|------|
+| 1945 | Vannevar Bush | "As We May Think" / Memex（概念） | MIT |
+| 1945 | Harvard Mark I | 55 ft, 5 tons, 3 sec 乘法 | Harvard |
+| 1947 | Grace Hopper | first computer bug（蛾，Mark II） | Harvard |
+| 1948 | — | transistor 發明 | Bell Labs |
+| 1955 | Engelbart | Berkeley EE PhD（plasma 主題） | Berkeley |
+| 1958 | — | ARPA 成立 | US Gov. |
+| 1962 | Ivan Sutherland | **Sketchpad**, first interactive graphics | MIT |
+| 1962 | Engelbart | "Conceptual Model for Augmenting Human Intellect" | SRI |
+| 1968-10 | Telefunken | **Rollkugel RKS 100-86**（球式滑鼠） | Telefunken（DE） |
+| 1968-12-09 | Engelbart | **Mother of All Demos** @ Fall Joint Computer Conf. (SF) | SRI |
+| 1973 | Xerox PARC | **Alto** | Xerox PARC |
+| 1973 | Dick Shoup | **SuperPaint** | Xerox PARC |
+| 1979 | Steve Jobs | 訪問 Xerox PARC | Apple |
+| 1981 | Xerox | **Star** 出貨（second system syndrome） | Xerox |
+| 1983 | Shoup | Emmy for video editing | — |
+| 1984 | Apple | **Macintosh**（Alto 之後 11 年） | Apple |
+| 1997 | Engelbart | Turing Award | — |
+
+## 1. Vannevar Bush 與 Memex (1945)
+
+Bush 是 MIT 的教授，二戰時擔任 OSRD 主任，**協調全美 6000 位科學家** 投入軍事研究（雷達、proximity fuze 引信等）。戰後他寫信給 Roosevelt，提出影響後世深遠的 **"social contract for science"**：
+
+1. 聯邦政府 **funds universities**
+2. 大學做 **basic research**
+3. 研究 **helps economy & national defense**
+
+> 💡 **記住**：1958 ARPA、1970 Xerox PARC、Engelbart 在 SRI 的 ARPA 經費 — 一路追回去都是 Bush 這份 social contract 的延伸。
+
+1945 年 7 月他在 **Atlantic Monthly** 發表 **"As We May Think"**，提出 **Memex（= Memory Extender）** 概念。
+
+> 💡 **重點：Memex 不是電腦，是 microfilm 機器。** 桌面上兩塊半透明螢幕投影微縮膠片，使用者透過拉桿翻頁、用 dry photography 把手寫筆記拍進膠片下一格空白。
+
+Memex 的革命性概念是 **associative trails** — 使用者可以把不同主題的文件「綁」成一條 trail，後人可繼承這條 trail。這是 **hypertext / hypermedia 的原始構想**。
+
+Bush 還預言了：wearable cameras、Encyclopedia Britannica for a nickel、自動語音轉錄、direct capture of nerve impulses、information flood、**increased specialization**。
+
+但 Bush 為什麼沒看到「digital computer」是答案？因為 1945 年的電腦長得像 Harvard Mark I：55 ft 長、5 tons、用 paper tape，乘法要 3 秒。從那個時代看不出來電腦會變小。**Bush 同時也誤判了火箭** — 戰前公開說「我不懂正經科學家或工程師怎麼會去玩火箭」，1944 年卻被迫飛去倫敦警告 Eisenhower V-1/V-2 的威脅。
+
+> 💡 **記住**：visionary is **local**。Bush 看穿 information machine 的未來，卻看不穿火箭。**在一個領域是先知，不代表在別的領域不是「sheep」。**
+
+## 2. Ivan Sutherland 與 Sketchpad (1962)
+
+MIT 博論計畫。用 **light pen** 在 CRT 上直接畫線、約束幾何、複製 instance — **第一個 interactive computer graphics 系統**。在還沒人「sit at a computer」的年代（當時電腦都還是 batch processing），Sutherland 證明了人可以即時、視覺地與電腦對話。這是 HCI 的工程起點。
+
+## 3. Douglas Engelbart 與 NLS (1962, 1968)
+
+**生平**：Berkeley EE PhD（1955），論文題目是與 HCI **完全無關的 "bi-stable gaseous plasma digital devices"**。之後到 SRI（Stanford Research Institute）做研究，靠 ARPA 經費。
+
+**1962 paper**："Conceptual Model for Augmenting Human Intellect" — 把上述 augmentation 哲學寫成正式文件。
+
+**1968-12-09 Mother of All Demos** @ Fall Joint Computer Conference（San Francisco）：90 分鐘長、現在看很慢，但每一分鐘都在發明一個今天的 PC 元件。Engelbart 戴著耳麥，左手用 chorded keyboard，右手用木盒滑鼠，與 SRI 連線即時操作。
+
+**發明清單（NLS = oN-Line System）**：
+
+| 第一個... | 對應今天的什麼 |
+|-----------|----------------|
+| mouse（木盒，兩個 1D rollers） | 滑鼠 |
+| word processing & 2D editing | Word / Pages |
+| hypertext implementation | Web links |
+| document version control | Git |
+| groupware（shared screen teleconferencing） | Zoom / Google Docs |
+| context-sensitive help | F1 help |
+
+**失敗的發明（dead ends）**：
+
+- **foot mouse**：他自己說「workable, but my leg tended to cramp」
+- **chorded keyboard**：5 鍵組合打字，學習曲線太陡
+
+1997 拿到 **Turing Award**。2000 年代成立 **Bootstrap.org**（在 Logitech 樓裡），繼續推 collective IQ。
+
+## 4. 滑鼠的「真‧第一」：Telefunken Rollkugel
+
+歷史考點：**滑鼠並非 Engelbart 首發**。
+
+| 設備 | 年份 | 機制 |
+|------|------|------|
+| Engelbart 木盒滑鼠 | 1968-12 demo | 兩個 **1D rollers**（X/Y 各一輪） |
+| **Telefunken Rollkugel RKS 100-86** | 1968-10 | **一顆球** 取代兩個 rollers |
+
+德國 Telefunken 公司比 Engelbart 的 demo 早 **約 2 個月**，且用「球」這個機構，更接近後來真正普及的滑鼠形態。**Logitech 機械滑鼠的祖先其實是這個，不是 Engelbart 的木盒**。
+
+> 💡 **記住**：問「誰發明滑鼠」要分兩層：概念上的 pointing device = Engelbart；球式機構 = Telefunken。
+
+## 5. Xerox PARC、Alto、Star
+
+**Xerox Palo Alto Research Center**（成立於 1970，戰後 Bush social contract 的私部門版本）。
+
+**Alto (1973)** — **internal version**，沒對外賣。它是世界上第一台具備今天 PC 形態的機器：
+
+| Xerox PARC 首創 | 今天的什麼 |
+|-----------------|------------|
+| **Bitmap display** | 所有現代螢幕 |
+| **Graphical User Interface, desktop metaphor** | Mac/Windows |
+| **Ethernet** | LAN |
+| **Laser printing** | 雷射印表機 |
+| **WYSIWYG**（"words and pictures"） | desktop publishing |
+
+> 💡 **PARC 不是發明滑鼠的人**。滑鼠是 Engelbart / Telefunken；PARC 是把滑鼠 **拿來配 GUI** 使用。
+
+**Star (1981)** — Alto 的商用化版本，**晚了 8 年才出貨**。失敗主因是 **"second system syndrome"**：第二代想把所有事一次做對 → **太晚、太貴**。
+
+**Steve Jobs 1979 訪問 PARC**，看到 Alto，回去做 **Lisa**，再做 **Macintosh (1984)** — **比 Alto 晚了 11 年**。
+
+## 6. Apple → Microsoft 的「偷竊鏈」
+
+> Microsoft stole from Apple. Apple stole from Xerox. Xerox stole from Engelbart. — 講義原文
+
+著名的 Jobs vs. Gates 對話（Gates 被 Jobs 罵抄襲 Windows from Mac）：
+
+> "Well, Steve, I think there's more than one way of looking at it. I think it's more like we both had this rich neighbor named **Xerox** and I broke into his house to steal the TV set and found out that **you had already stolen it**."
+
+對應 Picasso 的名言：「Good artists copy, great artists steal.」
+
+## 7. SuperPaint 與 Dick Shoup
+
+**1973, Xerox PARC**。Shoup 做出 **SuperPaint** — 第一個可以把 video tape 的 frame 抓進電腦、在上面塗鴉、再寫回 tape 的系統。**這是 video editing 的源頭**。
+
+故事的尷尬點：**Shoup 一度差點被 PARC 趕出去**，因為「invented personal computing 的那群人」不認為 video editing 算電腦科學。
+
+**1983 拿到 Emmy（艾美獎）** — HCI 史上少數拿到電視獎的工程師。
+
+## 8. 其他重要小故事
+
+**Harvard Mark I (1945)**：55 ft 長、8 ft 高、5 tons、彈道計算、physical switches + paper tape（沒有微處理器，沒有 program 概念）、**乘法要 3 秒**。這就是 Bush 寫 Atlantic Monthly 那年的電腦長相。
+
+**First computer bug (1947)**：Grace Hopper 在 **Harvard Mark II** 的 Relay #70 Panel F 裡發現一隻蛾。她在 logbook 上寫："First actual case of bug being found." 蛾本身被貼在筆記本上保存。**Hopper 後來成為 US Navy Rear Admiral**。
+
+**Alan Kay**（PARC 重要人物）名言：
+
+> "The best way to predict the future is to **invent it**."
+
+> 💡 **記住**：這句話是整個 HCI 學科的座右銘，與 Engelbart augmentation 並列。
+
+## 易混淆 / 易考點
+
+- **滑鼠到底誰先發明？** 概念與 demo = Engelbart 1968-12；ball 機構的真正第一 = Telefunken Rollkugel 1968-10（早 2 個月）；**PARC 不是發明滑鼠的人**。
+- **Memex 是電腦嗎？** **不是**。是 microfilm（微縮膠片）機器 + dry photography，整台沒有 digital computer。
+- **Bush 的 social contract** 的三句口訣：**government funds → universities do basic research → research helps economy & defense**。 ARPA (1958)、PARC、SRI 都是它的果實。
+- **PARC 哪些不是它發明的？** **滑鼠不是**（→ Engelbart / Telefunken）。是 PARC 首創的：bitmap display / GUI + desktop metaphor / Ethernet / laser printing / WYSIWYG。
+- **年代陷阱**：Alto **1973**、Star **1981**、Mac **1984**、Lisa 在 Mac 之前。Mac 比 Alto 晚 **11 年**。Star 比 Alto 晚 **8 年**。
+- **transistor 1948 / ARPA 1958 / Sketchpad 1962 / Engelbart Demo 1968 / Alto 1973 / Star 1981 / Mac 1984** — 這七個年份背熟。
+- **first computer bug** 是 **Harvard Mark II**（不是 Mark I），發現者 **Grace Hopper**。
+- **Turing Award**：Engelbart **1997**。
+
+## 自我測驗
+
+> 💡 **考試風格**：考題以概念理解與課題延伸為主，鮮少直接考數字計算。標有 *（計算，低頻）* 的題目是低頻考點，其餘都是重點。
+
+**Q1.** Vannevar Bush 在 1945 年的 Atlantic Monthly 上發表的文章標題是？描述的機器名稱與其儲存媒介為何？
+
+<details><summary>答案</summary>"As We May Think"；Memex（Memory Extender）；儲存媒介是 **microfilm（微縮膠片）**，不是電腦。</details>
+
+**Q2.** 把以下發明配對到首發者：(a) Sketchpad (b) NLS (c) Alto (d) Macintosh (e) SuperPaint
+
+<details><summary>答案</summary>(a) Ivan Sutherland @ MIT 1962；(b) Douglas Engelbart @ SRI 1968；(c) Xerox PARC 1973；(d) Apple 1984；(e) Dick Shoup @ Xerox PARC 1973。</details>
+
+**Q3.** 為什麼說 Telefunken 才是「球式滑鼠」的真正第一發明者？型號與年份？
+
+<details><summary>答案</summary>Telefunken Rollkugel **RKS 100-86**，1968 年 10 月，比 Engelbart Mother of All Demos（1968-12-09）早約 2 個月，且首次以 **一顆球** 取代 Engelbart 設計中的兩個 1D rollers。</details>
+
+**Q4.** 列出 Xerox PARC 首創的 5 項技術，並指出哪一項是它「沒有」首創的。
+
+<details><summary>答案</summary>首創：Bitmap display、GUI + desktop metaphor、Ethernet、Laser printing、WYSIWYG。**沒有首創**：mouse（→ Engelbart / Telefunken）。</details>
+
+**Q5.** Engelbart 的 augmentation 哲學一句話是什麼？它與 Pattie Maes 的 interface agents 立場有何衝突？
+
+<details><summary>答案</summary>"augmentation, not automation" — 工具是用來放大人的智力，不是替人做事。Shneiderman 繼承這條路（direct manipulation, user control）；Maes 主張把控制交給 software agents 代理。1997 年 IUI / CHI 公開辯論。</details>
+
+**Q6.** Harvard Mark I 的規格：長度、重量、乘法所需時間？第一隻 computer bug 出現在哪一台機器？發現者是誰？
+
+<details><summary>答案</summary>Mark I：55 ft 長、5 tons 重、乘法 3 秒。First bug 出現在 **Harvard Mark II**（Relay #70 Panel F 裡的蛾），發現者是 **Grace Hopper**（後為 US Navy Rear Admiral）。</details>
+
+**Q7.** Bush 的 "social contract for science" 三條是什麼？這條 contract 與 ARPA、PARC、Engelbart 的關係？
+
+<details><summary>答案</summary>(1) federal government funds universities；(2) universities do basic research；(3) research helps economy & national defense。ARPA（1958 成立）就是這條 contract 的具體實踐機構，後來 ARPA 出錢支持 Engelbart 在 SRI 的研究；Xerox PARC（1970）是私部門版本的同一個邏輯。</details>
+
+**Q8.** 「Microsoft stole from Apple. Apple stole from Xerox.」這句話原文出自誰？對應 Picasso 哪句名言？
+
+<details><summary>答案</summary>出自 Bill Gates 對 Steve Jobs 的反駁（"rich neighbor named Xerox" 那段）。Picasso 名言："Good artists copy, **great artists steal**." Alan Kay 補上一句："predict the future by inventing it."</details>
+</script>
+
+<script type="text/markdown" id="md-ch3">
+## 學習目標
+
+完成本章後，你應能：
+
+1. 解釋電動馬達如何從電磁鐵 → solenoid → brushed motor → brushless motor 演化而來。
+2. 寫出並運用摩擦力 (friction) 核心公式 $F_f = \mu F_n$，並說明三大反直覺定律。
+3. 用 $W = F \cdot d$ 推導「為什麼輪子比雪橇省力」，而不只是說「因為它在滾」。
+4. 區分背隙 (backlash) 與卡死 (jamming)，並知道何時換大馬達有用、何時沒用。
+5. 用機械優勢與功率守恆，計算齒輪傳動的扭力 / 速度交換。
+6. 依場合選擇 spur / planetary / worm / rack-and-pinion / chain / differential 等傳動方式。
+
+## 核心概念
+
+### 1. 電動馬達基礎 (electric motors)
+
+要驅動機器人車，最常用的就是**電動馬達 (electric motor)**。它的演化邏輯是一連串「為什麼？」：
+
+- **電磁鐵 (electromagnet)**：線圈通電產生磁場，可隨意開關，比永久磁鐵 (permanent magnet) 好控。直接吸引鐵磁性物件的問題在於兩磁極間的力
+
+  $$F = \mu \frac{q_{m1} q_{m2}}{4\pi r^2}$$
+
+  分母是 $r^2$，所以**距離稍遠就幾乎無力，貼近又會「啪」地黏死**，幾乎無法做平順的位置控制。
+- **線性致動器 solenoid**：把鐵芯放進線圈中，通電後鐵芯被推出，得到「平順可控的線性運動 (linear motion)」。缺點：**行程有限 (finite range of motion)**。
+- **有刷馬達 (brushed motor)**：把線性運動「彎成圓周運動」，並在鐵芯快走到端點時用**電刷 (brush)** 反轉電場，連續旋轉就誕生了。
+- **無刷馬達 (brushless motor)**：電刷會磨損、火花、接觸不良。解法是把線圈固定當定子 (stator)，讓永久磁鐵當轉子 (rotor) 繞著線圈轉，由外部電路依序切換電流方向。
+
+> 💡 **記住**：solenoid 給「直線」、motor 給「旋轉」；brushed 結構簡單但電刷會壞，brushless 反過來把磁鐵放外側。
+
+### 2. 摩擦力 (friction)
+
+**定義**：阻擋固體表面 / 流體層 / 物質元素間相對滑動 (sliding) 的力。微觀上是兩表面的原子在凹凸處互相**嵌合 (interlock)**，看似光滑的鋼面其實是晶粒堆。
+
+核心公式（必背）：
+
+$$F_f = \mu F_n$$
+
+其中 $\mu$ 是**摩擦係數 (coefficient of friction)**，純經驗值；$F_n$ 是**法向力 (normal force)**，垂直於接觸面。
+
+三大「奇怪」定律：
+
+| 定律 | 內容 | 直覺嗎？ |
+| --- | --- | --- |
+| Amontons 第一定律 | $F_f \propto$ 載重 | 直覺 |
+| Coulomb 定律 | 動摩擦力與**滑動速度無關** | 反直覺 |
+| Amontons 第二定律 | 摩擦力與**表觀接觸面積無關** | 非常反直覺，但超有用 |
+
+典型靜摩擦係數（節錄自投影片）：
+
+| 材料 A | 材料 B | $\mu_s$ |
+| --- | --- | --- |
+| Teflon | Teflon | **0.04** |
+| Polythene | Steel | 0.20 |
+| Concrete (wet) | Rubber | 0.30 |
+| Steel | Steel | 0.80 |
+| Glass | Glass | 0.94 |
+| Concrete (dry) | Rubber | 1.0 |
+| **Cast iron** | **Copper** | **1.05** |
+
+Teflon 與 cast iron/copper 差了 25 倍，材料選擇影響甚鉅。另有 **BAM (boron-aluminum-magnesium, AlMgB₁₄)** 陶瓷合金，比 Teflon 還滑、硬度接近鑽石。
+
+**靜摩擦 (static friction) > 動摩擦 (kinetic / dynamic friction)**：靜止時原子間會多形成需要能量打斷的鍵結，所以摩擦力對時間曲線會先線性爬升，到極限摩擦 (limiting friction) 那一刻物體開始動，瞬間掉到較低的動摩擦水平。
+
+降低摩擦的層級（投影片明確排序）：
+
+$$\text{rough solid} \;>\; \text{solid} \;>\; \text{liquid} \;>\; \text{gas}$$
+
+對應做法：打磨拋光 → 鍍 Teflon → 上油潤滑 → 氣浮（如空氣曲棍球桌）。
+
+### 3. 滾動與軸承 (rolling, bearings)
+
+**為什麼輪子比雪橇省力？**（投影片明確警告：**不可以只說「因為它在滾」**。）真正原因有兩個：
+
+1. **接觸點不滑**：輪子在地面是「滾離 / 滾入接觸 (engage / break up contact)」，不是滑動；滑動只發生在輪軸 (axle) 處（除非用 ball bearing 把這也消除）。
+2. **軸比輪小很多**，所以軸處滑動的**距離 $d$** 被縮小很多倍。由功的定義 $W = F \cdot d$，雖然 $F_f = \mu F_n$ 中的 $\mu$ 與 $F_n$ 都沒變，但要做的功大幅減少。
+
+> 💡 **記住**：「輪子省力」的本質是「**把滑動的距離縮小**」，不是減少摩擦係數。所以**軸要盡量細**。
+
+#### 🔬 深入：把「輪子省力」徹底拆開
+
+**(A) 為什麼輪子跟地板之間「真的」沒有滑動？**
+
+關鍵概念：**純滾動 (rolling without slipping)** 時，輪子接觸地面的那一點，**瞬時速度是 0**。
+
+最直觀的類比是**走路**：腳踩下去的那一瞬間，腳掌不動（沒在地上拖），身體往前移動，腳抬起、擺到前方、再踩——整個過程中地面跟腳之間**從來沒有「擦過去」**，只有「貼上 → 鬆開」。輪子就是這個過程的連續版：每點輪緣靜止一瞬間，就被捲起來、換下一點接力。
+
+數學驗證：輪心以 $v$ 前進、輪以 $\omega$ 旋轉，純滾動條件 $v = \omega R$。接觸點總速度 = 輪心速度 + 該點相對輪心的旋轉速度 = $v + (-\omega R) = 0$。**接觸點瞬時靜止**。
+
+> ⚠ **靜摩擦 vs 動摩擦的觀念地雷**：輪子跟地面之間**仍然有摩擦力**——是**靜摩擦**（它正是讓輪子不打滑、能推進的力）。但靜摩擦**不做功**：接觸點 $d = 0$，所以 $W = F\cdot d = 0$。**做負功的是動摩擦**，需要相對滑動。
+
+**(B) 為什麼軸 (axle) 就有滑動？**
+
+軸穿過輪心，輪繞著軸旋轉。輪轂 (hub) 內壁貼著軸外壁 360° 摩擦——這是**真正的滑動**，兩個金屬面互相擦。所以滑動摩擦並沒消失，**只是搬家**：從「輪胎–地面」搬到「軸–輪轂」。
+
+ball bearing 就是把這個滑動也消滅：在軸與輪轂之間塞一圈滾珠，讓接觸再變成滾動——把第一原理用第二次。
+
+**(C) 為什麼軸越細越省力？$W = F \cdot d$ 算給你看**
+
+設輪半徑 $R$、軸半徑 $r$。車前進 1 公尺，輪轉了 $1/(2\pi R)$ 圈。每圈，軸與輪轂界面互相滑過 $2\pi r$。所以**前進 1 公尺，軸界面總滑動距離**：
+
+$$d_{\text{滑}} = \frac{1}{2\pi R} \times 2\pi r = \frac{r}{R}$$
+
+代入功的定義：
+
+$$W_{\text{損失}} = \mu N \cdot d_{\text{滑}} = \mu N \cdot \frac{r}{R}$$
+
+對比雪橇（整個底部都拖，$d_{\text{滑}} = 1$）：
+
+$$W_{\text{雪橇}} = \mu N \cdot 1$$
+
+**所以輪子相對雪橇的損失比 = $r/R$**。數字例：輪 $R = 30\text{ cm}$、軸 $r = 1\text{ cm}$ → $r/R \approx 3.3\%$。雪橇要 100 J 的地方，輪只要 3.3 J——**$\mu$ 跟 $F_n$ 完全沒變，是 $d$ 被縮小了 30 倍**。
+
+#### 🚲 應用：腳踏車前進的能量鏈
+
+學生常見的誤解：「腳踏車是靠軸的摩擦力前進的？」**不是**。腳踏車的能量流向：
+
+```
+你的腿 → 踏板 → 曲柄 → 鏈條 → 後輪轂 → 後輪旋轉
+                                            ↓
+                            後輪–地面靜摩擦力（朝前推車）
+                                            ↓
+                                        車子前進
+```
+
+| 角色 | 力 / 機制 | 對前進的貢獻 |
+|---|---|---|
+| 能量來源 | 你的腿（肌肉做功）| 唯一正功源頭 |
+| 推車向前的力 | **後輪–地面靜摩擦**（你踩 → 鏈條給後輪扭矩 → 輪「想往後推地」→ Newton 第三定律地面回推輪向前）| 推進力（但本身不做功，見上方地雷） |
+| **軸動摩擦** | 輪轂繞軸旋轉、$W = \mu N (r/R)$ | **負功，純損失** ⚠ |
+| 空氣阻力 | 流體阻力 | 負功，速度高時主導 |
+| 滾動阻力 | 輪胎變形、地面變形 | 負功，比軸摩擦更小 |
+
+> 🔑 **一句話**：軸的動摩擦力**只負責漏水**（把你的能量變熱），從來不是水龍頭。能量來自**你的腿**、推力來自**後輪的靜摩擦**。
+
+**為什麼是「靜摩擦」而不是「動摩擦」推車？**
+
+因為輪胎跟地面**沒有相對滑動**（純滾動）。靜摩擦力可以朝任何方向、大小到 $\mu_s F_n$ 為止，自動提供「剛好需要的力」推車向前。如果地面太滑（冰面）→ 靜摩擦上限低於需求 → 輪子打滑 → 變動摩擦 → 大部分功變熱，**車反而不會動**。這就是為什麼結冰時腳踏車踩不動。
+
+**靜摩擦真的「不做功」嗎？（物理系常考細節）**
+
+嚴格分析：靜摩擦在**接觸點**不做功（$d = 0$）。但它扮演**能量轉接頭**——把後輪原本由鏈條送來的「旋轉動能」轉成車身的「平移動能」。對整台車的質心 (COM) 來說靜摩擦對 $d_{\text{COM}} > 0$ 做了正功，所以「車子獲得動能」這件事不違反能量守恆。靜摩擦本身不是能量來源，是**能量模式的轉換器**。
+
+#### 🎯 前輪 vs 後輪 的角色（順便釐清）
+
+| | 後輪（驅動輪） | 前輪（被動輪） |
+|---|---|---|
+| 能量輸入 | 鏈條給扭矩 | 無 |
+| 與地面的靜摩擦 | **朝前**（推車前進）| **朝後**（純滾動阻力）|
+| 軸動摩擦 | 損失（變熱）| 損失（變熱）|
+| 對車的淨貢獻 | 推進 | 阻力 |
+
+兩個輪子的軸都在損失能量，**但只有後輪**透過靜摩擦把鏈條送來的能量變成車的動能。前輪純粹是被拖著走、自己滾動而已。
+
+**軸承 (bearing)** 是「分隔運動件並承受負載」的元件，目錄：
+
+| 類型 | 原理 | 應用 |
+| --- | --- | --- |
+| Plain bearing | 軸 (journal) 在套筒中滑動，靠潤滑減 $\mu$ | 便宜、簡單 |
+| Ball bearing | 滾珠在內外環間滾動，消除滑動 | 自行車、馬達 |
+| Ball screw | 在螺紋與螺母間放滾珠 | 旋轉 → 直線、低摩擦 |
+| Caster | 可旋轉的小輪 | 辦公椅、推車 |
+| Ball transfer unit | 一顆大球在更多小球上滾動，全向滾動 | 輸送桌、桌面 |
+
+**Omniwheel / Mecanum**：在輪緣周圍裝小輪，主動輪能往前推、被動方向能自由滑，等同「2D wheel」。實務上會把兩個 omniwheel **半相位錯開 (half-phase offset)** 並排，避免間隙時失去接觸。
+
+**Holonomicity (holonomic)**：是「可控自由度 (controllable DoF)」與「**總自由度 (total DoF)**」的關係：
+
+- 兩者相等 → **holonomic**（可朝任意方向直接移動，例：omniwheel 機器人）
+- 可控少於總自由度 → **non-holonomic**（如汽車不能原地橫移）
+- 可控多於任務空間 → **redundant**
+
+#### ⚙ 軸承深入：滾動 vs 滑動、為什麼 cage 跑半速、為什麼這樣能省力
+
+**(A) 滾動 vs 滑動的物理本質**
+
+| | 滑動 (sliding) | 滾動 (rolling) |
+|---|---|---|
+| 接觸點相對速度 | $v_{rel} \ne 0$（兩面互擦）| $v_{rel} = 0$（接觸點瞬時靜止） |
+| 摩擦類型 | **動摩擦** $\mu_k F_n$ | **靜摩擦**（不做功）|
+| 主要能量損失 | $W = \mu_k F_n d$（與滑動距離成正比，變熱）| 理想剛體 = 0；真實系統 = 滾動阻力 |
+| 有效摩擦係數 | $\mu_k \approx 0.05 \sim 1.0$ | $C_r \approx 0.001 \sim 0.005$（小 10–1000 倍）|
+| 阻力來源 | 微觀凸點互鎖、需剪斷 | 材料變形遲滯 (hysteresis)、微滑移、黏附 |
+
+> 🔑 **關鍵觀念**：滾動**不是「摩擦變小」，是「壓根沒有滑動摩擦」**。理想剛體滾動阻力為零；真實滾動阻力來自材料變形——輪壓地時，接觸面前緣壓縮、後緣回彈，因為**彈性遲滯**，回彈能量少於壓縮能量，差額變熱。這就是為什麼輪胎會微溫、為什麼充氣比沒氣省力（充氣 → 較硬 → 變形小 → 遲滯損失小）。
+
+**(B) Ball bearing 的「雙重 no-slip」條件**
+
+球軸承一顆球同時頂到 inner ring 跟 outer ring，**兩個接觸都必須是 no-slip**：
+
+<svg viewBox="0 0 720 460" xmlns="http://www.w3.org/2000/svg" style="background:#161b22; border:1px solid #30363d; border-radius:8px; max-width:100%; height:auto; display:block; margin:1em 0;">
+  <text x="360" y="22" text-anchor="middle" fill="#c9d1d9" font-size="13" font-family="ui-sans-serif,system-ui,sans-serif">球軸承「展開」側視（單一 ball 的瞬間切片）</text>
+  <rect x="40" y="40" width="640" height="60" fill="#21262d" stroke="#6e7681" stroke-width="1.5"/>
+  <line x1="60" y1="45" x2="80" y2="65" stroke="#444c56" stroke-width="0.8"/>
+  <line x1="100" y1="45" x2="120" y2="65" stroke="#444c56" stroke-width="0.8"/>
+  <line x1="140" y1="45" x2="160" y2="65" stroke="#444c56" stroke-width="0.8"/>
+  <line x1="180" y1="45" x2="200" y2="65" stroke="#444c56" stroke-width="0.8"/>
+  <line x1="220" y1="45" x2="240" y2="65" stroke="#444c56" stroke-width="0.8"/>
+  <line x1="260" y1="45" x2="280" y2="65" stroke="#444c56" stroke-width="0.8"/>
+  <line x1="430" y1="45" x2="450" y2="65" stroke="#444c56" stroke-width="0.8"/>
+  <line x1="470" y1="45" x2="490" y2="65" stroke="#444c56" stroke-width="0.8"/>
+  <line x1="510" y1="45" x2="530" y2="65" stroke="#444c56" stroke-width="0.8"/>
+  <line x1="550" y1="45" x2="570" y2="65" stroke="#444c56" stroke-width="0.8"/>
+  <line x1="590" y1="45" x2="610" y2="65" stroke="#444c56" stroke-width="0.8"/>
+  <line x1="630" y1="45" x2="650" y2="65" stroke="#444c56" stroke-width="0.8"/>
+  <text x="55" y="85" fill="#adbac7" font-size="12" font-family="ui-monospace,monospace">outer ring</text>
+  <text x="55" y="98" fill="#8b949e" font-size="11" font-style="italic">(fixed)</text>
+  <circle cx="360" cy="200" r="60" fill="#0d1117" stroke="#79c0ff" stroke-width="2"/>
+  <circle cx="360" cy="200" r="3" fill="#f85149"/>
+  <text x="370" y="205" fill="#79c0ff" font-size="13" font-family="ui-monospace,monospace">ball</text>
+  <line x1="360" y1="140" x2="360" y2="260" stroke="#444c56" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="40" y="300" width="640" height="60" fill="#21262d" stroke="#6e7681" stroke-width="1.5"/>
+  <text x="55" y="332" fill="#adbac7" font-size="12" font-family="ui-monospace,monospace">inner ring</text>
+  <text x="55" y="350" fill="#8b949e" font-size="11" font-style="italic">(rotates at ω_i)</text>
+  <line x1="200" y1="318" x2="240" y2="318" stroke="#7ee787" stroke-width="1.5"/>
+  <polygon points="240,318 232,314 232,322" fill="#7ee787"/>
+  <line x1="280" y1="318" x2="320" y2="318" stroke="#7ee787" stroke-width="1.5"/>
+  <polygon points="320,318 312,314 312,322" fill="#7ee787"/>
+  <line x1="400" y1="318" x2="440" y2="318" stroke="#7ee787" stroke-width="1.5"/>
+  <polygon points="440,318 432,314 432,322" fill="#7ee787"/>
+  <line x1="480" y1="318" x2="520" y2="318" stroke="#7ee787" stroke-width="1.5"/>
+  <polygon points="520,318 512,314 512,322" fill="#7ee787"/>
+  <circle cx="360" cy="140" r="5" fill="#f85149"/>
+  <text x="378" y="135" fill="#f85149" font-size="13" font-family="ui-monospace,monospace" font-weight="bold">v = 0</text>
+  <text x="378" y="150" fill="#8b949e" font-size="11" font-style="italic">no-slip with fixed outer</text>
+  <line x1="360" y1="200" x2="450" y2="200" stroke="#ffa657" stroke-width="3"/>
+  <polygon points="450,200 442,195 442,205" fill="#ffa657"/>
+  <text x="465" y="195" fill="#ffa657" font-size="13" font-family="ui-monospace,monospace" font-weight="bold">v_center = v_i / 2</text>
+  <text x="465" y="212" fill="#8b949e" font-size="11" font-style="italic">midpoint of top &amp; bottom</text>
+  <circle cx="360" cy="260" r="5" fill="#7ee787"/>
+  <line x1="360" y1="278" x2="540" y2="278" stroke="#7ee787" stroke-width="3"/>
+  <polygon points="540,278 532,273 532,283" fill="#7ee787"/>
+  <text x="555" y="273" fill="#7ee787" font-size="13" font-family="ui-monospace,monospace" font-weight="bold">v = v_i = ω_i r_i</text>
+  <text x="555" y="290" fill="#8b949e" font-size="11" font-style="italic">no-slip with rotating inner</text>
+  <path d="M 320 175 A 35 35 0 0 1 360 145" fill="none" stroke="#d2a8ff" stroke-width="2"/>
+  <polygon points="360,145 354,143 357,153" fill="#d2a8ff"/>
+  <text x="265" y="170" fill="#d2a8ff" font-size="12" font-style="italic">ω_b (球自轉)</text>
+  <text x="360" y="395" text-anchor="middle" fill="#c9d1d9" font-size="13" font-family="ui-sans-serif,system-ui,sans-serif">球是 rigid body：頂端 (v=0) 與底端 (v=v_i) → 中點必為平均 v_i/2</text>
+  <text x="360" y="430" text-anchor="middle" fill="#8b949e" font-size="11" font-style="italic">所以 ball 跟著 cage 以 v_i/2 平移（對應 cage 角速度 ω_c ≈ ω_i / 2）</text>
+</svg>
+
+**兩個 no-slip 條件**：
+- 球**頂端** ↔ outer ring：對方靜止 → 球頂端瞬時速度 = 0
+- 球**底端** ↔ inner ring：對方以 $v_i = \omega_i r_i$ 移動 → 球底端瞬時速度 = $v_i$
+
+**(C) 「半速定律」：直覺版證明（一行）**
+
+球是 rigid body。剛體上兩個固定點之間，**中點速度 = 兩端速度的平均**：
+
+$$v_{\text{球心}} = \frac{0 + v_i}{2} = \frac{\omega_i r_i}{2}$$
+
+球心被 cage 拉著轉，所以 cage 角速度（繞 bearing 軸）：
+
+$$\omega_c = \frac{v_{\text{球心}}}{R_c} = \frac{\omega_i r_i}{2 R_c} \approx \frac{\omega_i}{2}$$
+
+其中 $R_c = r_i + r_b$ 是球心軌道半徑。當 $r_b \ll r_i$（一般情況），$\omega_c$ 真的就是 inner ring 角速度的**一半**。
+
+**球自己的自轉 $\omega_b$**？球底距球頂 $2r_b$，速度差 $v_i$，所以：
+
+$$\omega_b \cdot 2 r_b = v_i \ \Rightarrow\ \omega_b = \frac{\omega_i r_i}{2 r_b}$$
+
+比 $\omega_i$ 還快（因為 $r_i / r_b$ 大）。
+
+> ⚠ **觀念釐清**：「半速」**特指 cage 的公轉速度**（ball center 繞 bearing 軸的速率），**不是球的自轉**。球的自轉反而比 inner ring 快好幾倍。
+
+**(D) 嚴格版：兩條 no-slip 方程**
+
+如果要看完整推導（避免直覺出錯）：
+
+設 cage 角速度 $\omega_c$、球自轉 $\omega_b$。考慮 bearing 軸方向：
+
+| 接觸點 | 對方速度 | 球上對應點速度 | no-slip 條件 |
+|---|---|---|---|
+| 內環接觸（球底，距 bearing 軸 $r_i$） | $\omega_i r_i$ | $\omega_c R_c - \omega_b r_b$ | $\omega_i r_i = \omega_c R_c - \omega_b r_b$ |
+| 外環接觸（球頂，距 bearing 軸 $r_o$） | $0$ | $\omega_c R_c + \omega_b r_b$ | $0 = \omega_c R_c + \omega_b r_b$ |
+
+解聯立：$\omega_c = \omega_i r_i / (2 R_c)$、$\omega_b = -\omega_i r_i / (2 r_b)$。負號代表自轉方向跟 cage 公轉**反向**——這也是物理上合理的：球頂要跟著靜止外環、球底要跟著前進內環，球自轉的方向自然是「往前滾」。
+
+**(E) 為什麼 ball bearing 真的省力**
+
+| | Plain bearing（軸直接套筒） | Ball bearing |
+|---|---|---|
+| 接觸性質 | **滑動**（軸表面擦套筒）| **滾動**（球與兩 ring 都 no-slip） |
+| 滑動距離（軸轉 1 圈）| $2\pi r_{\text{軸}}$（整個軸表面）| 理想 = 0 |
+| 能量損失 | $\mu_k F_n \cdot 2\pi r_{\text{軸}}$ | 滾動阻力 + cage 摩擦 + 潤滑黏滯 |
+| 有效摩擦係數 | $\mu \approx 0.05 \sim 0.15$ | $\mu_{\text{eff}} \approx 0.001 \sim 0.005$ |
+| 改善幅度 | — | **10–100 倍** |
+
+**為什麼差這麼多**：plain bearing 的軸跟套筒一直在做「滑動接觸」，距離 $d$ 就是軸表面實際走過的長度。Ball bearing 把所有滑動接觸換成 no-slip 滾動接觸，**理想情況下 $d_{\text{滑}} = 0$**——這完美套用上一節「輪子省力的關鍵是縮小 $d$」的邏輯，只是這次是把 $d$ 從「某個小值」進一步縮到「接近 0」。
+
+剩下的損失主要來自：
+1. **微滑移 (microslip)**：真實材料不是完美剛體，接觸面會微小變形，產生極小的滑動
+2. **Cage 摩擦**：球跟金屬保持架 (cage / retainer) 之間有少量滑動
+3. **潤滑油黏滯**：潤滑油本身的剪切阻力
+4. **滾動阻力**：球與 ring 接觸時的彈性變形遲滯
+
+**(F) 半速也是 bearing 的「健康診斷指標」**
+
+如果 cage **不**以 $\omega_i/2$ 轉 → 代表 no-slip 條件至少有一邊崩了 → 球在滑而不是滾。一旦出現滑動：
+- 動摩擦取代靜摩擦 → 立刻產生熱
+- 鋼球摩擦鋼 ring → 表面點蝕 (pitting)、剝離 (spalling)
+- bearing 壽命從幾千小時掉到幾十小時
+
+所以工業上監測 bearing 健康一種做法就是**量 cage 速度**：偏離 $\omega_i/2$ 太多 → 球在打滑 → 即將失效。
+
+導致 ball 打滑的常見原因：
+- **潤滑不足**：邊界潤滑失效，球瞬間「焊住」內環的微小區域
+- **負載過大**：ring 變形、接觸幾何崩壞
+- **異物污染**：球被異物頂住、無法純滾
+- **高速軸**：離心力把球往外推、跟 inner ring 接觸力減弱 → 該邊先打滑
+
+> 💡 **記住**：「**cage 跑半速 = 球在純滾 = bearing 健康**」這是同一件事的三種說法。
+
+### 4. 背隙與配合 (backlash, fits)
+
+**Backlash**（又稱 lash, play）：兩件嚙合元件間的**間隙**，「不施可觀力就可以在這個距離內亂跑」的最大量。齒輪、軸承、皮帶都有。太大會造成定位誤差、震動；太小會造成**卡死 (jamming)**。
+
+改善背隙與避免卡死的五大手法（slide 上的圖示）：
+
+1. 軸的**兩端都加軸承**支撐，讓軸保持直線。
+2. 縮短槓桿臂（lever play）。
+3. 降低軸向 play。
+4. 降低軸的傾斜 (tilt)。
+5. **用較厚的材料切齒輪**，平面對齊較好。
+
+**Engineering fit (工程配合)**：兩件配合件間的間隙大小。ISO 是國際標準、ANSI 是北美標準。重要類別：interference fit (壓配)、force fit (FN1–FN5)、location fit (LN, LT, LC)、RC fit (running clearance, RC1 最緊到 RC9 最鬆)。組裝固定處用 **lock nut (鎖緊螺帽)** 防鬆脫。
+
+> ⚠ **jamming 的特殊性**：jamming 是接觸面的法向力把兩件「楔死」，此時摩擦力反而**幫助**卡住 → **換大馬達只會把零件壓得更緊**。唯一解是改幾何（鬆配合、加軸承、消傾斜）。
+> 💡 **記住**：**大馬達能克服摩擦，但不能克服 jamming。** 當車不動，先看是不是卡死，再考慮升級馬達。
+
+#### 🔧 為什麼這樣做有效？— 五大手法的 rationale
+
+所有手法本質都在做同一件事：**讓嚙合件的實際相對位置，保持在設計圖上的相對位置**。位置準 → 間隙可以做小 → 背隙小、jamming 也不會發生。
+
+| 手法 | 物理機制 | 為什麼有效 |
+|---|---|---|
+| ①兩端軸承支撐 | 懸臂軸在受力時**彎曲量**正比於 $\frac{FL^3}{3EI}$；兩端約束後等效長度 $L$ 減半，彎曲量剩 $\frac{1}{8}$。彎了的軸讓齒輪偏離設計平面 → 背隙失準。 | 消除懸臂彎曲，是降低傾斜最直接的辦法 |
+| ②縮短槓桿臂 | 軸的傾斜角 $\theta \approx \frac{FL^2}{2EI}$；接觸點的側向偏移 $= \theta \times$（軸承到齒輪距離）。**槓桿臂越短，同樣傾斜角下齒輪偏得越少**。 | 縮短力臂直接縮小幾何放大因子 |
+| ③降低軸向 play | 軸能在軸線方向竄動 → 齒輪跑出設計嚙合面 → **邊緣接觸**，應力集中 + 有效間隙暴增。用止推軸承 (thrust bearing) 或軸肩擋圈封住即可。 | 消除第三個自由度；邊緣接觸是背隙與 jamming 的溫床 |
+| ④降低傾斜 (tilt) | 齒輪傾斜讓兩齒面不平行，接觸從「面接觸」退化成「線/點接觸」；傾斜放大了接觸點偏移的幾何效果，比 play 本身的影響還大。根本解是公差配合正確或加墊圈 (shim)。 | 傾斜是 backlash 的乘數，要最先消除 |
+| ⑤較厚材料切齒輪 | 雷射切薄板的 kerf 有角度，齒上下尺寸略有差異 → 齒面不平行。較厚材料切出的齒輪**接觸面寬**，同樣的微量偏斜下接觸區不易跑出去，有效間隙變化較小。 | 接觸面寬 = 對偏斜的容忍度更高 |
+
+### 5. 傳動 (transmission)
+
+**Mechanism**：把輸入力與運動，轉成想要的輸出力與運動的裝置。**Transmission** 是其中專管「**有控制地傳遞功率**」的子類；典型形式就是齒輪箱 (gearbox)。
+
+兩條鐵則：
+
+**機械優勢 (mechanical advantage, MA) — 槓桿原理**：
+
+$$\text{MA} = \frac{F_B}{F_A} = \frac{a}{b}$$
+
+**功率守恆 (power conservation)**：
+
+$$P = F \cdot v = \tau \cdot \omega$$
+
+齒輪本質上就是**用速度換扭力 (trade speed for torque)**，反之亦然 —— 功率不變（忽略損耗）。馬達轉得快但扭力小，車輪要的是大扭力、低轉速，所以中間放齒輪箱。多級齒輪箱可以堆出非常大的傳動比。
+
+齒輪 / 傳動形式目錄：
+
+| 類型 | 特性 | 場合 |
+| --- | --- | --- |
+| Spur gear（正齒輪） | 最常見、兩軸平行、輸出反向 | 通用 |
+| Internal gear（內齒輪） | 空間效率高、**輸出不反向** | 緊湊設計 |
+| Planetary gear（行星齒輪） | 太陽 + 行星 + 環，同軸高比值 | 電鑽、馬達減速箱 |
+| Worm drive（蝸桿） | **單級就能做超高傳動比**、不可逆轉 | 微型 servo、舉升機構 |
+| Rack-and-pinion（齒條 + 小齒輪） | 旋轉 ↔ 直線 | 方向盤、CNC |
+| Chain + sprocket（鏈條 + 鏈輪） | 遠距離傳動、容許軸距彈性 | 自行車、機車 |
+| Differential（差速器） | 一輸入分配給兩輸出，允許兩輪不同速 | 汽車後軸過彎 |
+
+#### 🔬 五種傳動的 "Why"：為什麼各自具備這些特性？
+
+##### Planetary gear — 為什麼能在「同軸」做出「超高比值」？
+
+**結構**：中心是 sun（太陽輪），外圈是 ring（內齒環），中間數顆 planets（行星輪）同時咬住 sun 與 ring，planets 的軸接到 carrier（行星架）。三個介面：sun、ring、carrier，任選一個固定、一個輸入、一個輸出。
+
+**為什麼同軸（coaxial）**：sun、ring、carrier 三者**共用同一條中心軸**。一般 spur gear 兩軸平行但分開，做減速箱要往側邊長出去；行星齒輪把所有東西塞在一個圓筒裡，輸入軸與輸出軸對齊 → 電鑽馬達後面直接接電鑽夾頭、不用偏心。
+
+**為什麼能高比值**：以「固定 ring，sun 輸入，carrier 輸出」為例（最常見），齒比
+
+$$i = 1 + \dfrac{Z_{\text{ring}}}{Z_{\text{sun}}}$$
+
+舉例：$Z_{\text{sun}} = 12$、$Z_{\text{ring}} = 60$，$i = 1 + 60/12 = 6$。**單級就能 1:6**。
+
+> 📦 「級 (stage)」= **一組嚙合的齒輪**。spur gear 一對小+大齒 = 一級；一個 sun-planets-ring 套件 = 一級。「兩級」是把第一級的**輸出**當第二級的**輸入**（前一個 carrier 帶下一個 sun）。比值是**乘起來**：兩級各 1:6 → 總 1:36，三級 1:216。電鑽常見的「3-stage planetary」就是這個。
+
+**為什麼 spur gear 做不到一樣的事？** 同樣的「外徑」限制下（例如電鑽手把粗 40 mm），spur 要 1:6 得做一顆 17 齒小齒輪配 102 齒大齒輪——但**大齒輪自己直徑就要 ~100 mm**（齒數 × 模數），早就超出 40 mm 殼子。所以 spur 一級頂多 1:3，再高就裝不下。
+
+關鍵差異：planetary 把**外殼本身**當大齒輪（ring 是「內齒」，齒長在內側），所以「大齒輪」的直徑可以**等於外殼直徑**。spur 的大齒輪是「外齒」，必須整顆塞進殼子裡 → 直徑被限死。
+
+> 💡 一句話：**spur 的大齒輪 vs 外殼**互相佔空間；**planetary 的大齒輪 = 外殼**，省下整個圓的面積。
+
+**為什麼承載大**：扭力由 3–4 顆 planets **並聯分攤**，每顆只扛 1/3 ~ 1/4，所以同樣齒寬能傳更大扭力，又不會偏載（planets 對稱排列，sun 軸不受徑向力）。這就是為什麼電鑽、新能源車驅動、機器人關節都用行星。
+
+##### Worm drive — 為什麼「單級」就能 1:50，又為什麼「不可逆」？
+
+**幾何直覺**：worm（蝸桿）像一根**只有一條螺紋的螺絲**，蝸輪是被它「螺進去」的大齒。蝸桿轉一整圈 = 螺紋前進一齒 = 蝸輪只動 1 齒。
+
+**單級高比值的數學**：
+$$i = \dfrac{Z_{\text{wheel}}}{N_{\text{start}}}$$
+
+$Z_{\text{wheel}}$ 是蝸輪齒數，$N_{\text{start}}$ 是蝸桿的「螺紋頭數」（單頭蝸桿 = 1）。$Z_{\text{wheel}} = 50$、單頭 → **i = 50**，一級到位。spur gear 要 1:50 得疊 3–4 級。
+
+**為什麼「不可逆」（self-locking 自鎖）**：關鍵在**導程角 (lead angle) $\gamma$**。蝸桿傳動效率
+$$\eta = \dfrac{\tan\gamma}{\tan(\gamma + \varphi)}$$
+其中 $\varphi = \arctan\mu$ 是摩擦角。當 $\gamma < \varphi$（導程角小於摩擦角，typically $\gamma < 5°$），**反向驅動的效率 < 0** → 蝸輪無論用多大力都推不動蝸桿。
+
+**物理上**：蝸輪推蝸桿時，力的方向幾乎和蝸桿軸線垂直，**幾乎沒有沿軸推進的分量**——所有力都變成摩擦損耗。就像你想用刀刃推螺絲讓它轉一樣徒勞。
+
+**用途**：
+- 舉升機構（電梯、千斤頂、防墜）→ 斷電也不會掉下來
+- 微型 servo → 馬達停止時負載自鎖、不需電流維持
+- **代價**：效率只剩 30–50%（多級 spur 可達 90%+），所以**不能用在連續高功率場合**。
+
+##### Rack-and-pinion — 為什麼跟 CNC 沾上邊？
+
+**結構**：pinion（小齒輪）咬齒條（直條狀的「齒輪」），旋轉 ↔ 直線轉換。
+
+**為什麼用在 CNC（與類似的大行程線性平台）**：
+- **行程不受限**：齒條多長就能跑多長。**ball screw（滾珠螺桿）**雖然精度更高，但長螺桿會**自重下垂**、轉速一高就「跳繩」(whip) → 5 m 以上幾乎沒法用。齒條沒有這個問題，**整面工具機床身**都可以用。
+- **剛性高**：齒齒嚙合直接傳力，不像皮帶會彈。CNC 切削吃刀時反作用力大，需要剛性。
+- **速度快**：直線速度 $v = \omega r_{\text{pinion}}$，pinion 隨便轉幾百 rpm 就有 m/s 級的線速度（ball screw 受臨界轉速限制）。
+- **代價**：背隙比 ball screw 大；高精度 CNC 用**雙小齒輪預壓**消除（兩顆 pinion 反向頂死齒條兩側）。
+
+**汽車方向盤是 rack-and-pinion 的另一個經典應用**：
+
+1. 你**旋轉**方向盤 → 帶動 steering column → column 末端是一顆 pinion。
+2. Pinion 咬住一根橫向的 rack（在引擎室裡橫跨左右）。
+3. 你左轉方向盤 → pinion 順時針 → rack **往左平移**。
+4. Rack 兩端用 tie rod（拉桿）連到左右輪的 **steering knuckle (轉向節)**。
+5. Rack 平移 → 拉桿推 / 拉 knuckle → 兩輪同步轉一個角度。
+
+**為什麼用這個機構而不是別的**：兩輪需要的是「**同步、剛性、可雙向**的水平推拉」。直線運動天然適合「橫推 tie rod」的幾何；齒輪嚙合提供剛性與雙向力傳遞（推也行、拉也行）；旋轉的方向盤用 pinion 就直接接到這條 rack 上。如果用螺桿（lead screw），轉很多圈才動一點點 → 方向盤要轉好幾百圈才能打滿，沒人開得了。所以**齒條給了「轉一點動很多」的線性比**——符合方向盤手感。
+
+##### Chain + sprocket — 為什麼「允許軸距彈性」？
+
+**結構**：兩個 sprocket（鏈輪）間用 roller chain 連結。
+
+**為什麼遠距離傳動**：齒輪要傳動兩個遠軸，**中間得放好幾顆惰輪**（idler gear），每多一顆就多一份摩擦損耗、多一份齒隙、多一個軸承故障點。鏈條一條到底，500 mm、1000 mm 都可以。
+
+**為什麼「容許軸距彈性」**：
+- **軸距可變**：鏈長加減一節就行（自行車後輪可前後微調張力）。齒輪一旦定中心距，誤差 0.5 mm 就嚙合不順。
+- **可吃軸不平行 / 微小錯位**：鏈條柔，可以吃 ±0.5°；齒輪超過 0.1° 就出現偏載。
+- **可加張力器 (tensioner)**：彈簧張緊輪自動補償**鏈條伸長 (chain elongation)** 與裝配誤差。後變速器（rear derailleur）就是這個道理。
+
+**代價**：鏈條會伸長（每節 pin 磨損累積，俗稱「鏈條變長」其實是 pin 變細）→ 需要定期更換；高速會甩動；潤滑要求高。
+
+##### Differential — 為什麼「一輸入能分配給兩個不同速的輸出」？
+
+**問題**：汽車過彎時**外側輪走的弧長 > 內側輪**。若兩輪硬連同一軸 → 必有一輪滑動（磨胎、損抓地、轉不過彎）。需要一個機構讓兩輪可以**獨立轉**，又能**同時被同一個馬達驅動**。
+
+**結構**：driveshaft 帶動 ring gear（環齒輪），ring gear 上固定一個 **carrier**，carrier 上裝**兩顆 pinion gear**（行星小齒輪），這兩顆 pinion **同時咬住兩個 side gear**——side gear 分別接左右車輪。
+
+**關鍵運動學**（這是差速器的精髓）：
+$$\omega_{\text{ring}} = \dfrac{\omega_{\text{left}} + \omega_{\text{right}}}{2}$$
+
+**輸入轉速 = 兩輸出轉速的平均**。也就是說：
+- 直行：$\omega_L = \omega_R = \omega_{\text{ring}}$，pinion 不自轉、只跟 carrier 公轉。
+- 過彎：$\omega_L = \omega_{\text{ring}} - \Delta$、$\omega_R = \omega_{\text{ring}} + \Delta$，pinion 自轉 → 一邊「吃進」差量、另一邊「吐出」差量。
+
+**為什麼這個式子成立**：carrier 是參考座標，從 carrier 上看，左右 side gear **轉速大小相等、方向相反**（被同一顆 pinion 連起來）。再加上 carrier 本身的公轉 → 在地面座標下做平均運算就得到上式。
+
+**扭力的對稱**：兩輸出**扭力相等**（同一個 pinion 兩邊壓力一樣）→ 這也是 **open differential 在單側打滑時整台車動不了**的原因（打滑側阻力 = 0 → 另一側扭力也只能是 0 → 全部能量用來空轉打滑輪）。LSD（限滑差速器）、ABS、ESC 都是在補這個缺陷。
+
+**類比**：把兩個輪子想像成兩個齒輪併聯，差速器是「平均池」——你倒一杯水進去（輸入轉速），它可以選擇兩邊均分（直行）或一邊多一邊少（過彎），但**總和守恆**。
+
+### 6. 馬達連接軸的方法
+
+- **Set screw (緊固螺絲)**：旋鈕 / 馬達側鎖一顆螺絲頂住軸，最常見也最簡易。
+- **Luster terminal / 端子塊**：以螺絲壓緊接觸，DIY 常用。
+- **Flange coupling (法蘭聯軸器)** 與 **press-fit (壓配)**：高扭力、精度需求高的場合。
+- **D-shaft**：軸截面為 D 形，孔同樣為 D 形即可防止滑轉。
+
+#### 🔧 各連接法的機制細節 & 對偏心 (eccentricity) 的處理
+
+##### Set screw — 真的就是「螺絲頂軸」嗎？可靠嗎？
+
+**是的，就這麼粗暴**：齒輪 / 旋鈕的中心孔比軸稍大，徑向鑽一個螺紋孔，鎖一顆無頭螺絲 (grub screw) 把軸頂死。靠**摩擦 + 局部變形**鎖緊。
+
+**它的確不可靠**——你的直覺沒錯。常見失效：
+- **滑轉 (slipping)**：扭力超過摩擦限就空轉。$T_{\max} \approx \mu F r$，$F$ 是螺絲鎖緊力，$r$ 是軸半徑。
+- **退牙鬆脫**：振動讓螺絲反轉鬆開。
+- **軸表面壓痕**：螺絲尖端會在軸上戳出凹坑 → 拆下來再裝對位就跑了。
+
+**典型強化做法**：
+1. **配 D-shaft 或 軸上加平面 (shaft flat)**：螺絲頂在平面上，不會繞著圓周打滑。**90% 的 RC / DIY 馬達座**都這樣設計。
+2. **兩顆螺絲、90° 錯開**：分散應力、互相防鬆。
+3. **Loctite 螺絲膠**：低強度（藍）防鬆、高強度（紅）半永久。
+4. **杯尖 (cup point) 而非平尖**：尖端咬入軸表面，抗扭更好（但傷軸更深）。
+
+**判斷 set screw 夠不夠**：低速、低扭、易拆裝場合（旋鈕、編碼器、輕量齒輪）→ 夠。馬達直驅輪子、傳動軸 → **不夠**，要 D-shaft + key + 螺絲。
+
+##### Luster terminal — 不只接電線
+
+**原本**：歐式接線端子，「Lüsterklemme」德文是「吊燈夾」——做來把吊燈的多股電線壓在一起。所以**首要用途是電氣接線**沒錯。
+
+**為什麼 CSL 拿來當機械接頭**：端子塊的孔徑剛好 2–8 mm，兩端的螺絲可以**徑向壓緊一根桿**。在 prototype / 教學場合，**它等於一個「現成的雙 set screw 套筒」**——便宜、容易拆、不用車削。
+- **適用**：低扭力的剛性連接，例如把馬達軸接到一根小桿、把感測器固定在桿上。
+- **不適用**：高速 / 高扭。塑膠殼的端子塊一受熱就軟掉；金屬的也只是「兩顆 set screw 串聯」，繼承 set screw 全部缺點。
+
+> 💡 結論：是 DIY 偷懶神器，**不要在正式機構出現**。
+
+##### Flange coupling — 怎麼運作？
+
+**結構**：兩個圓盤（flanges 法蘭），每個盤中心開孔套在自己的軸上（通常用 key + keyway 或 press-fit 鎖住），盤的「端面」朝向彼此，**用一圈螺栓把兩個盤鎖在一起**。
+
+**力的傳遞路徑**：
+
+軸 A → key → flange A → 螺栓組（剪力）→ flange B → key → 軸 B
+
+**為什麼能承高扭力**：
+- 螺栓在距離中心 $R$ 處承受**剪力**，多顆螺栓並聯。$T_{\max} = n \cdot F_{\text{bolt,shear}} \cdot R$。
+- 例：6 顆 M6 鋼螺栓、$R = 30\,\text{mm}$、$F_{\text{shear}} \approx 5\,\text{kN}$ → $T \approx 900\,\text{N·m}$（汽車傳動軸等級）。
+- 對比 set screw 大概只能扛幾 N·m。
+
+**剛性 (rigid) vs 撓性 (flexible) flange**：
+- **Rigid**：兩盤金屬對金屬硬鎖。**要求兩軸完美同心**，否則所有偏心都變成軸承上的徑向力 → 軸承壽命暴跌。
+- **Flexible**：兩盤之間夾一個彈性元件（橡膠塊、jaw spider、片簧、Oldham 圓盤滑塊）。**允許 0.1–1 mm 偏心 / 0.5–3° 角度誤差**，把對位誤差吸收掉。
+
+##### 對「偏心 (eccentricity)」的兩種理解，要分清楚
+
+「Eccentricity」在機械裡指兩件事，**處理方法完全不同**：
+
+**(a) 軸間偏心 (shaft misalignment)** — 馬達軸與從動軸不同心
+- **原因**：安裝誤差、底座變形、熱膨脹。
+- **症狀**：軸承徑向載荷暴增、振動、噪音、壽命短。
+- **處理**：**用 flexible coupling**（jaw、Oldham、beam）吸收對位誤差。或**用 universal joint (萬向接頭)** 應付大角度錯位。**不能**用 counterweight 解決。
+
+**(b) 質量偏心 (mass eccentricity / rotor imbalance)** — 旋轉件的質心不在轉軸上
+- **原因**：齒輪鑄造誤差、單側裝了東西、葉片不均勻。
+- **症狀**：離心力 $F = m\omega^2 e$（$e$ 是質心到軸的距離）→ 高速時振動巨大。$\omega = 1000\,\text{rad/s}$、$m\cdot e = 1\,\text{g·mm}$ → $F = 1\,\text{N}$；$\omega = 10000$ 就 100 N。
+- **處理**：**裝 counterweight**（配重）在質心對面、距離 $r_c$ 處，質量 $m_c$ 使 $m_c r_c = m e$，讓**總離心力歸零**。汽車輪框裝鉛塊、洗衣機桶配重塊都是這個。動平衡機 (balancing machine) 就是專門找這個 $e$。
+
+> ⚠ 常見誤解：「軸有偏心就加配重」——錯。**配重只解質量不平衡，不解對位錯誤**。對位錯了就是要重新對位或換 flexible coupling。
+
+##### Press-fit (壓配 / 過盈配合)
+
+**做法**：孔比軸**小幾 μm**（例如 ⌀10 H7/p6 → 過盈 0–24 μm）。靠液壓機 / 加熱孔 / 冷縮軸 強迫裝入。靠**彈性接觸壓力 → 摩擦** 傳扭力。
+
+**優點**：無背隙、無鬆動點、傳扭超大、完全同心。
+**缺點**：**裝了拆不下來**（拆 = 破壞）；對公差要求嚴。
+
+**用途**：永久組裝（齒輪上軸、軸承內圈套軸、火車輪壓上軸）。
+
+##### 對照表
+
+| 方法 | 扭力等級 | 對位需求 | 拆裝難度 | 典型場景 |
+|---|---|---|---|---|
+| Set screw | 低 | 中（吃對位） | 容易（鬆螺絲） | 旋鈕、編碼器、輕齒 |
+| Luster terminal | 很低 | 鬆 | 容易 | DIY prototype |
+| D-shaft + set screw | 中 | 中 | 容易 | RC 馬達、小型減速 |
+| Rigid flange | 極高 | **嚴**（要對中） | 中（拆螺栓） | 重工業傳動 |
+| Flexible flange / coupling | 高 | **鬆**（吸偏心） | 中 | 馬達 ↔ pump、CNC |
+| Press-fit | 極高 | 由公差決定 | **拆不掉** | 永久組裝 |
+
+### 7. 線性運動與連桿
+
+齒輪都是旋轉的，但機器人常需要直線推拉：
+
+- **Push-pull rod**：直推直拉的剛性桿。
+- **Knuckle joint / ball-joint linkage**：允許角度變化的接頭。
+- **Stewart platform**：六根線性致動器並聯，撐起一個可六自由度移動的平台，飛行模擬器常用。
+
+## 公式整理表
+
+| 公式 | 用途 |
+| --- | --- |
+| $F = \mu q_{m1} q_{m2} / (4\pi r^2)$ | 磁極吸力，距離平方衰減 |
+| $F_f = \mu F_n$ | 摩擦力 = 摩擦係數 × 法向力 |
+| $W = F \cdot d$ | 摩擦做的功；解釋輪子省力 |
+| $\text{MA} = F_B / F_A = a/b$ | 槓桿原理 = 齒輪傳動比 |
+| $P = F \cdot v = \tau \cdot \omega$ | 功率守恆，齒輪用速度換扭力 |
+
+## 「弱馬達怎麼開好車」綜合啟示
+
+> 💡 **slide p.86 三大原則**：
+> 1. $F_f = \mu F_n$ → 法向力越小摩擦越小 → **車要做輕**（呼應 statics 與 trusses）。
+> 2. **軸要兩端支撐**，避免歪斜造成 jamming（大馬達救不了卡死）。
+> 3. 雷射切出多份不同尺寸的批次 (batches)，**實測找出最對的 fit**——孔太緊會卡、太鬆會背隙。
+
+## 易混淆 / 易考點
+
+- **為什麼 friction 不受表觀接觸面積影響？** 因為真實接觸只發生在微觀凸點，凸點總面積由法向力決定，與宏觀面積無關。
+- **Jamming vs. backlash**：backlash 是「動了不傳力」的間隙；jamming 是「卡住完全動不了」。前者影響精度，後者讓系統完全失效，且**大馬達無解**。
+- **Holonomic 精確定義**：可控自由度 = 總自由度。汽車（兩可控 DoF：油門 + 方向盤，三總 DoF：x, y, θ）→ non-holonomic。
+- **為什麼輪軸要小？** 因為輪軸處仍有滑動，$F_f$ 不變但 $d$ 變小，做的功 $W = F \cdot d$ 才小。每前進 1 m，軸界面只滑 $r/R$ m。
+- **靜摩擦 > 動摩擦** 的原因：靜止時表面原子有時間形成額外鍵結，需要額外能量打斷。
+- **🚲 推腳踏車向前的是什麼力？** 答案：**後輪與地面的「靜摩擦」**——不是動摩擦、也不是軸的摩擦。動摩擦只負責損失（變熱）；軸動摩擦只負責漏水（不是水龍頭）。能量源頭是**你的腿**。
+- **靜摩擦真的「不做功」嗎？** 嚴格說在接觸點 $d=0$ 所以 $W=0$。但它扮演**能量「轉接頭」**，把鏈條送來的旋轉動能轉成車的平移動能。對車質心而言，靜摩擦對 COM 位移做了正功——這跟「接觸點不做功」是兩個尺度的觀點，並不矛盾。
+- **靜摩擦 vs 動摩擦的轉換點**：地面太滑（冰）→ 靜摩擦上限 $\mu_s F_n$ 不夠 → 輪打滑、變動摩擦 → 大部分功變熱 → 車反而不會動。所以打滑是「**力的種類轉換**」而非「沒有力」。
+- **⚙ 球軸承「半速」特指 cage 公轉，不是球自轉**：cage（球心軌道）$\omega_c \approx \omega_i / 2$，但球自轉 $\omega_b = \omega_i r_i / (2 r_b)$ 反而比 inner ring 快好幾倍。
+- **半速定律一行直覺證**：球是 rigid body，頂端（接靜止外環，$v=0$）+ 底端（接內環，$v=v_i$）→ 中點速度必為平均 $v_i/2$。
+- **滾動阻力 vs 滑動阻力的本質差異**：滾動阻力來自**材料變形遲滯**（彈性回彈不完全），不是動摩擦。所以 $C_r$ 跟 $\mu_k$ 是不同物理量，數量級也差 10–1000 倍。
+- **Ball bearing 為什麼省 10–100 倍？** 把所有「滑動接觸」換成「滾動接觸」，$W = \mu N d$ 裡的 $d$ 從「軸表面總走過距離」縮到接近 0。$\mu$ 跟 $N$ 都沒改，是 $d$ 被消滅了。
+- **Bearing 健康監測**：cage 若不在 $\omega_i/2$ 附近 → 球在打滑 → 動摩擦取代靜摩擦 → 高溫點蝕 → 壽命暴跌。
+
+## 自我測驗
+
+> 💡 **考試風格**：考題以概念理解與課題延伸為主，鮮少直接考數字計算。標有 *（計算，低頻）* 的題目是低頻考點，其餘都是重點。
+
+**Q1.** *（計算，低頻）* 一個 2 kg 物體放在 $\mu = 0.3$ 的桌面（$g = 9.8\,\text{m/s}^2$），需要多大水平力才能讓它開始滑動？
+
+<details><summary>答案</summary>$F_n = mg = 19.6\,\text{N}$，$F_f = \mu F_n = 0.3 \times 19.6 = 5.88\,\text{N}$。需要施力略大於 5.88 N。</details>
+
+**Q2.** *（計算，低頻）* 馬達輸出 0.1 N·m、6000 RPM，經傳動比 1:50 減速後，輸出端的扭力與轉速各是多少（忽略損耗）？
+
+<details><summary>答案</summary>扭力放大 50 倍：$\tau_\text{out} = 5\,\text{N·m}$；轉速降為 1/50：$120\,\text{RPM}$。功率不變 $P = \tau \omega$。</details>
+
+**Q3.** 為什麼說「輪子比雪橇省力」不能只回答「因為它在滾」？
+
+<details><summary>答案</summary>滾動本身仍可能在軸處滑動。真正原因是：(a) 輪面與地面不滑動，(b) 軸比輪小很多倍，使滑動距離 $d$ 縮小，由 $W = F_f \cdot d$ 得功減少。</details>
+
+**Q4.** *（計算，低頻）* 在 Teflon/Teflon ($\mu = 0.04$) 與 Cast iron/Copper ($\mu = 1.05$) 間，若法向力 100 N，兩者摩擦力差幾倍？
+
+<details><summary>答案</summary>$4\,\text{N}$ vs $105\,\text{N}$，約 26 倍。投影片中標註「factor of 25」即是此意。</details>
+
+**Q5.** 你的車裝完馬達後動不了，怎麼判斷該換大馬達還是先修機構？
+
+<details><summary>答案</summary>先檢查是否 jamming（手撥都撥不動）。若卡死，再大的馬達也救不了，必須鬆配合、加第二顆軸承、改正歪斜。若只是摩擦大但能轉，才考慮加大馬達或減重。</details>
+
+**Q6.** Worm drive 為何能做出超高傳動比？又有什麼副作用？
+
+<details><summary>答案</summary>蝸桿每轉一圈，蝸輪只前進一齒，單級就能達 1:50 以上。副作用：摩擦損耗大、通常**不可逆轉**（蝸輪轉不動蝸桿），既是缺點也常被當作自鎖優點。</details>
+
+**Q7.** Holonomic 與 non-holonomic 各舉一例，並說明可控 / 總自由度。
+
+<details><summary>答案</summary>Omniwheel 機器人：可控 (vx, vy, ω) = 3，總 = 3，**holonomic**。汽車：可控 = 2 (前進速度 + 轉向)，總 = 3 (x, y, θ)，**non-holonomic**——無法直接橫移。</details>
+
+**Q8.** Brushed 與 brushless 馬達的核心差別是什麼？brushless 為什麼比較耐用？
+
+<details><summary>答案</summary>Brushed：線圈當轉子、磁鐵當定子，靠電刷把電流送進旋轉的線圈；電刷會磨損、有火花。Brushless：磁鐵當轉子、線圈當定子，電流不需經過旋轉件，由外部電路換相，因此壽命長。</details>
+
+**Q9.** *（計算，低頻）* 一槓桿支點左邊 $b = 0.2\,\text{m}$ 放 100 N 的負載，右邊 $a = 1\,\text{m}$ 處要施多少力才能平衡？此時 MA = ?
+
+<details><summary>答案</summary>$\text{MA} = a/b = 5$，$F_A = F_B / \text{MA} = 100/5 = 20\,\text{N}$。代價是右邊要移動 5 倍距離（功守恆）。</details>
+
+**Q10.** 純滾動 (rolling without slipping) 時，輪子跟地面接觸點的瞬時速度是多少？由此說明為什麼輪胎跟地面之間「沒有滑動」、以及為什麼**靜摩擦力不做功**。
+
+<details><summary>答案</summary>
+
+接觸點瞬時速度 = 輪心速度 + 該點相對輪心的旋轉速度 = $v + (-\omega R) = 0$（純滾動條件 $v = \omega R$）。
+
+接觸點速度為 0 表示輪胎跟地面之間**沒有相對滑動**，只有「貼上 → 鬆開」的 engage/disengage 過程，所以沒有動摩擦做負功消耗能量。
+
+「不做功」的數學定義：$W = F \cdot d$。靜摩擦力 $F$ 雖然存在（正是它推動車身），但作用點瞬時不動 → $d = 0$ → $W = 0$。所以靜摩擦不做功——它扮演的是**能量「轉接頭」**：把鏈條送來的旋轉動能轉成車身的平移動能，本身不耗能。
+
+</details>
+
+**Q11.** 學生說：「腳踏車前進是靠軸的動摩擦力做功。」這句話錯在哪裡？請說明腳踏車前進的能量來源、推進力、能量損失各是什麼。
+
+<details><summary>答案</summary>
+
+**錯誤一**：能量來源不是軸的摩擦，而是**你的腿**（肌肉做功）。
+**錯誤二**：軸的動摩擦做**負功**（變成熱），是**能量損失**，不是推進力。
+**錯誤三**：推車子向前的力是**後輪–地面的靜摩擦**（不是動摩擦）。
+
+能量鏈：腿 → 踏板 → 鏈條 → 後輪轂 → 後輪旋轉 → 後輪–地面**靜摩擦**朝前推車。
+
+| 角色 | 機制 | 對前進的貢獻 |
+|---|---|---|
+| 能量來源 | 你的腿 | 唯一正功源頭 |
+| 推進力 | 後輪–地面靜摩擦 | 推進（但本身不做功） |
+| 損失 1 | 軸動摩擦 $\mu N (r/R)$ | 負功（變熱） |
+| 損失 2 | 空氣阻力、滾動阻力 | 負功 |
+
+驗證「為什麼是靜摩擦不是動摩擦」：地面太滑（冰）→ 靜摩擦上限不足 → 輪子打滑變動摩擦 → 大部分功變熱 → **車反而不會動**。所以推車的正是靜摩擦。
+
+</details>
+
+**Q12.** *（計算，低頻）* 設輪半徑 $R = 25\,\text{cm}$、軸半徑 $r = 0.8\,\text{cm}$、$\mu = 0.05$、車重 $N = 200\,\text{N}$。車前進 100 m，軸摩擦損失多少能量？若改用 ball bearing 把軸的滑動完全消除（理想化 $\mu \to 0$），又能省多少？
+
+<details><summary>答案</summary>
+
+軸界面滑動距離：$d_{\text{滑}} = (r/R) \times 100\,\text{m} = (0.8/25) \times 100 = 3.2\,\text{m}$。
+
+軸摩擦損失：$W = \mu N d_{\text{滑}} = 0.05 \times 200 \times 3.2 = 32\,\text{J}$。
+
+對比若沒輪子直接拖（雪橇）：$W_{\text{雪橇}} = \mu N \times 100 = 1000\,\text{J}$。所以**輪子省了 968 J**，省 $r/R \approx 3.2\%$ 的損失比。
+
+ball bearing 理想化 → 額外再省這 32 J。實務上 ball bearing 摩擦係數約 $0.001 \sim 0.005$，可再降一個數量級。
+
+</details>
+
+**Q13.** *（計算，低頻）* 球軸承的 inner ring 以 $\omega_i = 100$ rad/s 轉動、outer ring 固定。設 $r_i = 20$ mm、球半徑 $r_b = 4$ mm。請計算：(a) cage 公轉角速度 $\omega_c$ (b) 單顆球的自轉角速度 $\omega_b$ (c) 用一行話解釋為何 cage 是「半速」。
+
+<details><summary>答案</summary>
+
+球心軌道半徑 $R_c = r_i + r_b = 24$ mm。
+
+**(a)** $\omega_c = \omega_i r_i / (2 R_c) = 100 \times 20 / (2 \times 24) = 41.7$ rad/s。約為 $\omega_i / 2 = 50$ rad/s 的 83%——因為 $r_b$ 不可忽略，所以不是嚴格的一半。
+
+**(b)** $\omega_b = \omega_i r_i / (2 r_b) = 100 \times 20 / (2 \times 4) = 250$ rad/s。球自轉比 inner ring 快 2.5 倍。
+
+**(c)** 球是 rigid body，頂端（接外環，靜止）跟底端（接內環，$v_i$）之間，中點（球心）速度必為兩端的平均 = $v_i / 2$。所以球心以 $v_i / 2$ 平移、cage 跟著以對應角速度公轉。
+
+</details>
+
+**Q14.** 為什麼 ball bearing 比 plain bearing 省 10–100 倍？請用 $W = F \cdot d$ 跟「滑動 vs 滾動」的概念回答。Ball bearing 「省力」的極限是什麼（為什麼不是真正的零摩擦）？
+
+<details><summary>答案</summary>
+
+**省力本質**：plain bearing 軸表面直接擦套筒，每轉一圈滑動距離 = $2\pi r_{\text{軸}}$。Ball bearing 把這個滑動換成 no-slip 滾動——理想情況下滑動距離 = 0，所以 $W = \mu N d \to 0$。$\mu$ 跟 $N$ 都沒變，是 $d$ 被縮到接近零。
+
+**省力極限**（為什麼不是零）：
+1. **滾動阻力**：球與 ring 接觸時的彈性遲滯（hysteresis）
+2. **微滑移**：真實材料不是完美剛體
+3. **Cage 摩擦**：球跟保持架有少量滑動
+4. **潤滑油黏滯**：流體剪切阻力
+
+加總 $\mu_{\text{eff}} \approx 0.001 \sim 0.005$，仍比 plain bearing 的 $0.05 \sim 0.15$ 小一兩個數量級。
+
+</details>
+
+**Q15.** 工廠的工程師發現某顆 bearing 的 cage 速度比預期的 $\omega_i / 2$ 慢了 20%。這代表什麼？為什麼需要立刻處理？
+
+<details><summary>答案</summary>
+
+代表 **no-slip 條件被破壞、球在打滑**。原因可能是潤滑不足、負載過大、異物污染、或高速離心力。
+
+需要立刻處理是因為：一旦出現滑動 → 靜摩擦變動摩擦 → 鋼球與鋼 ring 直接磨擦 → 高溫 → 點蝕 (pitting) → 表面剝離 (spalling) → bearing 壽命從幾千小時掉到幾十小時。如果是高速主軸（如 CNC、渦輪），失效會引發整台機器損毀。
+
+</details>
+
+**Q16.** 為什麼 planetary gear 在同樣外徑下能傳更大扭力？又為什麼它能做到「同軸輸入輸出」？
+
+<details><summary>答案</summary>
+
+**大扭力**：3–4 顆行星輪**並聯**分攤輸入扭力，每顆只扛總扭力的 1/3 ~ 1/4。又因 planets 對稱分佈，sun 軸不受徑向力（合力抵消）→ 軸承壽命長。
+
+**同軸**：sun、ring、carrier 三者共用同一條中心軸線。一般 spur gear 兩軸平行但分離，做減速箱會「向外長」；planetary 把所有東西塞在圓筒內，輸入軸與輸出軸對齊 → 馬達後面直接接夾頭，這就是電鑽的標準結構。
+
+齒比公式（ring 固定）：$i = 1 + Z_{\text{ring}} / Z_{\text{sun}}$。$Z_{\text{sun}} = 12$、$Z_{\text{ring}} = 60$ → i = 6（單級）。三級串聯 216 倍，仍只佔短短一截圓筒空間。
+
+</details>
+
+**Q17.** Worm drive 為什麼能「自鎖」（蝸輪推不動蝸桿）？這個特性在電梯與微型 servo 上分別有什麼價值？
+
+<details><summary>答案</summary>
+
+**自鎖原理**：蝸桿傳動的效率
+$$\eta = \dfrac{\tan\gamma}{\tan(\gamma + \varphi)}$$
+其中 $\gamma$ 是蝸桿的導程角、$\varphi = \arctan\mu$ 是摩擦角。當 $\gamma < \varphi$（蝸桿螺紋很「平」），反向效率變負 → 蝸輪推蝸桿時，力幾乎全變成摩擦熱，沒有任何分量能讓蝸桿轉動。
+
+**幾何直覺**：蝸輪推蝸桿就像用刀刃去推螺絲讓它自轉——力方向幾乎垂直於螺桿軸線。
+
+**價值**：
+- **電梯 / 千斤頂**：斷電不會掉下來、不需要額外煞車機構。
+- **微型 servo**：馬達停止時，外部負載無法把齒輪反推回去 → 不必持續供電維持位置，省電、發熱小。
+
+**代價**：正向效率也只剩 30–50%（比 spur gear 90%+ 低很多），不適合連續高功率傳動。
+
+</details>
+
+**Q18.** 汽車的 open differential（普通差速器）在過彎時是怎麼讓「兩個輪子用同一個馬達卻轉不同速」的？為什麼這種設計在「單側打滑」時整台車就動不了？
+
+<details><summary>答案</summary>
+
+**過彎機制**：driveshaft 帶動 carrier 公轉，carrier 上的兩顆 pinion gear 同時咬住左右兩個 side gear（接左右輪）。當兩輪轉速不同（過彎），pinion **自轉**來吸收差量。運動學關係：
+$$\omega_{\text{ring}} = \dfrac{\omega_{\text{left}} + \omega_{\text{right}}}{2}$$
+輸入轉速 = 兩輸出轉速的平均。
+
+**為什麼單側打滑就動不了**：open differential 的另一個特性是**左右扭力恆等**（pinion 兩邊壓力一樣）。如果一個輪在冰上打滑（阻力 ≈ 0）→ 另一個輪能拿到的扭力也只能是 0 → 整個輸入功率都被拿去**空轉打滑輪**。
+
+**補救方案**：
+- LSD（限滑差速器）：增加左右側耦合，強迫扭力部分傳給有抓地力的輪。
+- ABS / ESC：偵測打滑後對該輪「點剎」，用剎車阻力騙差速器把扭力推到另一邊。
+- Locker：直接機械式鎖死兩輪同速，越野車常用。
+
+</details>
+</script>
+
+<script type="text/markdown" id="md-ch4">
+## 學習目標
+
+讀完本章你應該能：
+
+- 解釋本講為何貫穿一個「打造投石機 (catapult)」的主題，以及它對應到的三大子題：剛性臂、鉸鏈 / 閂鎖、儲能彈簧
+- 用「壓縮 + 張力」而非「彎曲」說明三角形 / 桁架 (truss) 為什麼省料又強壯
+- 能用自己的話說出以下考點定義：statics、finite element analysis、living hinge、buckle、stiffness、snap-fit、press-fit、purpose of springs
+- 區分 universal joint 與 ball joint 的自由度 (DoF)，並說出 3D 列印鉸鏈典型間隙約 0.25 mm
+- 解釋為什麼 3D 列印幾乎不用 coil spring，改用 cantilever spring
+- 解釋 snap-fit 懸臂剛度為什麼隨厚度、長度呈「立方」變化
+- 區別 snap-fit 三種可逆性 (inseparable / separable / separable-with-additional-movement) 與 press-fit 力的兩個調諧參數
+
+## 課程定位 ⚠
+
+> 📦 **定義 — statics (靜力學)**: the branch of mechanics concerned with bodies at rest and **forces in equilibrium** — 研究「為了承受負載 (take a load) 而設計的物體」。
+
+> ⚠ **本章不是傳統靜力學課**：投影片裡沒有 F = kx、沒有 2j = m + r 平面桁架判定、沒有 method of joints / sections，也沒有 Pratt / Howe / Warren 桁架分類。整門 CSL 講的是 3D 列印 / HCI 視角下的 "statics"，所以重點是「列印得出來、強度夠、有效地把組件數降到最少」這種工程直覺，**不要拿傳統靜力學公式來考自己**。
+
+本章貫穿的主題是「動手做一台投石機 (catapult)」，可以拆成三個子問題：
+
+1. **剛性臂 (rigid elements)**：投石臂要 sturdy 又輕 → 用桁架 / 中空結構
+2. **鎖住的鉸鏈 (locking mechanism)**：發射前要 latch 住 → 用 hinges + locks
+3. **儲能彈簧 (spring)**：發射要爆發力 → 設計強力 spring
+
+整個 lecture 的所有片段，都是在為這三個子問題提供工具箱。
+
+> 💡 **記住**：投石機 = 剛性桁架 + 鉸鏈 / 閂鎖 + 儲能彈簧。看到任何技術就問自己「它對應哪一塊？」
+
+## 1. 桁架 (trusses)
+
+故事從一張 **PET 寶特瓶椅凳** 開始：一個人坐在用 Coca-Cola 寶特瓶 + 3D 列印接頭組成的椅子上，重點是它「consists of triangles」。
+
+老師接著用「一隻腳踩四面體 (tetrahedron) 結構」做思考實驗：
+
+> 📦 **law of the lever (槓桿律)**: 機械利益 (mechanical advantage) $MA = \dfrac{F_B}{F_A} = \dfrac{a}{b}$。投影片只出現這一條真正的數學式——先理解它，桁架的「為什麼三角形比長桿強」才有根基。
+
+1. 沒有底部斜桿 → 三根上方寶特瓶當作 **long levers**，long levers break easily（容易被折斷成彎曲破壞）
+2. 加上底部三根「closing the triangles」的桿件後 → no more bending；上方桿只受 **compression (壓縮)**，下方桿只受 **tension (張力)**
+
+這就是桁架的核心 insight：把「彎曲負載」轉換成「只有壓縮 + 張力的純軸力」，因為純軸力的構件可以做得**又細又輕**。
+
+工具與案例：
+
+- **TrussFab**：把寶特瓶當桿件、3D 列印 hub 當節點的 SketchUp 外掛；提供 tetra / octa / beam / block 等預製模組，可以加 test load 然後 check stability（超過上限就紅色警告）
+
+> 📦 **定義 — finite element analysis (FEA)**: subdivides a large problem into smaller finite elements, assembles their equations into a larger system, then minimizes an associated error function to approximate a solution. 桁架天生離散化成桿件，是 FEA 的天然載體。
+- **CHI 2017 Denver pavilion**：用 **1500 個寶特瓶** 拼出大型展示拱
+- **SkinFrame [Wang et al.]**：把一個實心 L 形支架 + 球體模型，自動轉成內部填滿桁架的輕量化版本
+- **3D 列印手部骨折支架 (cast)**：為什麼挖洞？— 結構承載集中在三角格網的桿件上，其他部分挖掉以求透氣輕量。
+
+Hub connector 的演化（為了應付 FDM 列印層方向的弱點）：
+
+1. **Threaded connector**（螺紋蓋）：直接複製瓶蓋螺紋；但「all thread does not work」，因為列印層方向會讓某些角度的螺紋承受拉力時 **layers rip apart on tension**
+2. 新版 **hub design** 改用 **generic flange + clip-on C-cuff**：C-cuff 是一個獨立的列印件，可以單獨以最佳取向 slice → coherently strong（沿著最強纖維方向受力）
+
+> 💡 **記住** 桁架設計的兩步驟 insight：(1) **determine what forces you expect**（預估會出現的力）(2) **make sure each one is covered**（確保每一個都有對應到構件）。
+
+#### 🔬 為什麼三角形比四邊形剛硬？— 自由度計數
+
+直覺上大家都知道「三角形最穩」，但為什麼？正式答案來自 **Grübler 公式**（適用於 2D pin-jointed truss）：
+
+$$\text{DoF} = 2n - b - 3$$
+
+$n$ = 節點數（joint），$b$ = 桿件數（bar），$3$ = 剛體平面運動自由度（x、y 平移 + 旋轉）。
+
+| 形狀 | $n$ | $b$ | DoF = $2n - b - 3$ | 結論 |
+|---|---|---|---|---|
+| 三角形 | 3 | 3 | $6 - 3 - 3 = 0$ | **剛性** ✓ |
+| 正方形（4 桿） | 4 | 4 | $8 - 4 - 3 = 1$ | **可剪切（能形變）** ✗ |
+| 正方形 + 對角線（5 桿） | 4 | 5 | $8 - 5 - 3 = 0$ | **剛性** ✓ |
+| 正方形 + 兩對角線（6 桿）| 4 | 6 | $8 - 6 - 3 = -1$ | **超靜定**（有冗餘桿） |
+
+**DoF = 0** 表示「剛好剛性」（最輕量化）。DoF < 0 表示有多餘的桿，結構雖然也剛硬，但有些桿承受的力無法只靠靜力學唯一解出來（需要考慮材料變形）。
+
+**直覺類比：正方形 vs 三角形**
+
+正方形框架（DoF=1）就像一個沒鎖緊的相框——雖然四邊都接好，但框架可以整體「歪斜（shear）」變成平行四邊形。加一根對角線進去，就把一個 DoF 消掉，歪不了了。
+
+> ⚠ **常見誤解**：「用更硬的材料」不能消除 DoF。DoF 是拓撲（幾何連接關係）的結果，跟材料強度無關。DoF=1 的框架無論用鋼還是鑽石做，在理論上仍會有 1 個形變模式。
+
+**延伸：3D 桁架**
+
+3D 版本的 Grübler 公式：$\text{DoF} = 3n - b - 6$
+
+四面體（tetrahedron）：$n=4, b=6$ → $12 - 6 - 6 = 0$，所以四面體是 3D 版本的「最小剛性單元」。這也是 TrussFab 用四面體做模組的原因。
+
+## 2. 鉸鏈 (hinges)
+
+投石機臂要能轉動 → 需要 hinge。3D 列印 hinge 的關鍵數字：
+
+> 💡 **記住**：列印多部件 hinge 時，sliding surfaces 之間要留 **~0.25 mm 間隙**，這樣才能列印成一坨之後仍然能轉動。
+
+多部件 hinge 種類：
+
+- 經典 **leaf hinge**（兩片葉 + 中央插銷）：列印時插銷常另外加，不一起印
+- **Lift-off hinge**：插銷與一邊長在一起，組裝時把另一邊「lift on / off」
+- **Locked-in-one-print hinge**：所有零件一次列印完就互相鎖住、拿不開，例如 thingiverse locket（會印出小頭像在裡面）
+- **Range-restricting hinge**：在 hinge 一端加凸塊，限制轉動範圍
+
+**織物拓樸 (fabric topology)**：3D 列印織物的「interlocking rigid parts so they can move」可以用三種 joint 排列：
+
+- **square**（正方格網）
+- **triangle**
+- **hexagonal**
+
+> 💡 **記住**：**number of joints define how the fabric will be able to deform** — joint 數量越多、自由度越多、布料越能服貼地變形（hexagonal 最會變形）。
+
+**Hinges with 2 DoF**：
+
+> 📦 **universal joint (萬向接頭)**: 提供 **2 DoF** 的鉸接；主要用途是 **transmit rotary motion between angled shafts**（在兩根有夾角的軸之間傳遞旋轉）。
+
+**Hinges with 3 DoF**：
+
+> 📦 **ball joint (球接頭)**: offers **3 DoF**；可以在球座上加凸塊來 *restrict motion*。
+
+⚠ 易混點：**universal = 2 DoF**、**ball = 3 DoF**，老師明確標出來，幾乎一定考。
+
+## 3. 活動鉸 / 一體鉸 (living hinge)
+
+> 📦 **定義**: a thin flexible hinge (flexure bearing) made from the **same material** as the two rigid pieces it connects. Typically thinned or cut to allow bending along the hinge line. Minimal friction makes it useful in **MEMS**; low cost makes it common in **disposable packaging**. 在 3D 列印 = 單層列印厚度 (one print layer)；同時是 hinge 也是 spring。
+
+重點補述：
+
+- 厚度 = **一層列印厚度** (one 3D print layer)，所以非常薄
+- 在一個方向 **compliant**（可彎），垂直方向仍 **rigid**（剛性陣列示意圖：一排平行薄桿，沿桿身方向可彎、垂直桿身方向僵硬）
+- **side-effect**：living hinge 不只是 hinge，**同時還是一個 spring**（彎曲後想彈回去）
+- 應用：**MEMS**（微機電）與 **disposable packaging**（你拆過的拋棄式塑膠包裝、便當盒蓋的薄折痕都是它）
+
+> 💡 **記住**：living hinge = same material 做的 thin flexible hinge = hinge + spring 二合一。
+
+#### 🔬 Living hinge 的力學：一層厚為什麼能彎曲不斷裂？
+
+**核心張力**：living hinge 要求「又薄又軟能彎，又強不能斷」，這兩個需求看似矛盾。
+
+**彎曲應變分析**
+
+一個厚度 $t$、彎曲半徑 $R$ 的樑，外側最大應變為：
+
+$$\varepsilon_{max} = \frac{t}{2R}$$
+
+PLA 的斷裂應變 $\varepsilon_{fail} \approx 3\text{--}5\%$。要讓 hinge 能彎 90°（$R \approx t$）而不斷：
+
+$$\varepsilon = \frac{t}{2t} = 0.5 = 50\%$$
+
+這遠超過 PLA 的極限！所以一般 FDM 材料的 living hinge **通常做不到** 90° 重複彎曲。
+
+真正耐彎的 living hinge 用的是 **PP（聚丙烯）**，斷裂應變 > 200%，這也是為什麼優酪乳蓋那種 living hinge 能開合上千次——那是射出成型 PP，不是 FDM PLA。
+
+**3D 列印的 living hinge 為什麼還能用？**
+
+投影片說的「一層厚」是指 1 print layer ≈ 0.2 mm。在這個尺度下，即使 PLA，彎曲半徑只要 > 幾 mm，$\varepsilon_{max}$ 就還在容忍範圍。重點是：
+
+- 用途是 **MEMS / 微機電**（行程小）或**拋棄式包裝**（彎一次就好）
+- 不能期待像 PP hinge 一樣重複彎折幾千次
+
+**spring 力怎麼來？**
+
+彎曲 living hinge 相當於彎曲一個 cantilever beam（從一端固定到另一端）。回彈力（spring force）就是梁的彈性回復力，近似：
+
+$$k_{hinge} \approx \frac{Ebt^3}{4L^3}$$
+
+$L$ 是 hinge 長度（沿軸向），$b$ 是 hinge 寬度，$t$ 是厚度（一層）。$t$ 極小所以 $k$ 也很小 → 很容易被手撥動，但確實有回彈力。這也是為什麼 living hinge 做的蓋子會「自動彈回」。
+
+| 變數 | 調大 | 效果 |
+|---|---|---|
+| $t$（厚度） | 多印幾層 | $k \propto t^3$，快速變硬 |
+| $L$（長度） | 加長 hinge 區域 | $k \propto 1/L^3$，快速變軟 |
+| $b$（寬度） | 加寬 | $k \propto b$，線性變硬 |
+
+## 4. 彈簧 (springs)
+
+`<30sec brainstorming>`：what does a spring look like? 大家會先想到 **coil spring (盤簧)**，特別是 *壓縮型*；如果加上鉤子變成 *tension-only*（伸張型）。但市面上其實有海量造型 — 老師丟出一張塞滿 100 種彈簧的目錄圖。
+
+如何分類彈簧？兩個維度：
+
+**(1) 力的性質 — linear vs. rotation (旋轉)**
+
+- 維克多捕鼠器中央的扭力 coil = torsion（典型旋轉式）
+- 一般 coil compression / extension = linear
+
+**(2) 剛度 (stiffness)** — rigidity of an object; the extent to which it **resists deformation** in response to an applied force. **Determined by material.**
+
+老師展示的彈簧目錄（你要叫得出名字）：
+
+- **Coil compression spring**：兩端不掛鉤的盤簧
+- **Coil extension spring**：兩端帶鉤的盤簧，只承拉
+- **Coil torsion spring**：旋轉式 coil（捕鼠器、衣夾）
+- **Conical spring (錐形彈簧)**：why this design? → **initially soft, then get stiffer**（先軟後硬，因為大圈先壓扁、小圈才開始作用）
+- **Volute spring (蝸卷彈簧)**：why this design? → (1) **compact, given its stiffness**（同剛度更小體積）(2) **less likely to buckle**（較不易挫屈）
+
+> 📦 **定義 — buckle (挫屈)**: bend and give way under pressure or deformation. 長而細的彈簧受壓時容易側向彎曲倒塌；volute 的螺旋盤疊結構讓每圈互相支撐，有效抑制這個失效模式。
+- **Machined spring**：用銑床從一根金屬棒切出來的整體式
+- **Cantilever spring**：a spring which is fixed only at one end（一端固定 — 跳水板就是）
+- **Leaf spring (板片彈簧)**：傳統卡車後輪上一疊片狀彈簧
+- 還有 flat spiral 等
+
+為什麼鋼絲 coil spring，而不用「鋼帶」像橡皮筋一樣？
+
+1. **Steel is too stiff for many applications**（鋼本身太硬，平片直接拉不動）
+2. **Cannot pull very far until it rips**（鋼帶的 elastic regime 太短，拉不遠就斷）→ 把鋼絲繞成 coil 等於把「大量延伸長度折疊在小空間」，這樣鋼絲只承受小幅扭曲就能達到大位移。
+
+> 💡 **記住（超重要 3D 列印考點）**：**3D 列印幾乎不用 coil 彈簧**（"in 3D printing, coil springs are essentially never used"）— 因為 FDM 的層方向 + 細圈支撐困難。**改用 cantilever springs**。
+
+彈簧在投石機上對應到兩個功能：
+
+1. **儲存 + 釋放發射能量**（主要）
+2. **Latch 中的小彈簧**：保證閂鎖只在預期時打開
+
+更廣義地說 —
+
+> 📦 **定義 — purpose of springs**: **store and later release energy**（投石機型）；更常見的用途：提供「定義良好的 counter-force / resistance」，規定使用者必須施多少力才能觸發動作（按鍵、按鈕、互動裝置）。
+
+- (1) 儲能 / 釋放
+- (2) **更常見**：提供良好定義的 **counter-force / resistance** → springs are super useful
+
+## 5. 扣合 (snap-fit) 與壓配 (press-fit)
+
+### 5.1 Snap-fit 變體
+
+> 📦 **定義**: assembly method to attach flexible parts (usually plastic) by pushing their interlocking components together. Variations: **cantilever, torsional, annular**. Advantages over screws: **speed and no loose parts**.
+
+### 5.2 可逆性三類
+
+- **Inseparable**：扣進去就拔不出來（範例：3D 列印 cast 的整圈扣合）
+- **Separable**：可以拔出（範例：列印的小盒子蓋子）
+- **Separable, but requires additional movement**：要做額外動作才能解開（範例：**背包扣 (buckle)** — 要按兩側才開）
+
+### 5.3 Snap-fit 幾何（重要術語）
+
+- **Entrance side**（入口側）：傾斜，方便推入
+- **Retraction side**（撤出側）：陡峭或直角，防止退出
+- **Overhang depth**（嵌入深度）：扣鉤往內咬住的深度
+
+### 5.4 剛度調整：立方關係 ⚠ 高頻考點
+
+snap-fit 的 cantilever 部分剛度要怎樣才對？
+
+- **Lower bound**：使用中不會因為慣性自己滑開
+- **Upper bound**：使用者操作不費力
+
+如何調？**To make softer**：
+
+- Make it **thinner (cubed)** — 厚度減半，剛度變成 **1 / 8**
+- 或 make it **longer (cubed)** — 長度加倍，柔順度也是 **1 / 8** 剛度
+
+> 💡 **記住**：cantilever 彈簧剛度 $k \propto \dfrac{t^3}{L^3}$（厚度的三次方、反比於長度的三次方）。這是因為 beam bending 理論中，cantilever 的撓度 $\delta \propto L^3 / (E \, b \, t^3)$，所以剛度 $k = F / \delta$ 直接以三次方依賴於厚度、反比於長度三次方。
+
+#### 📐 $k \propto t^3/L^3$ 完整推導（Euler-Bernoulli 梁撓度）
+
+**建模：cantilever snap-fit 的幾何**
+
+一端固定、另一端自由的矩形截面懸臂樑：
+- 長度 $L$（從固定端到 snap 尖端）
+- 截面寬 $b$（out-of-plane 方向，即材料深度）
+- 截面厚 $t$（in-plane 方向，彎曲方向）
+- 末端施加點力 $F$（要把 snap 彈開的力）
+
+**Step 1：截面慣性矩**
+
+矩形截面的二次矩（second moment of area）：
+
+$$I = \frac{b t^3}{12}$$
+
+$b, t$ 互換的話 $I$ 差 $t^3/b^3$ 倍——這就是為什麼厚度方向有三次方關係。
+
+**Step 2：懸臂末端撓度**
+
+Euler-Bernoulli 樑理論給出懸臂末端偏移：
+
+$$\delta = \frac{F L^3}{3 E I} = \frac{F L^3}{3 E \cdot \dfrac{bt^3}{12}} = \frac{4 F L^3}{E b t^3}$$
+
+**Step 3：剛度**
+
+$$\boxed{k = \frac{F}{\delta} = \frac{E b t^3}{4 L^3}}$$
+
+三次方確認：$k \propto t^3$（厚） 且 $k \propto L^{-3}$（長） ✓
+
+**🔢 數字例：PLA snap-fit**
+
+取 $E_{PLA} = 3500\ \text{MPa}$，$b = 5\ \text{mm}$，基準案例 $t = 1\ \text{mm}$，$L = 10\ \text{mm}$：
+
+$$k = \frac{3500 \times 5 \times 1^3}{4 \times 10^3} = \frac{17500}{4000} = 4.375\ \text{N/mm}$$
+
+| 變化 | 新參數 | 新 $k$ | 倍率 |
+|---|---|---|---|
+| 基準 | $t=1, L=10$ | 4.375 N/mm | × 1 |
+| 厚度 × 2 | $t=2, L=10$ | 35.0 N/mm | **× 8** |
+| 厚度 × ½ | $t=0.5, L=10$ | 0.547 N/mm | **× ⅛** |
+| 長度 × 2 | $t=1, L=20$ | 0.547 N/mm | **× ⅛** |
+| 長度 × ½ | $t=1, L=5$ | 35.0 N/mm | **× 8** |
+
+**設計直覺**：厚度是最敏感的調參旋鈕——減薄 1 print layer（0.2 mm → 減 20%），$k$ 剩 $(0.8)^3 = 51\%$，幾乎砍半。要 soft snap-fit：先拉長 $L$，不夠再減薄 $t$（但太薄會脆）。
+
+### 5.5 Press-fit
+
+> 📦 **定義**: under pressure, one part is forced into a **slightly smaller hole** in the other part. 例子：LEGO 內的三個圓柱孔。
+
+決定「拔出力」的兩個關鍵：
+
+1. **Friction coefficient**（摩擦係數）→ 列印材料本身有影響
+2. **Tightness of the fit**（緊度）→ tiny difference have huge effect → **tuning tends to require series of test prints**（要連印好幾批微調尺寸）
+
+老師舉 LEGO 內部三個圓柱孔當例子問「any springs here?」— 答案是那三個圓孔就是 press-fit 的「彈性 spring」（材料本身的微變形）。
+
+### 5.6 SpringFit [Roumen et al., HPI]
+
+HPI 的論文（注意是雷射切割版，但思想可移植到 3D 列印）：因為 press-fit 對 kerf / 材料變化敏感，無法跨機器、跨材料重現，所以他們把所有 press-fit mount / joint **全部換成 cantilever springs**（在 sticker 上加一段細長彈簧片頂住目標物件）。比 press-fit 更穩健 (robust)。
+
+> 💡 **記住 vote 結果**：snap-fit 通常勝 press-fit（重現性高、不挑機器、不挑材料）。
+
+## 6. 用彈簧固定物件 / 列印張力件
+
+### 6.1 用 spring 固定球
+
+**How many contact points does it take to hold a sphere?**
+
+- **三點 + 重力**：放在桌上 OK，但你舉起來就掉了
+- **四點 + 一個 spring 推住第四點**：可以自由攜帶、不掉
+- 範例：底部「ring serves as three points (better with notches)」+ 頂端 example spring 推第四點
+
+### 6.2 應用
+
+- **Whiteboard marker holder**：同樣概念 — 一頭 cup 包住筆頭、另一頭 spring 推 → only need ONE spring（不需精準對準）
+- **AutoConnect [Igarashi et al.]**：輸入兩個物件（沙發扶手 + 馬克杯），自動產生連接件 → 例如自動產生 *mug holder for a chair arm*
+- **3D 列印 carabiner (登山扣)**：用兩件做容易；要一體列印呢？關鍵是 **print in relaxed state**（在 STL 裡就把它畫成「未受力的、開口形狀」），使用時人手 deform-to-load，扣門自然回彈 — 列印張力件的標準技巧
+- **Metamaterial Mechanisms [Ion et al., HPI]**：單件無組裝 (no assembly) 的機構 → 整個機構（門把 + 彈簧 + 鎖舌）一次列印出來，"devices consisting of a single part require no assembly and thus tend to be robust"
+
+## 主題串接：回到投石機
+
+把整堂課組合回去：
+
+- 子題 1 (rigid)：hollow truss / 三角形纖維方向、減重不減強
+- 子題 2 (lock)：locked hinge + latch；latch 的小機關裡又藏了小 spring
+- 子題 3 (energy)：cantilever spring (因為 FDM 不適合 coil) 提供爆發釋放
+
+#### 🔬 Truss 是什麼？為什麼這樣設計？
+
+**最直白的定義**：truss 是一種**只用直桿 + 接頭**組成的結構，設計原則是把所有力都拆成「拉」或「壓」，**完全消除彎曲**。
+
+**為什麼要消除彎曲**：同一根材料，受彎曲時能承受的力遠小於受拉 / 壓時。你用兩根手指折一根筷子（彎曲）很容易；但用兩隻手沿軸向拉（張力）根本拉不斷。Truss 就是把整個結構重新設計，讓每根桿子都只承受拉或壓、不承受折。
+
+**關鍵：為什麼三角形能做到這件事**
+
+正方形框架：施力後可以「歪斜」成平行四邊形——四個角的接頭都在旋轉，桿子被迫彎曲。
+
+三角形框架：三邊長固定了，形狀就固定了，**幾何上不可能歪斜**——每根桿只能被拉長或壓短（純軸力）。
+
+```
+正方形（不穩定）：     三角形（穩定）：
+□ → 施力 → ▱          △ → 施力 → △（形狀不變）
+ 角在旋轉，桿被折       桿只被拉/壓
+```
+
+**三角形是最小單位**，複雜的 truss 都是把很多三角形拼在一起。艾菲爾鐵塔、橋樑桁架、屋頂木架，拆開來都是三角形的集合。
+
+**為什麼比實心樑輕**：實心樑中間大部分材料「沒在受力」（彎曲時只有上下表面受力最大，中間幾乎閒置）。Truss 把那些不受力的部分直接去掉，只留下有在傳力的桿件，所以中間都是空氣——重量大幅減少，強度幾乎不變。
+
+**TrussFab 的寶特瓶椅為什麼能撐住人**：寶特瓶受壓或拉時很強（你踩扁整桶很難，但你折彎一根扁瓶很容易）。設計成 truss 讓每根瓶只受壓 / 拉 → 充分利用寶特瓶的強項 → 1500 根瓶組成的結構可以撐人站上去。
+
+#### 🔬 Snap-fit vs Press-fit vs Spring：三者的根本差別
+
+這三個都跟「彈性形變」有關，但扮演的角色完全不同。
+
+**Spring（純彈力夾持）**
+
+Spring 本身就是夾力的來源，**持續施力**。筆放進架子裡，彈性臂一直被頂開、一直想彈回去、一直在夾著筆。取出筆 → 臂立刻回彈，什麼都沒鎖住。
+
+白板筆架就是這個：cup 提供三個接觸點，spring arm 提供第四個方向的推力，合起來把筆夾住。Spring 是**主角**，夾力 = 彈力。
+
+**Snap-fit（幾何鎖定，spring 是配角）**
+
+懸臂臂偏折是為了讓你能把零件**越過一個凸緣**，越過之後臂彈回、鉤子卡在凸緣後面。從這一刻起，臂已經放鬆，繼續鎖住的是**鉤子的形狀**，不是彈力。
+
+白板筆蓋套上筆身就是這個：蓋裡的臂被撐開、越過筆身凸緣、咔噠彈回 → 鉤子卡住。Spring 是**配角**（讓插入成為可能），鎖定靠幾何。
+
+**Press-fit（材料本身是 spring，靠摩擦）**
+
+沒有臂，沒有鉤子。孔比軸小幾微米，強行壓入後**材料本身一直被撐開**——孔的材料像橡皮圈一樣套在軸上，一直想縮回去，這個收縮力 × 摩擦係數 = 拔出力。材料本身就是 spring，只是它藏在結構裡看不見。LEGO 積木三個圓孔就是這個：孔的材料微微被撐開，靠摩擦鎖住 stud。
+
+**對照表**
+
+| | 誰是 spring | 臂/形變目的 | 有無咔噠 | 取出需要力嗎 |
+|---|---|---|---|---|
+| Pure spring | 外掛的彈性臂 | 持續夾住 | 無 | 不需要（臂自動放開） |
+| Snap-fit | 懸臂臂 | 讓你越過凸緣 | **有** | 需要（要再次撐開臂） |
+| Press-fit | 材料本身 | 無（直接壓入） | 無 | 需要（要克服摩擦） |
+
+> 💡 **一個直覺**：snap-fit 有「記憶點」（咔噠的那一刻），之後狀態改變；spring clamping 和 press-fit 都是持續施力、沒有狀態切換。
+
+## 易混淆 / 易考點
+
+1. **Universal joint = 2 DoF；ball joint = 3 DoF**（投影片正面標明，必考）
+2. **列印鉸鏈間隙 ≈ 0.25 mm**
+3. **Snap-fit cantilever 剛度 ~ 厚度³ 越薄越軟 / 長度³ 越長越軟**（為什麼立方：beam bending 撓度 ∝ L³ / t³）
+4. **3D 列印幾乎不用 coil spring → 用 cantilever spring**（最常被當「為什麼」題）
+5. **Living hinge = 厚度 = 1 print layer，同時是 hinge 也是 spring，常見於 MEMS / 拋棄式包裝**
+6. **Snap-fit 三類可逆性**：inseparable / separable / separable-with-additional-movement (背包扣)
+7. **Press-fit 兩個調諧參數**：friction coefficient + tightness of fit；難重現 → SpringFit 用 cantilever 取代
+8. **Volute spring 兩個優點**：compact、less likely to buckle
+9. **Conical spring 行為**：先軟後硬 (initially soft, then get stiffer)
+10. **桁架 insight 兩步驟**：determine forces → make sure each is covered
+11. **填空題候選定義**：statics / FEA / living hinge / buckle / stiffness / snap-fit / press-fit / purpose of springs — 各定義已整合進對應章節
+
+## 自我測驗
+
+> 💡 **考試風格**：考題以概念理解與課題延伸為主，鮮少直接考數字計算。標有 *（計算，低頻）* 的題目是低頻考點，其餘都是重點。
+
+**Q1**. Fill in the blanks（填空，原文）：snap-fit is an assembly method used to attach _____ parts, usually _____, by pushing the parts' _____ components together.
+
+<details><summary>答案</summary>flexible / plastic / interlocking。</details>
+
+**Q2**. 一個 universal joint 提供幾個自由度？一個 ball joint 呢？
+
+<details><summary>答案</summary>universal joint = 2 DoF；ball joint = 3 DoF。</details>
+
+**Q3**. 列印兩部件 hinge 時，sliding surfaces 之間建議留多少間隙？
+
+<details><summary>答案</summary>約 0.25 mm。</details>
+
+**Q4**. 我有一個 cantilever snap-fit 鉤，原始厚度 t、長度 L、剛度 k。如果厚度變成 2t、長度變成 2L，新的剛度是原本的幾倍？
+
+<details><summary>答案</summary>剛度 k ∝ t³ / L³。厚度 ×2 → 剛度 ×8；長度 ×2 → 剛度 ×(1/8)。合在一起：8 × (1/8) = **1 倍**（不變）。如果只是厚度加倍而長度不變，會是 8 倍；只把厚度減半，會變 1/8。</details>
+
+**Q5**. 為什麼 3D 列印幾乎不用 coil spring？應該改用哪一種？
+
+<details><summary>答案</summary>FDM 的層方向 + 細圈幾何難以可靠列印，coil spring 在 3D 列印「essentially never used」。改用 cantilever spring（一端固定的薄片 / 細梁）— SpringFit、snap-fit 內的彈性件、ModiBot 的關節都是 cantilever。</details>
+
+**Q6**. Volute spring 相對於一般 coil compression spring 有哪兩個優點？
+
+<details><summary>答案</summary>(1) compact given its stiffness（同樣剛度體積更小）(2) less likely to buckle（較不易挫屈）。</details>
+
+**Q7**. 列印的織物中，square / triangle / hexagonal 三種 joint 拓樸，哪一種最會變形？背後的判準（投影片強調）是什麼？
+
+<details><summary>答案</summary>判準：**number of joints define how the fabric will be able to deform**。joint 數越多越能變形 → 在三者中通常是 hexagonal（每個單元周邊接點密集）最會變形；triangle 反而最剛硬（因為三角形本身鎖住面內變形）。</details>
+
+**Q8**. 三類 snap-fit 可逆性是哪三類？背包上常見的扣是哪一類？
+
+<details><summary>答案</summary>inseparable / separable / separable-with-additional-movement。背包扣屬於 **separable with additional movement**（要按兩側才開）。</details>
+
+**Q9**. 要拿一個球體在手上自由攜帶（不能靠重力壓在桌上），至少需要幾個接觸點？多出來的點怎麼提供力？
+
+<details><summary>答案</summary>4 個接觸點。其中底部 3 個提供位置約束（可用一個內側帶 notches 的環取代），第 4 個由 **一個 spring 從反方向推壓**，把球夾在四點之間。同樣概念可以做白板筆架（一頭杯狀、一頭彈簧頂）。</details>
+</script>
+
+<script type="text/markdown" id="md-ch5">
+## 學習目標
+
+讀完這章你應該能：
+
+- 區分**致動器 (actuator)** 三大尺度——**重型 (heavy duty)**、**桌上型 / DIY**、**HCI / 小尺度**——並說出每一類別的代表技術。
+- 解釋為什麼**氣動 (pneumatics)** 是 *transmission* 而非 *source*。
+- 用面積比算出氣動力放大；說明為什麼挖土機選**液壓 (hydraulics)** 而不是氣動。
+- 描述**壓電 (piezoelectric)** 的雙向性與 **slip-stick 機構** 如何把微小伸縮變成連續線性運動。
+- 認識 **雙金屬條 (bimetallic strip)**、**形狀記憶合金 (shape memory alloy, SMA / Nitinol)**、**電活性聚合物 (electroactive polymers, EAP)**、**超音波 (ultrasound)** 致動的原理與典型應用。
+- 用 *Skin Drag Display* 手錶原型，整合 DC 馬達 + 齒輪傳動 + 3D 列印機構的設計取捨。
+
+## 大主軸：質性思維 (qualitative)
+
+這章「沒有公式可以背」——整堂課唯一寫出的等式只有氣動力放大 $= A_{out}/A_{in}$。需要建立的是 **「給定場景，挑哪種致動器」** 的直覺。
+
+slide 開場名言：
+
+> 💡 **記住**：*"you already know everything you need to build your robot"* — 螺線管 (solenoid) + 小型 DC 馬達能搞定上百個研究 prototype。
+
+但人總想 **go big**（地震模擬器、Stewart platform 6-DoF 平台）或 **go small**（盲文 cell、手錶 tactor、wearable）。於是有了下列「在電動馬達兩側」的選項。最後 slide 反覆強調的結論金句是：
+
+> 💡 **最後還是電動馬達贏 (in the end, electrical wins)**。連工業大閥門現在都改電動了。
+
+## 大型致動器 (large / heavy duty)
+
+### 1. 氣動 (pneumatics)
+
+**定義 (slide 原文)**：*pneumatic cylinder — mechanical device which utilizes the power of **compressed gas** to produce a force in a reciprocating **linear motion***。
+
+- **硬體三件**：壓縮機 (compressor) → 管路 + 閥 (valve) → 氣缸 (cylinder)。
+- **力放大 (amplification of force)**：氣缸內外活塞面積的比值。
+
+$$ \text{力放大} = \frac{A_{out}}{A_{in}} $$
+
+進氣的小活塞面積 $A_{in}$ 推動內部氣壓，氣壓再均勻作用在大活塞 $A_{out}$ 上 → 輸出力放大。
+
+- **復位 (reset)** 兩種方式：
+  1. **彈簧**——靠彈性把活塞推回去。
+  2. **第二閥**——從另一側打氣進來，反向推活塞。
+- **關鍵概念**：
+  > 💡 **記住**：*pneumatics is essentially a **transmission**, not a source*。
+
+  力來自壓縮空氣，壓縮空氣又得靠 **壓縮機**，而壓縮機本身又是**電動或內燃機**驅動 → 終究回到電。歷史上 **蒸氣機 (steam engine)** 是這條鏈的「會自己產生氣體」的起源版本。
+
+### 2. 液壓 (hydraulics)
+
+> 💡 *same concept as pneumatics, except cylinder is filled with a **liquid (oil)***。
+
+CAT 325L 挖土機那條粗管，**是液壓不是氣動**。為什麼？
+
+- 油 **不可壓縮 (incompressible)** → 剛性高，不會像悠悠球 (yo-yo) 上下彈跳。
+- 氣體在高壓下**會從密封處漏掉**，再緊都會漏；油黏度高、不漏。
+
+### 3. 氣動 vs. 液壓比較表
+
+| 面向 | 氣動 (pneumatics) | 液壓 (hydraulics) |
+|---|---|---|
+| 介質 | 壓縮氣體 | 油（液體） |
+| 可壓縮性 | 高（有內建彈性 "springyness"） | 不可壓縮 |
+| 噪音 / 重量 / 清潔度 | **較安靜、較輕、較乾淨**（不用處理油） | 吵、重、**實際維護會漏油**（管路接頭老化滲漏，地上一攤油） |
+| 高壓密封（物理上）| **難密封**（氣體分子小，高壓下會穿過密封件逸散） | **易密封**（油黏度高、分子大，高壓下不逸散） |
+| 適用場合 | 需要彈性吸震時（如汽車輪胎吸震） | 真正重型出力（挖土機、工業臂） |
+
+> ⚠ **「漏」有兩層意思，不要混用**：
+> - **清潔度的「漏油」**= 實際維護問題——管路接頭老化滲漏，地板留油漬。這是液壓的缺點。
+> - **高壓密封的「不漏」**= 物理性質比較——氣體分子小，高壓下會穿過密封件逸散；油分子大又黏，不會穿過。液壓在「保住高壓」這件事上贏氣動。
+>
+> 一句話：液壓**物理上容易密封**（贏氣動），但**長期維護容易漏油**（輸氣動）。不矛盾，是兩個不同層面。
+
+### 4. 重型電動 (heavy-duty electric)
+
+即便重型場合，**電動正在取代氣壓 / 液壓**：
+
+- 三相異步交流馬達 (three-phase asynchronous AC motor) 作為動力源。
+- **蝸桿傳動 (worm gear)**：氣動本身自帶傳動（壓縮 → 放大），電動則要靠齒輪做減速放大扭矩。蝸桿一圈只推大齒輪一齒 → 大減速比、自鎖。
+- 現在連大型工業**閥門 (valve)** 都是電動驅動。
+
+## 小型 / HCI 尺度致動器 (small actuation)
+
+當尺寸縮到手錶、手指、可穿戴 (wearable) 時，馬達難塞，於是有以下選項。但 slide 結尾預告：**這些選項共同缺點是出力都很小**。
+
+### 5. 壓電 (piezo)
+
+**定義**：*stuff that expands when you apply a voltage*。更正式的 **壓電效應 (piezoelectricity)**：*charge accumulates in certain solid materials in response to applied mechanical stress*——電壓 ↔ 形變是 **雙向** 的。
+
+- **雙向對偶**：施加電壓 → 收縮；壓它 → 產生電壓。
+  - 同一塊壓電片，加訊號就是 **buzzer（蜂鳴器）**；接到放大器就是 **mic（拾音器）** — 吉他拾音器就是這原理。
+- **bimorph (壓電 + 被動層) 彎曲**：純壓電只會直伸縮（位移極小）。把壓電貼到另一層「不會伸縮」的材料上，伸縮被約束 → 整體 **彎曲** → 放大成可用位移。盲文 (Braille) cell 就靠平躺的壓電條彎曲頂起點字凸點。
+- **slip-stick 機構**（連續線性運動）：
+  1. **慢伸**：壓電緩慢伸長，base 因摩擦「黏 (stick)」住底板，把 actuator 端推走。
+  2. **快縮**：壓電快速縮回，base 來不及黏，「滑 (slip)」回去。
+  3. 反覆 → 每週期淨位移一小段 → **連續線性運動**。
+  > 💡 用途：**相機影像穩定 (image stabilization)** —— slip-stick 馬達非常小且快，用來微位移感光元件抵消手震。
+- **更多應用**：聲音產生與偵測 (sound)、高壓產生、原子尺度顯微鏡 (scanning probe microscope) 微定位、香菸打火機與烤肉爐**點火 (cigarette lighter ignition)** — 按一下產生高壓火花。
+
+#### 🔬 正壓電 vs 逆壓電 — 把所有應用一次歸類
+
+**直覺**：同一塊壓電晶體有兩個方向都成立的對偶效應，差別只在「誰是輸入、誰是輸出」。記住一句話就夠：**「壓 → 出電」是正壓電；「通電 → 動」是逆壓電。**
+
+**逆壓電 (converse)：通電 → 變形**（actuator 用）
+
+$$\Delta L = d\cdot E\cdot L = d\cdot \frac{V}{t}\cdot L$$
+
+位移正比於電壓。但 $d$ 只有皮米/V 等級，所以要榨出 μm 行程得用**幾十～幾百伏**高壓驅動——這也是致動器比較表裡 piezo 寫「要高壓驅動」的原因。slip-stick 致動器、微定位、喇叭/蜂鳴器都走這條。
+
+**正壓電 (direct)：施力 → 出電**（sensor / 點火用）
+
+$$V = g\cdot \sigma\cdot t = g\cdot \frac{F}{A}\cdot t$$
+
+> 📦 **投影片「高壓產生 / 點火」就是這個。** 為什麼按一下能蹦出上萬伏火花？受壓產生電荷 $Q = d\cdot F$，而壓電晶體本身是個**極小電容** $C$（薄、面積小）。電壓 $V = Q/C$：$Q$ 中等、$C$ 極小 → $V$ 爆大，輕鬆 1~2 萬伏，擊穿空氣隙跳火花點燃瓦斯。打火機那聲「喀」是**彈簧小錘瞬間敲擊**——要快、要猛，因為電荷會慢慢漏，敲得快才能在漏掉前讓 $Q$（進而 $V$）衝到峰值。
+
+**投影片應用全歸類**
+
+| 應用 | 方向 | 機制 |
+|---|---|---|
+| 蜂鳴器 / 喇叭（聲音產生） | **逆** | 餵交流電壓 → 振膜振動發聲 |
+| 麥克風 / 拾音器（聲音偵測） | **正** | 聲壓推振膜 → 產生電壓訊號 |
+| **高壓產生 / 打火機・烤肉爐點火** | **正** | 敲擊 → $V=Q/C$ 蹦高壓火花 |
+| SPM / 掃描探針顯微鏡 微定位 | **逆** | 電壓 → 探針 nm 級位移 |
+| slip-stick 致動器 / 影像穩定 | **逆** | 鋸齒波電壓 → 伸縮 → 連續線性運動 |
+| 力 / 壓力 / 加速度感測器 | **正** | 受力 → 電荷輸出 |
+| 能量收集 (energy harvesting) | **正** | 振動 / 踩踏 → 發電 |
+
+> ⚠ **別搞混方向**：聲音「產生」是逆、聲音「偵測」是正——同一個「聲音」應用兩邊都有，靠的是「電→動」還是「動→電」來判。考試列舉題只要套「壓→出電 = 正」就不會錯。
+
+### 6. 雙金屬條 (bimetallic strip)
+
+兩種**熱膨脹係數 (coefficient of thermal expansion)** 不同的金屬（典型：鋼 + 銅，或鋼 + 黃銅）鉚接/焊接在一起。加熱 → 兩側膨脹量不同 → 強迫整條 **彎曲**。加熱可以直接通電。傳統恆溫器、跳脫保護開關就靠它。
+
+### 7. 形狀記憶合金 (shape memory alloy, SMA / Nitinol)
+
+- **合金 (alloy)**：兩種以上元素的金屬固溶體。
+- **記憶**原理：合金在高溫被「冷塑形 (cold-forged)」記住一個原始形狀；之後在冷態任意彎折變形，**一加熱就回到原始形狀**。通常拿電流加熱 (Joule heating)。
+- Slide demo：洗手台水龍頭旁的 Nitinol 彈簧，倒上熱水自動跳起。
+
+#### 🔬 SMA 為什麼能「記憶」形狀？— 馬氏體 / 奧氏體相變
+
+**直覺類比：疊好的撲克牌**
+
+把一副牌（martensite）比喻成「可以被推歪的晶體」：
+- 常溫（馬氏體相）：牌可以整批被推成扇形——看起來像塑性變形，但每張牌內部沒有位移，只是牌與牌間的排列關係（孿晶界, twin boundary）移動了。
+- 加熱後（奧氏體相）：牌整批被「收回」成原始整齊疊放狀態——形狀回來了。
+
+這個類比的核心：馬氏體中的「變形」是**孿晶介面的可逆移動**，不是真正的塑性（沒有斷鍵、沒有滑移線），所以加熱可以完全恢復。
+
+**相變機制**
+
+| 相 | 溫度 | 晶體結構 | 力學特性 |
+|---|---|---|---|
+| **奧氏體 (Austenite, A)** | 高溫（> $A_f$） | 立方體（BCC-like，有序） | **硬、形狀固定**（記憶的原始形狀就是這裡定義的） |
+| **馬氏體 (Martensite, M)** | 低溫（< $M_f$） | 歪斜單斜晶（有孿晶界） | **軟、可塑形**（推動孿晶界移動就能改形） |
+
+關鍵：在馬氏體相推動孿晶界的能量遠小於讓原子真正滑移所需的能量，所以感覺「軟」；但加熱回到奧氏體時，對稱性要求晶體必須恢復立方結構 → 形狀回來。
+
+**Nitinol 的轉變溫度與 Hysteresis**
+
+Nitinol（Ni-Ti）的轉變溫度可以靠成分微調：
+- 典型工作溫度：$A_f \approx 40\text{--}80°\text{C}$（手溫或熱水就能觸發）
+- 轉變有 **hysteresis（滯後）**：加熱路徑上的 $A_f > A_s$（奧氏體完成溫度 > 起始溫度），冷卻路徑上的 $M_s > M_f$，且 $A_s > M_s$（加熱轉點 > 冷卻轉點，差距通常 10–30°C）
+
+$$A_f > A_s > M_s > M_f$$
+
+Hysteresis 的實際影響：
+- 你不能「剛好在 $A_f$ 點來回」讓它一直運動——升溫到 $A_f$ 變形恢復，但降溫要比 $M_s$ 更低才再次「軟化」，這就是 SMA 的控制死帶 (dead zone)。
+- 這就是為什麼致動器選擇表裡 SMA 的「控制性：差」——hysteresis 讓精確位置控制困難。
+
+**為什麼不能高頻反覆？**
+
+加熱（電流通過 Joule heating）快，但**冷卻靠自然散熱**，慢。典型 Nitinol 線在空氣中冷卻需要幾秒，在水中約 100 ms。高頻（> 1 Hz）基本不可能，這正是致動器表中「速度：慢」的原因。
+
+> ⚠ **易混淆**：SMA 靠**溫度**（雖然常用電流「間接」加熱）。不要跟壓電（靠電壓直接形變）混淆。
+
+### 8. 電活性聚合物 (electroactive polymer, EAP)
+
+**定義**：*polymers that exhibit a change in size or shape when stimulated by an electric field*。
+
+典型結構：兩片貴金屬電極夾著**離子聚合物膜 (ionic-polymer membrane)**，膜內含 **自由陽離子 + 水分子**，骨幹帶負電。施加電壓 → 陽離子帶著水分子往陰極移動 → 一側膨脹、另一側乾縮 → **整片彎曲**。
+
+- Slide demo：兩根 EAP 條形成 **夾爪 (gripper)** 夾起小球。
+
+### 9. 超音波致動 (ultrasound)
+
+利用**聲輻射壓 (acoustic radiation pressure)** 在空中產生力，做：
+
+- **空中觸覺 (mid-air haptics)** — 不戴任何裝置就摸到「東西」。
+  - Iwamoto et al., SIGGRAPH '08, *Airborne* — 經典開創性 demo。
+- **聲懸浮 (acoustic levitation)** — 顆粒漂浮在空中。
+  - NTU UIST '22 *Garnish into Thin Air* (Ching-Yi Tsai, Chen-Kuo Sun) — 把食材碎屑懸浮在飲料杯上方做擺盤。
+
+## 致動器選擇對照表
+
+| 類型 | 尺度 | 出力 | 速度 | 控制性 | 典型應用 | 為什麼通常輸給電動馬達 |
+|---|---|---|---|---|---|---|
+| 氣動 | 大 | 大 | 快 | 有彈性、不易精準 | 汽車輪胎、簡易自動化 | 終究要壓縮機（=電/燃機） |
+| 液壓 | 大 | **極大** | 中 | 剛性好 | 挖土機、重型工業 | 一樣要泵浦，吵、漏油、髒 |
+| 壓電 | 小 | **極小** | **極快** | 高 (μm 等級) | 影像穩定、Braille、點火 | 位移太小、要高壓驅動 |
+| 雙金屬條 | 小 | 小 | 慢（熱慣性） | 差 | 恆溫器、跳脫開關 | 只能溫度觸發、慢 |
+| SMA / Nitinol | 小 | 中 | 慢 | 差（要等冷卻） | 形狀回復玩具、微夾爪 | 加熱費電、頻寬低 |
+| EAP | 小 | **極小** | 慢 | 中 | 軟性夾爪、研究型 | 力不夠、要含水環境 |
+| 超音波 | 小 | **極小** | 快 | 中 | 空中觸覺、懸浮 | 出力遠不足以驅動實體 |
+| **DC 馬達 + 齒輪** | 中 | 可任意放大 | 任意 | 高 | **幾乎所有東西** | — |
+
+> 💡 **記住**：「為什麼電動贏」的根本 = **能量密度 + 控制性都最好**，加上齒輪可以任意換算扭矩 / 轉速。其他技術通常只在某個極端尺度或特殊情境（彈性、無聲、空中、微米）才贏。
+
+## Case study：Skin Drag Display 手錶原型
+
+slide 後段用一個自家穿戴原型把「為什麼電動贏」演示一遍。
+
+**問題**：在手錶大小的殼裡，做一個能在皮膚上**拖出任意 2D 路徑**的 tactor。
+
+**設計取捨**：
+
+- **#1 Cartesian (笛卡兒)**：x、y 兩軸線性導軌。直觀，但要兩條長軌道，**塞不進圓形錶殼**。
+- **#2 Polar (極座標)**：徑向 + 方位角兩自由度。
+  - **方位角 (azimuth)**：用 **rack-and-pinion**，但 rack 不是直的 — **把圓形錶殼內側做成齒（內齒輪 = polar rack）**，pinion 在內側齒上走 → 自然轉一圈。
+  - **徑向 (radius)**：另一個小 DC 馬達 + worm gear 推 tactor 進出。
+
+**動力**：
+
+- **小尺寸 / 大出力** 的矛盾解法：**tiny DC motor 高轉速 + 大減速比齒輪**（worm drive 或 planetary gear 行星齒輪）→ 把高 RPM 換成低 RPM、高扭矩。
+- 電源：鈕扣電池；控制：**ATtiny** 微控制器。
+
+**機械防呆**：
+
+- **防卡 (anti-jamming)**：close-fit pinion（pinion 與 rack 間隙越小越好），且 pinion 軸上下都加 **bearing** → 不偏擺、不卡死。
+- **3D 列印件鎖螺絲怎麼辦？** → **heat-set brass nut (熱熔嵌入式黃銅螺母)**：
+  - CAD 上留一個比螺母略大的孔。
+  - 用烙鐵加熱黃銅螺母，**熔進塑膠** → 強度遠勝直接螺進塑膠的螺紋。
+  > 💡 **記住**：FDM 列印的孔有收縮，slide 寫的餘量是 **+0.15 mm clearance**（孔比螺母外徑大 0.15 mm，剛好讓熱熔時順利滑入又能密合）。
+
+## 易混淆 / 易考點
+
+1. **pneumatics 為什麼是 transmission 不是 source**：氣壓不會憑空生出來，要壓縮機；壓縮機要電/燃機 → 它只是把能量「**搬運 + 放大**」到末端，不是能量起源。
+2. **挖土機為什麼選液壓不選氣動**：(a) 油不可壓縮 → 手臂不會像 yo-yo 彈跳；(b) 高壓下氣會漏，油不會。
+3. **piezo 為什麼能同時做 buzzer 跟 mic**：壓電效應是**雙向**的——電壓↔形變 / 應力↔電荷。同一片元件，通電是 buzzer，受聲壓是 mic。
+4. **電動最後為什麼贏**：出力密度高、效率高、可控、可以靠齒輪任意換算扭矩 / 轉速；連大型工業閥門都電動化是最強的經驗證據。
+5. **heat-set nut 的餘量**：**+0.15 mm**（FDM 列印孔太緊放不進、太鬆熔完會晃）。
+6. **slip-stick** 的「慢」與「快」哪個是哪個：**慢伸 = stick（黏）= 前進**，**快縮 = slip（滑）= 不帶 base 回去** → 淨向前。
+
+## 自我測驗
+
+> 💡 **考試風格**：考題以概念理解與課題延伸為主，鮮少直接考數字計算。標有 *（計算，低頻）* 的題目是低頻考點，其餘都是重點。
+
+**Q1.** *（計算，低頻）* 一個氣缸進氣口截面積 $A_{in} = 1\ \text{cm}^2$、活塞截面積 $A_{out} = 25\ \text{cm}^2$。若入口壓力提供 10 N，輸出力多少？
+
+<details><summary>答案</summary>力放大 = $A_{out}/A_{in} = 25$。輸出力 = 10 N × 25 = **250 N**。注意：放大的是力，但活塞位移會反向縮 25 倍 — 能量守恆。</details>
+
+**Q2.** 為什麼壓電 actuator 通常要做成 **bimorph (壓電 + 被動層)** 而不是直接用一塊壓電？
+
+<details><summary>答案</summary>純壓電通電只有微米級伸縮位移，太小不好用。把壓電貼到不會伸縮的被動層上，伸縮被約束 → 整體**彎曲**，位移被幾何放大成毫米級可用變形。</details>
+
+**Q3.** Nitinol、雙金屬條、壓電——哪個是「靠溫度」、哪個是「靠電壓」？
+
+<details><summary>答案</summary>雙金屬條：靠溫度（熱膨脹係數差）。SMA / Nitinol：本質上靠**溫度**，雖然常用電流加熱 (Joule heating) 來控制。壓電：直接靠**電壓**。</details>
+
+**Q4.** slip-stick 機構的「慢」與「快」階段分別發生什麼？最終淨運動方向是哪一個？
+
+<details><summary>答案</summary>慢階段：壓電緩慢伸長，base 因摩擦「黏」住底板 → 把 actuator 端推走（前進）。快階段：壓電快速收縮，base 來不及黏 → 「滑」回去。淨運動方向 = 慢階段方向（前進）。</details>
+
+**Q5.** 為什麼 CAT 325L 挖土機用液壓，而汽車輪胎用氣動？
+
+<details><summary>答案</summary>挖土機要剛性出力大力舉重物，必須不可壓縮 → 油。汽車輪胎反而**希望**有彈性吸震 (springyness) → 氣剛剛好。「彈性」對挖土機是 bug，對輪胎是 feature。</details>
+
+**Q6.** Skin Drag Display 用極座標而非笛卡兒設計的主要原因？
+
+<details><summary>答案</summary>錶殼是**圓形**，極座標自然吻合：圓形殼內側可以直接做成內齒（polar rack）讓 pinion 沿著轉動，省下笛卡兒設計需要的直線導軌空間。</details>
+
+**Q7.** 用 heat-set brass nut 嵌入 3D 列印件，slide 給的孔徑餘量是多少？為什麼不能直接螺螺絲到塑膠？
+
+<details><summary>答案</summary>**+0.15 mm clearance**。直接螺進塑膠的螺紋強度低、會崩牙；熱熔黃銅螺母進去後，金屬螺紋可重複拆裝、出力大幅提升。</details>
+
+**Q8.** 給定情境配最合適的致動器：(a) 在空氣中讓飲料杯上方漂一顆食材；(b) 在手機相機裡做手震補償；(c) 一個簡單恆溫水壺切斷加熱。
+
+<details><summary>答案</summary>(a) **超音波 / 聲輻射壓**（NTU Garnish into Thin Air 那類）。(b) **壓電 + slip-stick** 微定位影像感光元件。(c) **雙金屬條** — 到溫度自動彎曲跳開電路。</details>
+
+**Q9.** 下列壓電應用各是「正壓電」還是「逆壓電」：(a) 打火機點火；(b) 喇叭發聲；(c) 麥克風收音；(d) SPM 探針微定位。
+
+<details><summary>答案</summary>判準：「壓→出電」= 正，「通電→動」= 逆。(a) 點火 = **正**（敲擊 → $V=Q/C$ 高壓火花）。(b) 喇叭 = **逆**（電壓 → 振膜動）。(c) 麥克風 = **正**（聲壓 → 電壓）。(d) SPM 微定位 = **逆**（電壓 → nm 位移）。</details>
+</script>
+
+<script type="text/markdown" id="md-ch6">
+## 學習目標
+
+讀完本章你應該能：
+
+- 解釋雷射切割 (laser cutter) 為什麼**本質上是 2D / extruded 2D**，所有 3D 必須來自「組多片」這個約束
+- 列舉並辨識本講出現的 **18 種接合家族**（stacking、kerf、notch、frame & spar、mortise & tenon、captured nut、bayonet、finger joint、screw-clamped finger、rotary / gear、spring & damper、bending、lattice / living hinge、precision bend、perforated origami、3D→2D unfold、textile、etching/FTIR）
+- 說明為什麼**鳩尾接 (dovetail) 不能雷切**、為什麼**指接 (finger joint) 被過度使用**
+- 解釋**散焦雷射 (defocus the laser)** 做精準折彎的關鍵原理，以及 LaserOrigami 是誰的論文
+- 區分 **kerf**、**press-fit**、**interference fit** 三個容易混的詞
+- 描述本講出現、與 *Trusses & Springs* 章節重疊的概念（living hinge、spring joint、snap-fit 風格）
+
+## 中心論點
+
+雷射切割是一台「平面切割機」：它只能在一張板材上劃出 2D 輪廓，所謂「extruded 2D」就是這些輪廓沿板材厚度方向**等比例擠出**的形狀。但我們要的是 3D 物件 → **3D 必須來自「組多片 2D」**。
+
+老師同時點明：**木工 (carpentry) 的接合大部分用不上**，因為許多木工 joint（dovetail、複雜榫卯）需要**從兩個方向切刀**，雷射只能從上往下切一面。這堂課其實是「**從整個木工裡，挑出能用雷射切做出來的那一小部分 (a small subset of carpentry)**」，然後反覆使用同樣那十幾個花樣。
+
+兩個做 joint 的目的：
+
+1. **突破 2D**：把多片平面組成 3D 物件
+2. **做活動部件 (moving parts)**：鉸鏈、彈簧、機構
+
+> 💡 **記住**：雷射切是 2D + 厚度 = extruded 2D。3D 是「**組多片**」組出來的，不是雷射本身做的。
+
+## 1. 堆疊 (stacking)
+
+最樸素的做法：把多片相同（或漸變）輪廓的板子**直接疊起來**用膠、夾、外框固定。代表性流程是 **Fusion 360 Slicer**（自動把 3D 模型橫切成片）。
+
+兩個典型用法：
+
+- **箱體厚度 (box thickness) 用堆疊框架達成**：要做一個 1 cm 厚的盒子但板材只有 3 mm？切四個「框」上下各放一片整面，就湊出 ~12 mm 的高度，而且還有層間 spacer 可放線材
+- **iPad / 手機收納盒**：上下實心 + 中間幾層挖空的框 = 自然形成內凹空間
+
+優點：完全不需要設計接合、無腦切完疊起來；缺點：膠 / 螺絲不可拆。
+
+## 2. 切口 (kerf) 與壓配 / 干涉配合 (press-fit / interference fit)
+
+### 2.1 kerf
+
+> 📦 **定義 — kerf (切縫)**：雷射光束實際移除的材料寬度 $w$。雷射並不是「無厚度的線」，它有一條真實寬度，切完後板材會少掉這條寬度的材料。
+
+實務影響：你 CAD 上畫的「線」實際變成寬度 $w$ 的縫，所以**所有配合 (fit) 設計都要把 $w$ 補償回去**。例如直徑 10 mm 的圓孔，雷射切完內徑會偏大；軸要插進去，外徑要相對放大。
+
+### 2.2 press-fit / interference fit
+
+> 📦 **定義 — press-fit (壓配)**：又稱 **interference fit (干涉配合)**。靠**法向力 (normal force) + 摩擦 + cold welding** 把兩件鎖死的接合方式。發生在「軸 (shaft) 插進略小的孔 (hole) 裡」這種狀況，interference 把兩件夾在一起。
+
+干涉量分 **max interference**（孔比軸大上限的負值，即孔最小、軸最大時）與 **min interference**（孔最大、軸最小時）。在雷射切的世界裡，干涉量必須考量 kerf 變化 + 材料含水率變化 + 板厚公差，所以實務上要**試切多種尺寸的批次 (batches)** 找到剛好的緊度。
+
+> 💡 **記住**：kerf 不補償，press-fit 不是太鬆就是太緊。雷射切的 press-fit 工作流程 = **設計 → 切多種尺寸 → 試 → 選出剛剛好的尺寸**。
+
+#### 🔬 Max / Min interference：為什麼干涉量是一個「區間」
+
+**直覺**：孔和軸都不是精確尺寸，各自有一段公差範圍。所以干涉量 $\delta = d_{\text{軸}} - d_{\text{孔}}$ 也不是單一值，而是一段區間。把公差堆疊推到兩個極端角，就得到 max / min 兩個界線。
+
+**數字例**：圖紙標 軸 $10.00\pm0.02$、孔 $9.95\pm0.02$。
+
+| 件 | 實際可能範圍 |
+|---|---|
+| 軸 | 9.98 ~ 10.02 |
+| 孔 | 9.93 ~ 9.97 |
+
+$$\delta_{\max} = d_{\text{軸,max}} - d_{\text{孔,min}} = 10.02 - 9.93 = \mathbf{0.09\ mm}\ (\text{軸最肥 vs 孔最小} \to \textbf{最緊})$$
+
+$$\delta_{\min} = d_{\text{軸,min}} - d_{\text{孔,max}} = 9.98 - 9.97 = \mathbf{0.01\ mm}\ (\text{軸最瘦 vs 孔最大} \to \textbf{最鬆})$$
+
+<svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" style="background:#161b22; border:1px solid #30363d; border-radius:8px; max-width:100%; height:auto; display:block; margin:1em 0;">
+  <line x1="180" y1="60" x2="540" y2="60" stroke="#f85149" stroke-width="1.5"/>
+  <polygon points="180,60 190,55 190,65" fill="#f85149"/>
+  <polygon points="540,60 530,55 530,65" fill="#f85149"/>
+  <text x="360" y="48" fill="#f85149" font-family="ui-monospace,monospace" font-size="13" text-anchor="middle">δmax = 10.02 − 9.93 = 0.09 mm（最緊，怕壓裂）</text>
+  <line x1="340" y1="120" x2="380" y2="120" stroke="#ffa657" stroke-width="1.5"/>
+  <polygon points="340,120 350,115 350,125" fill="#ffa657"/>
+  <polygon points="380,120 370,115 370,125" fill="#ffa657"/>
+  <text x="395" y="124" fill="#ffa657" font-family="ui-monospace,monospace" font-size="13">δmin = 9.98 − 9.97 = 0.01 mm（最鬆，怕掉出）</text>
+  <line x1="180" y1="60" x2="180" y2="200" stroke="#6e7681" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="540" y1="60" x2="540" y2="200" stroke="#6e7681" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="340" y1="120" x2="340" y2="200" stroke="#6e7681" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="380" y1="120" x2="380" y2="200" stroke="#6e7681" stroke-width="1" stroke-dasharray="3 3"/>
+  <rect x="180" y="200" width="160" height="16" fill="#79c0ff" fill-opacity="0.3" stroke="#79c0ff" stroke-width="1.2"/>
+  <text x="260" y="235" fill="#79c0ff" font-family="ui-monospace,monospace" font-size="13" text-anchor="middle">孔 9.93–9.97</text>
+  <rect x="380" y="200" width="160" height="16" fill="#7ee787" fill-opacity="0.3" stroke="#7ee787" stroke-width="1.2"/>
+  <text x="460" y="235" fill="#7ee787" font-family="ui-monospace,monospace" font-size="13" text-anchor="middle">軸 9.98–10.02</text>
+  <line x1="60" y1="262" x2="660" y2="262" stroke="#6e7681" stroke-width="1"/>
+  <line x1="180" y1="258" x2="180" y2="266" stroke="#6e7681" stroke-width="1"/>
+  <line x1="340" y1="258" x2="340" y2="266" stroke="#6e7681" stroke-width="1"/>
+  <line x1="380" y1="258" x2="380" y2="266" stroke="#6e7681" stroke-width="1"/>
+  <line x1="540" y1="258" x2="540" y2="266" stroke="#6e7681" stroke-width="1"/>
+  <text x="180" y="282" fill="#8b949e" font-family="ui-monospace,monospace" font-size="11" text-anchor="middle">9.93</text>
+  <text x="340" y="282" fill="#8b949e" font-family="ui-monospace,monospace" font-size="11" text-anchor="middle">9.97</text>
+  <text x="380" y="282" fill="#8b949e" font-family="ui-monospace,monospace" font-size="11" text-anchor="middle">9.98</text>
+  <text x="540" y="282" fill="#8b949e" font-family="ui-monospace,monospace" font-size="11" text-anchor="middle">10.02</text>
+</svg>
+
+**同一張圖紙、同一批零件，實際干涉量會在 0.01 ~ 0.09 mm 之間飄**，你不知道手上這一對是哪個值，所以設計必須**兩端都安全**：
+
+| 界線 | 怕什麼 | 約束 |
+|---|---|---|
+| $\delta_{\min}$（最鬆） | 太鬆 → 掉出來、夾不住 | $\delta_{\min} > 0$ ✅ |
+| $\delta_{\max}$（最緊） | 太緊 → 壓不進去 / 撐裂 | $\delta_{\max} < $ 開裂門檻 ✅ |
+
+> ⚠ **別只算名目**：名目干涉 $=10.00-9.95=0.05$ 看起來很安全，但真正決定「會不會掉 / 會不會裂」的是 **0.01 與 0.09 這兩個邊界**。雷切還要再把 kerf 漂移 + 含水率 + 板厚公差疊進這個區間，所以才得靠**試切批次**量出當下的真實視窗，而不是純算。
+
+#### 🔧 Kerf 補償的計算方向：往哪邊加？
+
+雷射沿著 CAD 畫的路徑走，**光束寬 $w$ 的材料被移除**，其中 $w/2$ 從路徑內側移除，$w/2$ 從外側移除。
+
+**口訣（最容易出錯的地方）：**
+
+> - **外型件（shaft、tab）**：雷射會「吃進」截面 → CAD 畫大一點，actual = CAD − $w$
+> - **孔洞件（hole、slot）**：雷射會「吃掉」邊界 → CAD 畫小一點，actual = CAD + $w$
+
+**完整推導（以圓形為例）**
+
+| 設計意圖 | CAD 畫的尺寸 | 實際切出的尺寸 | 補償公式 |
+|---|---|---|---|
+| 軸（外型）直徑 $d$ | $D_{CAD}^{shaft} = d + w$ | $d_{actual} = D_{CAD} - w = d$ ✓ | **CAD 畫大 $w$** |
+| 孔（內孔）直徑 $d$ | $D_{CAD}^{hole} = d - w$ | $d_{actual} = D_{CAD} + w = d$ ✓ | **CAD 畫小 $w$** |
+
+**🔢 Press-fit 數字例**
+
+目標：軸比孔大 0.3 mm（干涉量 Δ = 0.3 mm），kerf $w = 0.2\ \text{mm}$，nominal $d = 10\ \text{mm}$：
+
+- 想要的軸直徑 $= 10 + 0.3 = 10.3\ \text{mm}$
+  - CAD 畫：$10.3 + 0.2 = \mathbf{10.5\ mm}$
+- 想要的孔直徑 $= 10\ \text{mm}$
+  - CAD 畫：$10 - 0.2 = \mathbf{9.8\ mm}$
+
+**結果**：
+- 軸實際直徑：$10.5 - 0.2 = 10.3\ \text{mm}$ ✓
+- 孔實際直徑：$9.8 + 0.2 = 10.0\ \text{mm}$ ✓
+- 干涉：$10.3 - 10.0 = 0.3\ \text{mm}$ ✓
+
+> ⚠ **實務提醒**：kerf $w$ 不是固定值，它隨**材料、板厚、雷射速度、功率**而變（通常 0.1–0.3 mm），所以**每次換材料就要重新量測 $w$**，切一批試件找出實際緊度。這就是為什麼投影片說「要切多種尺寸的批次測試」而不是純靠計算。
+
+## 3. 卡槽 (notch joint)
+
+最常見的雷射切 joint：兩片板互切槽，**十字交叉 (cross-lap) 互插**。
+
+代表案例：
+
+- **Juicer (榨汁器, Vanilla Design / Brent Wilson)**：上下兩片，先**旋 90° 對齊**再**滑下去 (slide top into bottom)** — 看似簡單卻把「2D + slide」用到極致
+- **筆電架 (laptop stand)**：兩片交叉，筆電壓在上面。**為什麼成立？**
+
+> 💡 **記住（高頻考點）**：laptop stand 成立的關鍵是 **「力的方向只有 -Z」**（重力往下）— notch joint 自然能承受垂直壓力，但若有側向力就會散架。看到 notch joint 永遠問一句：「力都往同一個方向嗎？」
+
+- **Mike Sinclair 用電線當燈的支撐**：power cord 走 notch
+- **Nomad 牆面 / 放射狀配置**：notch joint 也可以做 construction kit primitive（把 notch 當積木的最小單元）
+
+## 4. 框架與肋骨 (frames & spars)
+
+學自船殼、飛機翼、Rhino 軟體的網格結構：**主龍骨 (spar) + 多片肋骨 (ribs)**，肋骨間用 notch joint 卡上龍骨。
+
+範例：
+
+- **deer head / rhino 牆飾**：純肋骨堆出立體造型
+- **SkyBuggy 全雷射切 RC 飛機**
+- **SketchChair**：參數化椅子工具，輸出一片片肋骨 + 龍骨
+
+## 5. 榫接 (mortise & tenon) 與變體
+
+傳統木工的「卡榫」進化成適合雷射切的版本：**tenon (榫頭) 突出齊平**（不像古法藏進去）。
+
+- **Butterfly joint (蝴蝶榫)**：兩塊板對接，挖出蝴蝶狀槽，再塞一片蝴蝶狀板片進去鎖死
+- **Jigsaw mitre**：拼圖式斜接
+
+> ❓ **30 秒思考**（投影片問）：「**為什麼用 jigsaw mitre 而不是平接？**」 答案有三：(1) 確保方向（防呆）(2) 防止滑脫 (3) 裝飾。
+> 船無論如何都要上膠來水密 (watertight)，所以齊平 tenon 不影響功能，反而方便組裝。
+
+## 6. 捕捉螺帽 (captured nut) / 滑入鎖 (slide-to-lock)
+
+**T 形或 keyhole 切口**：先把螺絲頭 / 螺帽放在大孔，再**滑進細縫**，鎖住不能反向退出。
+
+代表：**Connect-4 棋子掉落槽** — 同樣的 keyhole 機構。
+
+優點：可重複組裝、不需膠水。
+
+## 7. 旋轉鎖 (bayonet)
+
+借鏡 **BNC 同軸接頭** 的「插入 + 旋轉鎖緊」原理。雷射切板材也可以做：兩片板上各切凸耳與凹槽，插入後旋轉一個角度即鎖住。
+
+## 8. 指接 (finger joint) ⚠ 講師強烈意見
+
+最經典的雷射切盒子接合：兩片板邊緣切出**互補的方形齒 (fingers)**，像兩隻手指交叉互鎖。
+
+代表：彩色壓克力小盒「ARTOMAT / POTUSSI」系列、hifi 喇叭箱、雷射切玩具裝載機 (end loader)。
+
+但 ——
+
+> ⚠ **講師強烈意見（投影片原文）**：**"finger joints are terribly overused"** —— 學生看到雷射切就無腦用 finger joint，但很多場合其實 notch、stacking、lattice 都更適合。請先想清楚再用。
+
+### 為什麼 dovetail 不能雷切？
+
+投影片直接問「**how about dove tails? how to laser cut?**」並在示意圖上打 ❌。原因：
+
+**Dovetail (鳩尾榫) 的齒是「斜的、燕尾狀」**，要做出這個負角度 (negative angle / undercut)，刀具必須**從側面**進刀（傳統木工用 dovetail saw 或路由器斜切）。但雷射只能**垂直由上往下**切板材，**做不出側向 undercut**。
+
+> 💡 **記住**：dovetail = 需要 undercut = 雷射切不出。指接是 dovetail 的「雷射切版本」，但失去 dovetail 的自鎖優勢，所以需要膠或螺絲補強 → 接下來的 §9。
+
+## 9. 螺絲鎖緊指接 (screw-clamped finger joint)
+
+把 finger joint 升級：切口上加一個 **十字切口 (cross-shaped cutout)**，**側向**塞進 M3 螺栓 + 螺帽，鎖緊兩片板。等於 finger joint 的形狀精度 + 螺絲的夾緊力。
+
+優點：**可重複拆裝**，不需膠。
+
+## 10. 旋轉接、齒輪、機械機構
+
+雷射切也能做機構：
+
+- **軸承 (bearings)** + **行星齒輪 (planetary gear)** + **齒條 + 小齒輪 (rack-and-pinion)**：全部可以一片片切出來組裝
+- **Jansen walker**（Theo Jansen 風力獸機構）：投影片直接列出 11 根連桿的特定長度（41.5、50.0、38.0、61.9、39.4、40.1、55.8、39.3、36.7、49.0、65.7 mm），加上曲柄 15.0 與偏心 7.8。**至少要認得這是 Jansen walker**
+- **Plasti Dip 防滑塗層**：雷切件當輪子時的補強
+
+> 💡 **記住 RepRap 哲學**：**致動 (actuation) 用金屬，結構 (structural) 用雷切**。雷切件做齒輪會磨損，做結構框架最划算。
+
+## 11. 彈簧與阻尼器 (springs & dampers)
+
+雷射切也能做彈簧 — 但要走「**從面切出細長條 = cantilever spring**」的路線（→ 對照 Trusses & Springs 章節的「3D 列印不用 coil spring，改用 cantilever spring」概念）。
+
+- **Spring joint**：板材邊緣切出一條長舌，舌頭就是 cantilever spring，用來頂住別的零件做扣合（acrylic 折疊盒上的小卡榫）
+- **螺旋彈簧**：從壓克力板上切出阿基米德螺線，做出平面螺旋彈簧
+- **金屬彈簧補充**：雷射切件 + 五金行買的金屬壓簧（曬衣夾 trick：兩片雷切板 + 一支金屬扭力簧 = 夾子）
+- **Living hinges serve as springs**：膠合板上切一道凹槽，那條 living hinge 同時就是 spring（→ §13）
+- **Shock absorber (Mike Sinclair iPhone 阻尼器)**：雷射切配合金屬彈簧做手機掉落阻尼
+
+## 12. 折彎 (bending)
+
+要把平片變成有角度的 3D：**熱風槍 (heat gun) 加熱壓克力**，軟化後折出角度。但這方式不精準（折痕位置全憑手感）。
+
+例外：**IQlight** — 不靠膠不靠折，只用互鎖（interlocking）的 2D 卡片就能組成燈罩，是純 2D 解的代表。
+
+## 13. 點陣 / 活動鉸 (lattice / living hinge) ⭐
+
+把整片「剛性材料」變柔的關鍵手法：**切一排排平行的細縫 (slits)**。每段細縫間的窄條變成 cantilever，整片板沿著縫的方向就能彎曲。
+
+> 📦 **概念連結**：這個 lattice = 大量 cantilever 並排 = **巨型 living hinge**。和 Trusses & Springs 章節定義的 living hinge 是同一個概念，只是這裡是切出來的，那裡是 3D 列印一層厚度。
+
+代表案例：
+
+- **Moleskine 風格筆記本封面**：lattice 讓硬皮可以對折
+- **眼鏡 / 智慧眼鏡外殼 (Google Glass 顯示器外殼, CHI 2014)**：彎曲剛性塑膠包覆光學元件
+- **Kenichi Sato 建築應用**：「FLEX = flexible foam between sliced layers of laminated plywood with simple cuts」— 中間夾軟泡棉、兩面薄夾板開縫 → 可大幅彎曲的建築面板
+- **木質座椅**：椅面切螺旋狀 lattice 讓人坐下時微沉
+
+也可以**把 lattice 切口當夾持彈簧**：縫的開合就是夾持力。
+
+## 14. 精準折彎：散焦雷射 (precision bends) ⭐⭐
+
+純熱風槍折彎不準。怎麼辦？
+
+> 💡 **記住（關鍵 key idea，投影片亮綠色字）**：**defocus the laser to heat up the bend** — **把雷射散焦（焦點移開板面）使能量分散在較寬區域，只「加熱」不「切斷」壓克力**，整條折線被均勻軟化 → 用模具或手 fold → 精準的直線折痕。
+
+代表論文：
+
+- **LaserOrigami** — Stefanie Mueller, Bastian Kruck, Patrick Baudisch @ **HPI (Hasso-Plattner-Institut)**
+  - 一台雷射切一次走完「切輪廓 + 散焦熱折」兩個工作 → 真正的 2D 機台做 3D 物件
+  - 是雷射切研究領域的代表作
+
+## 15. 紙摺紙 (perforated / scored origami)
+
+要在紙上做摺痕而不切斷？同樣思路 — **dial down the laser to a smidgen of its power**，讓它**「score (劃痕)」而不是 cut (切斷)**。
+
+代表案例：
+
+- **Robert Lang 摺紙**：複雜幾何摺紙的精準預壓痕
+- **中式外帶盒 (Chinese take-out box)**：盒身上的小**切口 (incisions)** 讓提把可以折出來
+
+## 16. 自動 3D → 2D 展開
+
+要把一個 3D 模型自動轉成可摺的 2D 紙樣？
+
+- **Pepakura Designer**（日本 Tamasoft）：經典工具，輸入 3D 模型 → 自動展開 + 加摺線 + 加接合舌 → 印出來剪下黏起來
+- **SketchUp 展開外掛**（unfold plugin）：免費替代品
+
+代表作品：紙模 Hello Kitty、Lego minifig、TRON disc、Zelda 寶箱…
+
+## 17. 軟性材料 / 紡織 / 時尚
+
+雷射切不限板材：
+
+- 雷射切**洋裝、牛仔布、蕾絲**：時尚產業已大量使用
+- 切布料的精度遠勝剪刀，且邊緣自然燒結（不脫線）
+
+## 18. 蝕刻、PCB、FTIR、雕刻、廢料再利用
+
+雷射的低功率模式 (engrave) 能做的其他事：
+
+- **蝕刻 resist**：在板材噴漆，雷射把要蝕刻的區域漆刮掉，剩下的漆是化學蝕刻時的保護層
+- **PCB 製作**：雷射切 Mylar 膜當銅箔遮罩
+- **FTIR (frustrated total internal reflection) 觸控面板**：壓克力**切邊光滑 → 光從邊緣注入會在內部全反射**；雷射**雕刻表面 → 光在雕刻處漏出**。手指觸碰雕刻面 → 又把光散射 → 攝影機接收 → 多點觸控
+- **雕香腸、雕食物**：低功率雕刻文字、圖案到食物表面
+- **廢料桌子**：用切剩的小料拼接成桌面（dual purpose 的循環經濟設計）
+
+## 接合方式總覽表
+
+| # | 接合家族 | 主要用途 | 限制 / 對應頁碼 |
+|---|---|---|---|
+| 1 | Stacking | 厚度補強、箱體 | 不可拆 |
+| 2 | Press-fit / interference | 固定軸孔 | 對 kerf 敏感 |
+| 3 | Notch joint | 通用、construction kit | 只承垂直力（laptop stand） |
+| 4 | Frame & spar | 船殼 / 翼形 / Rhino 網格 | 占空間 |
+| 5 | Mortise & tenon (齊平、butterfly、jigsaw) | 防呆、裝飾 | 通常還要膠 |
+| 6 | Captured nut / slide-to-lock | 可拆螺接 | 要設計大孔 + 細縫 |
+| 7 | Bayonet | 快插快拆 | 需要旋轉自由度 |
+| 8 | **Finger joint** | 盒子 | ⚠ 過度使用 |
+| 9 | Screw-clamped finger | 可拆、強度高 | 多一道螺絲工 |
+| 10 | Rotary / gear | 機構 | 結構 vs 致動分工 (RepRap) |
+| 11 | Spring / damper | 扣合、阻尼、夾持 | 用 cantilever，不用 coil |
+| 12 | Bending (heat gun) | 簡單折角 | 不準 |
+| 13 | Lattice / living hinge | 剛性材料變柔 | 沿縫方向才能彎 |
+| 14 | **Defocus 散焦折彎** | 精準折痕 | 需要設備支援散焦 |
+| 15 | Score origami | 紙摺痕 | 紙專用 |
+| 16 | Pepakura 自動展開 | 3D → 2D | 限於可展開 (developable) 表面 |
+| 17 | Textile | 服裝 | — |
+| 18 | Engraving / etching / FTIR / PCB | 加工而非接合 | — |
+
+## 易混淆 / 易考點
+
+1. **kerf 是什麼**：雷射移除的真實材料寬度。所有 fit 設計都要補償它。
+2. **為什麼 dovetail 雷切做不出來**：dovetail 齒有 undercut，需要側向進刀；雷射只能垂直由上往下，做不出。**這是高頻考點**。
+3. **press-fit vs. interference fit**：**同一件事的兩個名字**，都是「軸進略小孔，靠法向力 + 摩擦 + cold welding 固定」。
+4. **散焦雷射** (defocus the laser) 的用途：**加熱壓克力做精準折彎**（LaserOrigami / Mueller, Kruck, Baudisch / HPI）。不是切斷。
+5. **finger joint 講師為什麼強烈反對**：被過度使用 (terribly overused)；很多場合用 notch / stacking / lattice 更好。
+6. **laptop stand 的 notch joint 為什麼成立**：「**力的方向只有 -Z**」。看到 notch 永遠想這句。
+7. **living hinge 在兩章的重點差別**：
+   - **本章 (Lasercutter)**：把整片剛性材料切一排細縫 → 變成柔性面板（lattice 的特例）
+   - **Trusses & Springs 章**：3D 列印一層厚度 → hinge + spring 二合一
+   - 共同：**同材料、減去/減薄出來的撓性結構，同時是 hinge 也是 spring**
+8. **Pepakura** 是**日本** Tamasoft 的展開軟體；SketchUp 也有 unfold plugin。
+9. **FTIR 觸控**：**切邊光滑 → 光進；雕刻 → 光出**。順序記反就錯。
+10. **RepRap 哲學**：**actuation = metal、structural = 雷切件**。不要拿雷切件做齒輪當高負載。
+
+## 自我測驗
+
+> 💡 **考試風格**：考題以概念理解與課題延伸為主，鮮少直接考數字計算。標有 *（計算，低頻）* 的題目是低頻考點，其餘都是重點。
+
+**Q1.** 你 CAD 上畫一個直徑 10 mm 的圓孔。雷射切完實際內徑會比 10 mm **大**還是**小**？要插入 10 mm 軸做 press-fit，CAD 應該畫多大的孔？
+
+<details><summary>答案</summary>實際內徑會**大於** 10 mm，因為 kerf 把一條寬度 $w$ 的材料移除掉了。要做 press-fit，CAD 上的孔應該畫成 $10 - w - \Delta$（$\Delta$ 是干涉量），實切完內徑剛好略小於 10 mm，軸才能 press-fit 進去。實務上要切多種尺寸的批次試。</details>
+
+**Q2.** 為什麼鳩尾榫 (dovetail) 在雷射切上做不出來？
+
+<details><summary>答案</summary>Dovetail 的齒形是斜的（負角度 / undercut），傳統木工要從側面進刀。雷射只能**從上往下垂直切**板材，無法做側向 undercut，因此切不出 dovetail 的負角度形狀。雷射切的「對應物」是 finger joint，但 finger joint 沒有 dovetail 的自鎖優勢。</details>
+
+**Q3.** 解釋「laptop stand 用 notch joint 為什麼成立」這句話。如果有人在筆電上施加側向推力會怎樣？
+
+<details><summary>答案</summary>成立的關鍵是**力的方向只有 -Z（重力往下）**。Notch joint 對垂直方向壓力有良好支撐，但對側向力沒有約束。若側向推筆電，兩片交叉板會直接散開倒塌。</details>
+
+**Q4.** 散焦雷射（defocus the laser）的目的是什麼？對應到哪一篇論文與機構？
+
+<details><summary>答案</summary>**目的**：把雷射焦點移離板面，能量分散到較寬區域 → **只加熱、不切斷**壓克力，沿著預定線軟化 → 做精準折彎。對應論文：**LaserOrigami** by Stefanie Mueller, Bastian Kruck, Patrick Baudisch @ **HPI (Hasso-Plattner-Institut)**。</details>
+
+**Q5.** 老師對 finger joint 的強烈意見是什麼？舉一個 finger joint 並非最佳選擇的場景。
+
+<details><summary>答案</summary>「**finger joints are terribly overused**」 — 被過度使用。例如：做一片需要彎曲的剛性面板，應該用 **lattice / living hinge** 而不是 finger joint；做純垂直承重的支架，用 **notch joint** 更簡潔；做厚盒體，可以用 **stacking** 取代繁瑣的指接。</details>
+
+**Q6.** Press-fit 與 interference fit 的關係？press-fit 靠什麼三個物理機制把兩件鎖住？
+
+<details><summary>答案</summary>兩者是**同一件事的兩個名字**。Press-fit 靠：(1) **normal force (法向力)** (2) **friction (摩擦)** (3) **cold welding (冷接合)**。發生條件：軸插進略小的孔，干涉量提供持續的法向力。</details>
+
+**Q7.** FTIR 觸控面板用雷射做了哪兩件相反的事？光在哪裡進、哪裡出？
+
+<details><summary>答案</summary>(1) **切**：壓克力**切邊光滑** → 光從邊緣注入後在板內部 total internal reflection 行進。(2) **雕**：把表面雕粗 → 光在雕刻處 frustrated reflection 漏出。手指碰雕刻面散射 → 攝影機接收 → 觸控。**順序：邊緣進、雕刻處出**。</details>
+
+**Q8.** 列出本講所有用到「散焦 / 降低功率 / 不完全切穿」的技術，並指出材料分別是什麼。
+
+<details><summary>答案</summary>(1) **散焦雷射** → 加熱**壓克力**做精準折彎（LaserOrigami）。(2) **低功率 score** → 在**紙**上劃摺痕（Robert Lang origami、中式外帶盒）。(3) **雕刻 (engrave)** → 在**壓克力**表面做 FTIR 漏光區、在食物 / PCB resist 上刻圖案。共通點：**靠調整雷射「強度 / 焦點」改變它做的事，而不是換刀**。</details>
+
+**Q9.** Living hinge 在 Lasercutter 章與 Trusses & Springs 章的重點差別是什麼？共通的核心概念是什麼？
+
+<details><summary>答案</summary>**Lasercutter 章**：把整片剛性板切出一排平行細縫 (lattice)，變成可彎面板（範例：FLEX 建築面板、Google Glass 外殼、Moleskine 封面）。**Trusses & Springs 章**：3D 列印一層厚度的薄槽，作為 MEMS 與拋棄式包裝的鉸鏈。**共通核心**：**同一塊材料**藉由「減去 / 變薄」做出**撓性結構**，同時兼任 hinge + spring。</details>
+
+**Q10.** RepRap 哲學「actuation = metal、structural = 雷切」這句話的依據是什麼？什麼時候不該用雷切件做齒輪？
+
+<details><summary>答案</summary>依據是**雷切件強度 / 耐磨性遠不如金屬**。齒輪是承受局部高應力 + 滑動磨損的元件，用雷切件當動力齒輪會迅速磨損 → 換金屬齒輪、馬達等致動件。雷切件強項是**便宜、快速、可訂製形狀** → 拿來做結構框架最划算。所以雷切件做齒輪只適合**展示用 / 低負載 demo**，量產或長時間運轉的場合不該用。</details>
+</script>
+
+<!-- ============== Renderer ============== -->
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+(function(){
+  // Deep-dive emojis that mark supplementary content
+  var DEEPDIVE_EMOJI = /^[🎯📐🆚📁🔬🚲⚙🔧🧠]/u;
+
+  // Wrap headings that match deep-dive pattern into <details class="deepdive">
+  function wrapDeepDives(body){
+    var headings = Array.from(body.querySelectorAll('h3,h4'));
+    headings.forEach(function(h){
+      if(!h.parentNode) return;
+      var txt = h.textContent.trim();
+      var tag = h.tagName;
+      var wrap = false;
+      // h4 with a deep-dive emoji prefix
+      if(tag==='H4' && DEEPDIVE_EMOJI.test(txt)) wrap = true;
+      // h3 with a deep-dive emoji prefix (e.g. 🧠 rationale)
+      if(tag==='H3' && DEEPDIVE_EMOJI.test(txt)) wrap = true;
+      // h3 worked examples (EX1, EX2, EX3)
+      if(tag==='H3' && /^EX[0-9]/.test(txt)) wrap = true;
+      if(!wrap) return;
+
+      var level = parseInt(tag[1]);
+      // Collect siblings until same-or-higher heading
+      var siblings = [];
+      var next = h.nextElementSibling;
+      while(next){
+        if(/^H[1-6]$/.test(next.tagName) && parseInt(next.tagName[1])<=level) break;
+        siblings.push(next);
+        next = next.nextElementSibling;
+      }
+      // Build <details class="deepdive">
+      var det = document.createElement('details');
+      det.className = 'deepdive';
+      var sum = document.createElement('summary');
+      sum.innerHTML = h.innerHTML;
+      det.appendChild(sum);
+      var inner = document.createElement('div');
+      inner.className = 'deepdive-body';
+      siblings.forEach(function(el){ inner.appendChild(el); });
+      det.appendChild(inner);
+      h.parentNode.insertBefore(det, h);
+      h.parentNode.removeChild(h);
+    });
+  }
+
+  // 1. Render every chapter's markdown into its body
+  document.querySelectorAll('.chapter-body[data-md]').forEach(function(body){
+    var srcId = body.getAttribute('data-md');
+    var srcEl = document.getElementById(srcId);
+    if(!srcEl) return;
+    var md = srcEl.textContent;
+    body.innerHTML = marked.parse(md, {gfm:true, breaks:false});
+    wrapDeepDives(body);
+  });
+
+  // 2. Classify blockquotes by leading emoji for color-coded callouts
+  document.querySelectorAll('blockquote').forEach(function(bq){
+    var txt = bq.textContent.trim();
+    if(txt.startsWith('💡')) bq.classList.add('remember');
+    else if(txt.startsWith('⚠')) bq.classList.add('warning');
+    else if(txt.startsWith('📦')) bq.classList.add('definition');
+    else if(txt.startsWith('❓')) bq.classList.add('thinking');
+  });
+
+  // 3. Render KaTeX
+  if(window.renderMathInElement){
+    renderMathInElement(document.body, {
+      delimiters:[
+        {left:'$$', right:'$$', display:true},
+        {left:'$', right:'$', display:false}
+      ],
+      throwOnError:false,
+      strict:false
+    });
+  }
+
+  // 4. Wire up the nav controls
+  var chapters = document.querySelectorAll('details.chapter');
+  document.getElementById('btn-expand').addEventListener('click', function(){
+    chapters.forEach(function(d){ d.open = true; });
+  });
+  document.getElementById('btn-collapse').addEventListener('click', function(){
+    chapters.forEach(function(d){ d.open = false; });
+  });
+  var showAll = false;
+  document.getElementById('btn-show-ans').addEventListener('click', function(){
+    showAll = !showAll;
+    document.querySelectorAll('.chapter-body details:not(.deepdive)').forEach(function(d){
+      if(!d.classList.contains('chapter')) d.open = showAll;
+    });
+    this.textContent = showAll ? '隱藏所有答案' : '顯示所有答案';
+  });
+  var ddOpen = false;
+  document.getElementById('btn-deepdive').addEventListener('click', function(){
+    ddOpen = !ddOpen;
+    document.querySelectorAll('details.deepdive').forEach(function(d){ d.open = ddOpen; });
+    this.textContent = ddOpen ? '收合補充說明' : '展開補充說明';
+  });
+})();
+</script>
+
+</body>
+</html>
